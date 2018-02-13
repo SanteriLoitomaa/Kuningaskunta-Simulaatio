@@ -1,5 +1,6 @@
 # Kuningaskunta-Simulaatio
 Simulaatio kuningaskunnan toiminnasta fantasiamaailmassa. Harjoitustyö OOP-kurssille.
+
 Aiheemme on C. Peli.
 
 Peli alkaa muodostamalla kuningaskunnan, jossa pelaaja on kuningas. Pelaajana hallitset sukuja, joilla on riitoja ja suhteita toisiinsa.
