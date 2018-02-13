@@ -11,6 +11,7 @@ Pelissä on useita vuoroja joiden aikana päätöksiä tehdään eri sukujen eri
 kuningaskunta saadaan aikaiseksi.
 
 Roles:
+
 Tommi, Lead Writer
 
 Pasi, Core Functions
