@@ -1,5 +1,5 @@
 # Kuningaskunta-Simulaatio
-Simulaatio kuningaskunnan toiminnasta fantasiamaailmassa. Harjoitustyö OOP-kurssille.
+Simulaatio kuningaskunnan toiminnasta fantasiamaailmassa. Harjoitustyö Olio-Ohjelmoinnin Perusteet-kurssille.
 
 Aiheemme on C. Peli.
 
