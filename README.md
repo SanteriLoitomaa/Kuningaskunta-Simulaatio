@@ -12,4 +12,4 @@ kuningaskunta saadaan aikaiseksi.
 
 Roles: 	Tommi, Lead Writer
       	Pasi, Core Functions
-        Santeri, Coordination and Syntax
+            Santeri, Coordination and Syntax
