@@ -10,6 +10,9 @@ päätöksiä. Päätöksesi vaikuttaa resursseihin ja sukujen suhteisiin, joten
 Pelissä on useita vuoroja joiden aikana päätöksiä tehdään eri sukujen erilaisiin ongelmiin. Lopussa lasketaan pisteet kuinka "hyvä"
 kuningaskunta saadaan aikaiseksi.
 
-Roles: 	Tommi, Lead Writer
-      	Pasi, Core Functions
-            Santeri, Coordination and Syntax
+Roles:
+Tommi, Lead Writer
+
+Pasi, Core Functions
+            
+Santeri, Coordination and Syntax
