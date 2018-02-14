@@ -12,8 +12,8 @@ kuningaskunta saadaan aikaiseksi.
 
 Roles:
 
-Tommi, Lead Writer
+@Ashtaka97, Lead Writer
 
-Pasi, Core Functions
+@rampemus, Core Functions
             
-Santeri, Coordination and Syntax
+@Santtinen, Coordination and Syntax
