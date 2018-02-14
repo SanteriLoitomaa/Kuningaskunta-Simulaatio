@@ -11,11 +11,10 @@ public class Kuningaskunta{
     System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
     String nimi = vastaus.nextLine();
     System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
-    int vuorot = 24;
     while(!vastaus.hasNextInt()){
     	vastaus.next();
 	}
-    vuorot = vastaus.nextInt();
+    int vuorot = vastaus.nextInt();
     vuorot = vuorot * 12;
 	Kuningas kunkku = new Kuningas(nimi, vuorot);
     meillaOnOngelmia(kunkku, vuorot);
