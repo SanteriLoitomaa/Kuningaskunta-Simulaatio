@@ -4,6 +4,24 @@ import java.util.*;
 
 public class Kuningas{ 
   @SuppressWarnings("unused")
+  private String nimi;
+  private int raha;
+  private int ruoka;
+  private int rahaTuotto;
+  private int ruokaTuotto;
+  private int vuorot;
+  private int sukujenLKM;
+  private boolean havitty = false;
+  @SuppressWarnings("unused")
+private Scanner vastaus = new Scanner(System.in);
+  public ArrayList<Ongelma> ongelmat;
+  public ArrayList<Suku> suvut;
+  public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka","Vilja","Vihreä","Lihava","Pelto","Aura","Terve","Jussi"));
+  public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka","Kilpi","Rohkea","Keihäs","Soturi","Tappava","Nuoli","Lävistävä","Verinen","Lalli","Punainen"));
+  public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti","Pyhä","Loistava","Siunattu","Jeesus","Jumalan","Hymni","Synagoga","Protestantti","Sutra","Valkoinen"));
+  public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen","Varakas","Kolikko","Äveriäs","Roope","Tuote","Lentävä","Kärryt","Lompakko"));
+  public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikäärme","Salamoiva","Liekehtivä","Feenix","Potter","Milla","Sauva","Alkemisti","Haltija"));
+  
 public Kuningas(String nimi,int vuorot) {
     Random r = new Random();
     this.nimi = nimi;
@@ -51,17 +69,17 @@ public Kuningas(String nimi,int vuorot) {
       int x = r.nextInt(25);
       Ongelma vuoronOngelma = ongelmat.get(x);
       vuoronOngelma.tulosta();
-      Paatos paatos = kysyPaatos(); 
-      paatos.toteutaSeuraukset();
+      //Paatos paatos = kysyPaatos(); 
+      //paatos.toteutaSeuraukset();
       laskePisteet();
       if(havitty) break;
     }
     tulostaPisteet();
   }
   
-  private Paatos kysyPaatos(){
+  /*private Paatos kysyPaatos(){
     return new Paatos();
-  }
+  }*/
   
   private void laskePisteet(){
     this.raha += this.rahaTuotto;

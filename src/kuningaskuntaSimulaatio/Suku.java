@@ -19,8 +19,8 @@ public class Suku{
   public void annaTiedot(){
     //Anna edustaja, suvun nimi, aatelisuus ja muut ominaisuudet pisteineen. Annetaan aina kun vuorossa esitell‰‰n ongelma.
   }
-}
-public Suku(String nimi, String edustaja, int populaatio, int aatelisuus, int magia, int sotilaallinen, int uskonnollinen, int kauppias, int maalainen){
+  
+  public Suku(String nimi, String edustaja, int populaatio, int aatelisuus, int magia, int sotilaallinen, int uskonnollinen, int kauppias, int maalainen){
   this.populaatio = populaatio;
   this.aatelisuus = aatelisuus;
   
