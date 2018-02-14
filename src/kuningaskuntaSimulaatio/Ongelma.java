@@ -22,7 +22,7 @@ public class Ongelma{
 class Paatos{
   private Vaatimus[] v;
   private Seuraus[] s;
-  public Paatos(Vaatimus[] v, Seuraus[] s) {
+  public Paatos(Vaatimus[] v, Seuraus[] s, String viesti) {
 	  this.v  = v;
     this.s = s;
   }
