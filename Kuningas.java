@@ -1,106 +1,88 @@
 package kuningaskuntaSimulaatio;
 
-/*
-Aiheemme on C. Peli.
-
-Peli alkaa muodostamalla kuningaskunnan, jossa pelaaja on kuningas. Pelaajana hallitset sukuja, joilla on riitoja ja suhteita toisiinsa.
-Sukuja on monenlaisia (maagisia, uskonnollisia, sotilaallisia... jne.). Suvuille tulee ongelmia joihin sinun tulee tehdä viisaita
-päätöksiä. Päätöksesi vaikuttaa resursseihin ja sukujen suhteisiin, joten valitse viisaasti.
-
-Pelissä on useita vuoroja joiden aikana päätöksiä tehdään eri sukujen erilaisiin ongelmiin. Lopussa lasketaan pisteet kuinka "hyvä"
-kuningaskunta saadaan aikaiseksi.
-*/
-
 import java.util.*;
 
-public class Kuningas{ //Pelaaja
-  private static String nimi;
-  private static int raha;
-  private static int ruoka;
-  private static int vuorot;
-  public ArrayList<Suku> suvut;
-  public static Scanner vastaus;
+public class Kuningas{ 
+  @SuppressWarnings("unused")
+public Kuningas(String nimi,int vuorot) {
+    Random r = new Random();
+    this.nimi = nimi;
+    this.raha = r.nextInt(10)+90;
+    this.ruoka = r.nextInt(10)+90;
+    this.rahaTuotto = 2;
+    this.ruokaTuotto = 2;
+    this.vuorot = vuorot;
+    this.sukujenLKM = 15;
+    for ( int i = 0; i < sukujenLKM-1; i++) {
+    	int[] tyyppi = new int[5];
+      int populaatio = r.nextInt(30)+20;
+			tyyppi[r.nextInt(6)] += r.nextInt(1)+1;
+      tyyppi[r.nextInt(6)] += r.nextInt(1)+1;
+      //haetaan tyyppiin kuuluva nimi
+      String lisattavaNimi ="";
+      for ( int j = 0; j < tyyppi.length; j++) {
+        if ( tyyppi[j] != 0) {
+          switch ( j ) {
+            case 0: lisattavaNimi += magianimet.get(r.nextInt(magianimet.size()));
+            case 1: lisattavaNimi += sotilasnimet.get(r.nextInt(sotilasnimet.size()));
+            case 2: lisattavaNimi += uskontonimet.get(r.nextInt(uskontonimet.size()));
+            case 3: lisattavaNimi += kauppiasnimet.get(r.nextInt(kauppiasnimet.size()));
+            case 4: lisattavaNimi += maalaisnimet.get(r.nextInt(maalaisnimet.size()));
+          }
+        }
+      }
+      suvut.add(new Suku(lisattavaNimi, "RandomEtuNimi", populaatio, 0, tyyppi[0], tyyppi[1], tyyppi[2], tyyppi[3], tyyppi[4])); 	//tehdään ensin sukukonstruktori...
+    }
+    
+    //luodaan aateliset
+    suvut.add(new Suku("Isoherrat", "RandomEtuNimi", r.nextInt(10) + 20, r.nextInt(3)+1,0,0,0,0,0));
+    
+    generoiSukuSuhteet();
+  }
   
-  private static void vuorokierto(){ // Koko peli täällä
-    raha = 100;
-    ruoka = 100;
+  public int annaSukujenLKM(){
+	  return sukujenLKM;
+  }
+  
+  public void vuorokierto(){ // Koko peli täällä
+    laskePisteet();
     for(int i = 0; i < vuorot; i++){
-      Ongelma vuoronOngelma = new Ongelma();
+      Random r = new Random();
+      int x = r.nextInt(25);
+      Ongelma vuoronOngelma = ongelmat.get(x);
       vuoronOngelma.tulosta();
       Paatos paatos = kysyPaatos(); 
       paatos.toteutaSeuraukset();
       laskePisteet();
+      if(havitty) break;
     }
+    tulostaPisteet();
   }
   
-  private static Paatos kysyPaatos(){
+  private Paatos kysyPaatos(){
     return new Paatos();
   }
   
-  private static void laskePisteet(){
-	  
+  private void laskePisteet(){
+    this.raha += this.rahaTuotto;
+    this.ruoka += this.ruokaTuotto;
+    if(ruoka < 1 || raha < 1){
+      System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
+      havitty = true;
+    }
+    else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka + " ruoka(a) per kk ((+)" + this.ruokaTuotto + ").");
   }
-  
-  public static void main(String[] args){
-    //prologi
-    vastaus = new Scanner(System.in);
-    System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Mikä on nimenne ja tittelinne teidän ylhäisyytenne?");
-    nimi = vastaus.next();
-    System.out.println("Kuinka monta vuotta aiot hallita? (Vuodessa tulee 12 ongelmaa!)");
-    vuorot = vastaus.nextInt() * 12;
-    
-    //peli alkaa
-    vuorokierto();
-    
-    //pelin lopetus
+
+  //pelin lopetus
+  private void tulostaPisteet(){
     System.out.println("Valtakautesi on päättynyt.");
-    tulostaPisteet();
   }
-
-  private static void tulostaPisteet(){
-	
-  }
-}
-
-class Suku{
-  private int suhdeKuninkaaseen;
-  private HashMap<Suku,Integer> suhteet;
-  private String nimi;
-  private String edustaja;
-  private int populaatio;
-  private int aatelisuus;			//Aina arvot 0-3
   
-  private int magia;				//Suvun maagisuus (0-4)
-  private int sotilaallinen;		//Suvun sotilaallisuus (0-4)
-  private int uskonnollinen;		//Suvun uskonnollisuus (0-4)   ARVOT YHTEENSÄ 4 PER SUKU!
-  private int kauppias;				//Suvun kauppiaisuus (0-4)
-  private int maalainen;			//Suvun maallisuus (0-4)
-  
-  public void annaTiedot(){
-    //Anna edustaja, suvun nimi, aatelisuus ja muut ominaisuudet pisteineen. Annetaan aina kun vuorossa esitellään ongelma.
+  @SuppressWarnings("unused")
+private void generoiNimi(Suku nimettava){
+    nimettava.asetaNimi("randomnimi");
   }
-  public Suku(){
-  }
-}
-
-class Ongelma{
-  private String nimi;
-  private String selitys;
-  private ArrayList<Suku> kohteet; //Ensimmäinen kohde on esittelija, 
-  private ArrayList<Paatos> paatokset;
-    // Mahdollisesti vaikeusastelisäys näille ajan myötä
-  public void tulosta(){
-    
-  }
-  public Ongelma(){
-    
-  }
-}
-class Paatos{
-  public void tulostaPaatosrivi(){
-    
-  }
-  public void toteutaSeuraukset(){
-    
+                       
+  private void generoiSukuSuhteet() {
   }
 }
