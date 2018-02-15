@@ -22,8 +22,9 @@ public class Kuningaskunta{
     //peli alkaa
     kunkku.vuorokierto();
   }
-
-public static void meillaOnOngelmia(Kuningas kunkku, int vuorot){ //Luo kaikki pelin ongelmat, pit‰‰ kutsua sukujen luonnin j‰lkeen.
+  
+//Luo kaikki pelin ongelmat, pit‰‰ kutsua sukujen luonnin j‰lkeen.
+public static void meillaOnOngelmia(Kuningas kunkku, int vuorot){ 
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 		
 		paatokset.add(new Paatos(new Vaatimus[]{new Vaatimus(Tyyppi.Raha, kunkku.annaSukujenLKM()*5, null)}, new Seuraus[]{
