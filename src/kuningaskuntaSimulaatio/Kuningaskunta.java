@@ -33,7 +33,7 @@ public class Kuningaskunta {
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null) },
-				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -kunkku.annaSukujenLKM() * 5, null),
+				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), null),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
 				"Voin auttaa teitä korjaustöissä viidellä kullalla per suku."));
 

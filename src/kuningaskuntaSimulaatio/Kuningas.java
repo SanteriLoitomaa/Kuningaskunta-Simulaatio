@@ -14,20 +14,21 @@ public class Kuningas {
 	private Scanner vastaus = new Scanner(System.in);
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
-	public ArrayList<String> maalaisnimet = new ArrayList<>(
-			Arrays.asList("Kuokka", "Vilja", "Vihre‰", "Lihava", "Pelto", "Aura", "Terve", "Jussi"));
+	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihre‰", "Lihava",
+			"Pelto", "Aura", "Terve", "Jussi"));
 	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keih‰s",
 			"Soturi", "Tappava", "Nuoli", "L‰vist‰v‰", "Verinen", "Lalli", "Punainen"));
 	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyh‰", "Loistava", "Siunattu",
 			"Jeesus", "Jumalan", "Hymni", "Synagoga", "Protestantti", "Sutra", "Valkoinen"));
 	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "‰veri‰s",
 			"Roope", "Tuote", "Lent‰v‰", "K‰rryt", "Lompakko"));
-	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohik‰rme", "Salamoiva", "Liekehtiv‰",
+	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohik‰‰rme", "Salamoiva", "Liekehtiv‰",
 			"Feenix", "Potter", "Milla", "Sauva", "Alkemisti", "Haltija"));
 
 	public Kuningas(String nimi, int vuorot) {
 		Random r = new Random();
 		this.nimi = nimi;
+		this.vuorot = vuorot;
 		this.raha = r.nextInt(10) + 90;
 		this.ruoka = r.nextInt(10) + 90;
 		this.rahaTuotto = 2;
@@ -68,10 +69,6 @@ public class Kuningas {
 		tulostaPisteet();
 	}
 
-	/*
-	 * private Paatos kysyPaatos(){ return new Paatos(); }
-	 */
-
 	private void laskePisteet() {
 		this.raha += this.rahaTuotto;
 		this.ruoka += this.ruokaTuotto;
@@ -104,6 +101,7 @@ public class Kuningas {
 		}
 	}
 	
+	//Luodaan suku
 	private void lisaaSuku() {
 		Random r = new Random();
 		int[] tyyppi = new int[5];

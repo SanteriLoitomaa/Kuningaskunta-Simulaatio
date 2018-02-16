@@ -21,7 +21,7 @@ public class Ongelma {
 	// Mahdollisesti vaikeusastelisäys näille ajan myötä
 	public void tulosta(Kuningas kunkku) {
 		for (Paatos p : paatokset) {
-			p.tulostaPaatosrivi(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys, kunkku);
+			p.tulostaPaatosrivi(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys, kunkku, this, paatokset.indexOf(p));
 		}
 	}
 
@@ -49,14 +49,19 @@ class Paatos {
 	}
 
 	// Tulostaa mahdollisuudet
-	public void tulostaPaatosrivi(String selitys, Kuningas kunkku) {
-		int i = 1;
+	public void tulostaPaatosrivi(String selitys, Kuningas kunkku, Ongelma o, int paatosIndex) {
+		boolean b = false;
 		for (Vaatimus v : vaatimukset) {
-			if (v.tarkistaVaatimus(kunkku)) {
-				System.out.println(i + ". " + selitys);
+			if (v.tarkistaVaatimus(kunkku, paatosIndex, o)) {
+				b = true;
 			}
-			i++;
+			else {
+				b = false;
+				break;
+			}
 		}
+		if(b)
+			System.out.println((paatosIndex + 1) + ". " + selitys);
 	}
 
 	// Toteuta paatos
@@ -84,26 +89,32 @@ class Vaatimus {
 	}
 
 	// Tarkista mahdollisuus
-	public boolean tarkistaVaatimus(Kuningas kunkku) {
+	public boolean tarkistaVaatimus(Kuningas kunkku, int paatosIndex, Ongelma o) {
 		if (tyyppi == Tyyppi.RAHA) {
 			if (kunkku.annaRaha() >= this.arvo)
 				return true;
 			else {
-				
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
 			}
 		}
 		if (tyyppi == Tyyppi.RUOKA) {
 			if (kunkku.annaRuoka() >= this.arvo)
 				return true;
 			else {
-				
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
 			}
 		}
 		if (tyyppi == Tyyppi.SUKUSUHDE) {
 			if (kohde.annaSuhdeKuninkaaseen() >= arvo)
 				return true;
 			else {
-				
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
 			}
 		}
 		return false;
