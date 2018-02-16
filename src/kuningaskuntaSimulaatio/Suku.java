@@ -93,10 +93,11 @@ public class Suku{
   public int annaMaalainen() {
 	  return maalainen;
   }
-  public void toString(Suku kohde) { //Tulostaa suvun tiedot niissä paikoissa joissa ne vaaditaan, tyyppi ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
-	  System.out.println(annaNimi() + ":");
-	  System.out.println("Sukua edustaa " + annaEdustaja());
-	  System.out.println("Suku teihin on: " + annaSuhdeKuninkaaseen());
+  public String toString(Suku kohde) { //Muuttaa stringiksi suvun tiedot niissä paikoissa joissa ne vaaditaan, tyyppi ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
+	  String mjono = "";
+	  mjono +=annaNimi() + ":\n";
+	  mjono +="Sukua edustaa " + annaEdustaja() + "\n";
+	  mjono +="Suku teihin on: " + annaSuhdeKuninkaaseen() + "\n";
 	  // Selvitetään keihin suvulla on huonoin ja paras suhde.
 	  int huonoin = 100;
 	  Suku hsuku = suhteet.keySet().iterator().next();
@@ -111,26 +112,27 @@ public class Suku{
 		  }
 	  }
 	  // selvitetty
-	  System.out.println("Heidän Läheisin liittolaisensa on " + psuku);
-	  System.out.println("Heidän pahin vihamiehensä on " + hsuku);
-	  System.out.println("Suvussa on " + annaPopulaatio() + " jäsentä.");
+	  mjono +="Heidän Läheisin liittolaisensa on " + psuku + "\n";
+	  mjono +="Heidän pahin vihamiehensä on " + hsuku + "\n";
+	  mjono +="Suvussa on " + annaPopulaatio() + " jäsentä.\n";
 	  if (annaAatelisuus()>0) {
-		  System.out.println("Suku on aatelinen.");
+		  mjono +="Suku on aatelinen.\n";
 	  }
 	  if (annaMagia()>0) {
-		  System.out.println("Suku on maaginen.");
+		  mjono +="Suku on maaginen.\n";
 	  }
 	  if (annaSotilaallinen()>0) {
-		  System.out.println("Suku on sotilaallinen.");
+		  mjono +="Suku on sotilaallinen.\n";
 	  }
 	  if (annaUskonnollinen()>0) {
-		  System.out.println("Suku on uskonnollinen.");
+		  mjono +="Suku on uskonnollinen.\n";
 	  }
 	  if (annaKauppias()>0) {
-		  System.out.println("Suku on kauppiassuku.");
+		  mjono +="Suku on kauppiassuku.\n";
 	  }
 	  if (annaMaalainen()>0) {
-		  System.out.println("Suku tuottaa ruokaa.");
+		  mjono +="Suku tuottaa ruokaa.\n";
 	  }
+	  return mjono;
   }
 }
