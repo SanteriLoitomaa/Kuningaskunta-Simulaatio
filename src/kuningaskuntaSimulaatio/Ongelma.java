@@ -19,7 +19,7 @@ public class Ongelma {
 	// Mahdollisesti vaikeusastelisäys näille ajan myötä
 	public void tulosta(Kuningas kunkku) {
 		for (Paatos p : paatokset) {
-			p.tulostaPaatosrivi(selitys, kunkku);
+			p.tulostaPaatosrivi(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys, kunkku);
 		}
 	}
 
