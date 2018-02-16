@@ -14,8 +14,8 @@ public class Kuningas {
 	private boolean havitty = false;
 	@SuppressWarnings("unused")
 	private Scanner vastaus = new Scanner(System.in);
-	public ArrayList<Ongelma> ongelmat;
-	public ArrayList<Suku> suvut;
+	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
+	public ArrayList<Suku> suvut = new ArrayList<Suku>();
 	public ArrayList<String> maalaisnimet = new ArrayList<>(
 			Arrays.asList("Kuokka", "Vilja", "Vihre�", "Lihava", "Pelto", "Aura", "Terve", "Jussi"));
 	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keih�s",
@@ -34,39 +34,17 @@ public class Kuningas {
 		this.ruoka = r.nextInt(10) + 90;
 		this.rahaTuotto = 2;
 		this.ruokaTuotto = 2;
-		this.vuorot = vuorot;
-		this.sukujenLKM = 15;
-		for (int i = 0; i < sukujenLKM - 1; i++) {
-			int[] tyyppi = new int[5];
-			int populaatio = r.nextInt(30) + 20;
-			tyyppi[r.nextInt(6)] += r.nextInt(1) + 1;
-			tyyppi[r.nextInt(6)] += r.nextInt(1) + 1;
-			// haetaan tyyppiin kuuluva nimi
-			String lisattavaNimi = "";
-			for (int j = 0; j < tyyppi.length; j++) {
-				if (tyyppi[j] != 0) {
-					switch (j) {
-					case 0:
-						lisattavaNimi += magianimet.get(r.nextInt(magianimet.size()));
-					case 1:
-						lisattavaNimi += sotilasnimet.get(r.nextInt(sotilasnimet.size()));
-					case 2:
-						lisattavaNimi += uskontonimet.get(r.nextInt(uskontonimet.size()));
-					case 3:
-						lisattavaNimi += kauppiasnimet.get(r.nextInt(kauppiasnimet.size()));
-					case 4:
-						lisattavaNimi += maalaisnimet.get(r.nextInt(maalaisnimet.size()));
-					}
-				}
-			}
-			suvut.add(new Suku(lisattavaNimi, "RandomEtuNimi", populaatio, 0, tyyppi[0], tyyppi[1], tyyppi[2],
-					tyyppi[3], tyyppi[4])); // tehd��n ensin sukukonstruktori...
+		this.sukujenLKM = 25;
+
+		//luodaan suvut
+		for (int i = 0; i < sukujenLKM - 2; i++) {
+			lisaaSuku();
 		}
-
-		// luodaan aateliset
-		suvut.add(new Suku("Isoherrat", "RandomEtuNimi", r.nextInt(10) + 20, r.nextInt(3) + 1, 0, 0, 0, 0, 0));
-
+		lisaaAatelisSuku();
+		lisaaAatelisSuku();
+		
 		generoiSukuSuhteet();
+		
 	}
 
 	public int annaSukujenLKM() {
@@ -77,11 +55,10 @@ public class Kuningas {
 		laskePisteet();
 		for (int i = 0; i < vuorot; i++) {
 			Random r = new Random();
-			int x = r.nextInt(25);
+			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
-			vuoronOngelma.tulosta();
-			// Paatos paatos = kysyPaatos();
-			// paatos.toteutaSeuraukset();
+			vuoronOngelma.tulosta(this);
+			vuoronOngelma.valitsePaatos(vastaus.nextInt(),this);
 			laskePisteet();
 			if (havitty)
 				break;
@@ -113,13 +90,83 @@ public class Kuningas {
 	private void generoiNimi(Suku nimettava) {
 		nimettava.asetaNimi("randomnimi");
 	}
-
+  
 	private void generoiSukuSuhteet() {
+		Random r = new Random();
+		for ( Suku muokattava : suvut ) {
+			for ( Suku suhdeKohde : suvut) {
+				if ( !muokattava.equals(suhdeKohde) ) {
+					muokattava.asetaSuhdeSukuun(r.nextInt(200)-100, suhdeKohde);
+				}
+			}
+		}
 	}
 	
+	private void lisaaSuku() {
+		Random r = new Random();
+		int[] tyyppi = new int[5];
+		tyyppi[r.nextInt(4)] += r.nextInt(1) + 1;
+		tyyppi[r.nextInt(4)] += r.nextInt(1) + 1;
+		// haetaan tyyppiin kuuluva nimi
+		String lisattavaNimi = "";
+		for (int j = 0; j < tyyppi.length; j++) {
+			if (tyyppi[j] > 0) {
+				if (j==0) {
+					lisattavaNimi += magianimet.get(r.nextInt(magianimet.size()));
+				}
+				if (j==1) {
+					lisattavaNimi += sotilasnimet.get(r.nextInt(sotilasnimet.size()));
+				}
+				if (j==2) {
+					lisattavaNimi += uskontonimet.get(r.nextInt(uskontonimet.size()));
+				}
+				if (j==3) {
+					lisattavaNimi += kauppiasnimet.get(r.nextInt(kauppiasnimet.size()));
+				}
+				if (j==4) {
+					lisattavaNimi += maalaisnimet.get(r.nextInt(maalaisnimet.size()));
+				}
+			}
+		}
+		suvut.add(new Suku());
+		Suku lisattava = suvut.get(suvut.size()-1);
+		lisattava.asetaNimi(lisattavaNimi);
+		lisattava.asetaPopulaatio(r.nextInt(30) + 20);
+		lisattava.asetaAatelisuus(0);
+		
+		lisattava.asetaMagia(tyyppi[0]);	
+		lisattava.asetaSotilaallinen(tyyppi[1]);
+		lisattava.asetaUskonnollinen(tyyppi[2]);	
+		lisattava.asetaKauppias(tyyppi[3]);
+		lisattava.asetaMaalainen(tyyppi[4]);	
+	}
+	private void lisaaAatelisSuku() {
+		Random r = new Random();
+		suvut.add(new Suku());
+		Suku lisattava = suvut.get(suvut.size()-1);
+		lisattava.asetaAatelisuus(r.nextInt(2) + 2);
+		
+		lisattava.asetaMagia(0);	
+		lisattava.asetaSotilaallinen(0);
+		lisattava.asetaUskonnollinen(0);	
+		lisattava.asetaKauppias(0);
+		lisattava.asetaMaalainen(0);	
+	}
+	public int annaRaha() {
+		return raha;
+	}
+	public int annaRuoka() {
+		return ruoka;
+	}
+	public void asetaRaha(int asetettavaRahamaara) {
+		this.raha = asetettavaRahamaara;
+	}
+	public void asetaRuoka(int asetettavaRuoka) {
+		this.ruoka = asetettavaRuoka;
+	}
 	public void tulostaSuvut() {
 		for (Suku tulostettava : suvut) {
-			System.out.println(tulostettava.toString());
+			System.out.println(tulostettava);
 		}
 	}
 }
