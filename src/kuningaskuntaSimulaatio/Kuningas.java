@@ -32,7 +32,6 @@ public class Kuningas {
 		this.ruoka = r.nextInt(10) + 90;
 		this.rahaTuotto = 2;
 		this.ruokaTuotto = 2;
-		this.vuorot = vuorot;
 		this.sukujenLKM = 25;
 
 		//luodaan suvut
@@ -45,8 +44,6 @@ public class Kuningas {
 		generoiSukuSuhteet();
 		
 	}
-
-
 
 	public int annaSukujenLKM() {
 		return sukujenLKM;
@@ -95,8 +92,7 @@ public class Kuningas {
 	private void generoiNimi(Suku nimettava) {
 		nimettava.asetaNimi("randomnimi");
 	}
-	
-	
+  
 	private void generoiSukuSuhteet() {
 		Random r = new Random();
 		for ( Suku muokattava : suvut ) {
