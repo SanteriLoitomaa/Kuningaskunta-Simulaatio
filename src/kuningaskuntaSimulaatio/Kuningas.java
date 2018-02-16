@@ -3,7 +3,6 @@ package kuningaskuntaSimulaatio;
 import java.util.*;
 
 public class Kuningas {
-	@SuppressWarnings("unused")
 	private String nimi;
 	private int raha;
 	private int ruoka;
@@ -12,19 +11,18 @@ public class Kuningas {
 	private int vuorot;
 	private int sukujenLKM;
 	private boolean havitty = false;
-	@SuppressWarnings("unused")
 	private Scanner vastaus = new Scanner(System.in);
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
 	public ArrayList<String> maalaisnimet = new ArrayList<>(
-			Arrays.asList("Kuokka", "Vilja", "Vihreï¿½", "Lihava", "Pelto", "Aura", "Terve", "Jussi"));
-	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keihï¿½s",
-			"Soturi", "Tappava", "Nuoli", "Lï¿½vistï¿½vï¿½", "Verinen", "Lalli", "Punainen"));
-	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyhï¿½", "Loistava", "Siunattu",
+			Arrays.asList("Kuokka", "Vilja", "Vihreä", "Lihava", "Pelto", "Aura", "Terve", "Jussi"));
+	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keihäs",
+			"Soturi", "Tappava", "Nuoli", "Lävistävä", "Verinen", "Lalli", "Punainen"));
+	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyhä", "Loistava", "Siunattu",
 			"Jeesus", "Jumalan", "Hymni", "Synagoga", "Protestantti", "Sutra", "Valkoinen"));
-	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "ï¿½veriï¿½s",
-			"Roope", "Tuote", "Lentï¿½vï¿½", "Kï¿½rryt", "Lompakko"));
-	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikï¿½ï¿½rme", "Salamoiva", "Liekehtivï¿½",
+	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "äveriäs",
+			"Roope", "Tuote", "Lentävä", "Kärryt", "Lompakko"));
+	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikärme", "Salamoiva", "Liekehtivä",
 			"Feenix", "Potter", "Milla", "Sauva", "Alkemisti", "Haltija"));
 
 	public Kuningas(String nimi, int vuorot) {
@@ -50,8 +48,12 @@ public class Kuningas {
 	public int annaSukujenLKM() {
 		return sukujenLKM;
 	}
+	
+	public String annaNimi() {
+		return nimi;
+	}
 
-	public void vuorokierto() { // Koko peli tï¿½ï¿½llï¿½
+	public void vuorokierto() { // Koko peli täällä
 		laskePisteet();
 		for (int i = 0; i < vuorot; i++) {
 			Random r = new Random();
@@ -83,7 +85,7 @@ public class Kuningas {
 
 	// pelin lopetus
 	private void tulostaPisteet() {
-		System.out.println("Valtakautesi on pï¿½ï¿½ttynyt.");
+		System.out.println("Valtakautesi on päättynyt.");
 	}
 
 	@SuppressWarnings("unused")

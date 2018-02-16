@@ -100,7 +100,6 @@ class Vaatimus {
 			}
 		}
 		if (tyyppi == Tyyppi.SUKUSUHDE) {
-			boolean on = false;
 			if (kohde.annaSuhdeKuninkaaseen() >= arvo)
 				return true;
 			else {
