@@ -36,10 +36,8 @@ public class Kuningas {
 		this.ruokaTuotto = 2;
 		this.vuorot = vuorot;
 		this.sukujenLKM = 25;
-		
-		// luodaan aateliset
-		suvut.add(new Suku("Isoherrat", "RandomEtuNimi", r.nextInt(10) + 20, r.nextInt(3) + 1, 0, 0, 0, 0, 0));
-		
+
+		//luodaan suvut
 		for (int i = 0; i < sukujenLKM - 2; i++) {
 			lisaaSuku();
 		}
@@ -98,6 +96,9 @@ public class Kuningas {
 	
 	
 	private void generoiSukuSuhteet() {
+		/*
+		 * Tässä käydään läpi kaikki suvut ja lisätään niille suhteet kaikkiin muihin sukuihin
+		 */
 	}
 	
 	private void lisaaSuku() {
