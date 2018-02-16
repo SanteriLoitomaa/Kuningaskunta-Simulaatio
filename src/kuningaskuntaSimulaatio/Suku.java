@@ -12,7 +12,7 @@ public class Suku {
 
 	private int magia; // Suvun maagisuus (0-4)
 	private int sotilaallinen; // Suvun sotilaallisuus (0-4)
-	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENSï¿½ 4 PER SUKU!
+	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENSä 4 PER SUKU!
 	private int kauppias; // Suvun kauppiaisuus (0-4)
 	private int maalainen; // Suvun maallisuus (0-4)
 
@@ -114,13 +114,13 @@ public class Suku {
 		return maalainen;
 	}
 
-	public String toString() { // Muuttaa stringiksi suvun tiedot niissï¿½ paikoissa joissa ne vaaditaan, tyyppi
+	public String toString() { // Muuttaa stringiksi suvun tiedot niissä paikoissa joissa ne vaaditaan, tyyppi
 											// ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
 		String mjono = "";
 		mjono += annaNimi() + ":\n";
 		mjono += "Sukua edustaa " + annaEdustaja() + "\n";
 		mjono += "Suku teihin on: " + annaSuhdeKuninkaaseen() + "\n";
-		// Selvitetï¿½ï¿½n keihin suvulla on huonoin ja paras suhde.
+		// Selvitetään keihin suvulla on huonoin ja paras suhde.
 
 		int huonoin = 100;
 		Suku hsuku = suhteet.keySet().iterator().next();
@@ -138,9 +138,9 @@ public class Suku {
 		}
 		
 		// selvitetty
-		mjono += "Heidï¿½n Lï¿½heisin liittolaisensa on " + psuku.annaNimi() + "\n";
-		mjono += "Heidï¿½n pahin vihamiehensï¿½ on " + hsuku.annaNimi() + "\n";
-		mjono += "Suvussa on " + annaPopulaatio() + " jï¿½sentï¿½.\n";
+		mjono += "Heidän Läheisin liittolaisensa on " + psuku.annaNimi() + "\n";
+		mjono += "Heidän pahin vihamiehensä on " + hsuku.annaNimi() + "\n";
+		mjono += "Suvussa on " + annaPopulaatio() + " jäsentä.\n";
 		if (annaAatelisuus() > 0) {
 			mjono += "Suku on aatelinen.\n";
 		}

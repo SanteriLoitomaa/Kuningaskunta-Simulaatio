@@ -9,7 +9,7 @@ public class Kuningaskunta {
 		// prologi
 		Scanner vastaus = new Scanner(System.in);
 		System.out.println(
-				"Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Miten haluatte ettï¿½ kutsun teitï¿½, teidï¿½n ylhï¿½isyytenne? (nimi ja titteli)");
+				"Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
 		String nimi = vastaus.nextLine();
 		System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
 		while (!vastaus.hasNextInt()) {
@@ -19,6 +19,7 @@ public class Kuningaskunta {
 		vuorot = vuorot * 12;
 		Kuningas kunkku = new Kuningas(nimi, vuorot);
 		meillaOnOngelmia(kunkku, vuorot);
+		System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
 		
 		kunkku.tulostaSuvut();
 		
@@ -27,17 +28,17 @@ public class Kuningaskunta {
 		vastaus.close();
 	}
 
-	// Luo kaikki pelin ongelmat, pitï¿½ï¿½ kutsua sukujen luonnin jï¿½lkeen.
+	// Luo kaikki pelin ongelmat, pitää kutsua sukujen luonnin jälkeen.
 	public static void meillaOnOngelmia(Kuningas kunkku, int vuorot) {
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -kunkku.annaSukujenLKM() * 5, null),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
-				"Voin auttaa teitï¿½ korjaustï¿½issï¿½ viidellï¿½ kullalla per suku."));
+				"Voin auttaa teitä korjaustöissä viidellä kullalla per suku."));
 
-		kunkku.ongelmat.add(new Ongelma("Maanjï¿½ristys",
-				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidï¿½n "
+		kunkku.ongelmat.add(new Ongelma("Maanjäristys",
+				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän "
 						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
 				kunkku.suvut.get(0), paatokset));
 	}
