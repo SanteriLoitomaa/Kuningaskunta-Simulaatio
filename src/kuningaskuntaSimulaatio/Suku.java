@@ -161,4 +161,10 @@ public class Suku {
 		}
 		return mjono;
 	}
+	public void tulostaSuhteet() {
+		System.out.println("Suvulla " + this.annaNimi() + " on seuraavat suhteet muihin sukuihin:");
+		for (Suku tarkasteltava : suhteet.keySet()) {
+			System.out.println(tarkasteltava.annaNimi() + ": " + suhteet.get(tarkasteltava));
+		}
+	}
 }
