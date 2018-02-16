@@ -121,23 +121,25 @@ public class Suku {
 		mjono += "Sukua edustaa " + annaEdustaja() + "\n";
 		mjono += "Suku teihin on: " + annaSuhdeKuninkaaseen() + "\n";
 		// Selvitet��n keihin suvulla on huonoin ja paras suhde.
-		/*
+
 		int huonoin = 100;
 		Suku hsuku = suhteet.keySet().iterator().next();
 		int paras = -100;
 		Suku psuku = suhteet.keySet().iterator().next();
 		for (Suku tarkasteltava : suhteet.keySet()) {
 			if (suhteet.get(tarkasteltava) < huonoin) {
+				huonoin = suhteet.get(tarkasteltava);
 				hsuku = tarkasteltava;
 			}
 			if (suhteet.get(tarkasteltava) > paras) {
 				psuku = tarkasteltava;
+				paras = suhteet.get(tarkasteltava);
 			}
 		}
 		
 		// selvitetty
-		mjono += "Heid�n L�heisin liittolaisensa on " + psuku + "\n";
-		mjono += "Heid�n pahin vihamiehens� on " + hsuku + "\n";*/
+		mjono += "Heid�n L�heisin liittolaisensa on " + psuku.annaNimi() + "\n";
+		mjono += "Heid�n pahin vihamiehens� on " + hsuku.annaNimi() + "\n";
 		mjono += "Suvussa on " + annaPopulaatio() + " j�sent�.\n";
 		if (annaAatelisuus() > 0) {
 			mjono += "Suku on aatelinen.\n";
