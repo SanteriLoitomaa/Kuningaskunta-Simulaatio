@@ -96,9 +96,14 @@ public class Kuningas {
 	
 	
 	private void generoiSukuSuhteet() {
-		/*
-		 * Tässä käydään läpi kaikki suvut ja lisätään niille suhteet kaikkiin muihin sukuihin
-		 */
+		Random r = new Random();
+		for ( Suku muokattava : suvut ) {
+			for ( Suku suhdeKohde : suvut) {
+				if ( !muokattava.equals(suhdeKohde) ) {
+					muokattava.asetaSuhdeSukuun(r.nextInt(200)-100, suhdeKohde);
+				}
+			}
+		}
 	}
 	
 	private void lisaaSuku() {
@@ -109,17 +114,20 @@ public class Kuningas {
 		// haetaan tyyppiin kuuluva nimi
 		String lisattavaNimi = "";
 		for (int j = 0; j < tyyppi.length; j++) {
-			if (tyyppi[j] != 0) {
-				switch (j) {
-				case 0:
+			if (tyyppi[j] > 0) {
+				if (j==0) {
 					lisattavaNimi += magianimet.get(r.nextInt(magianimet.size()));
-				case 1:
+				}
+				if (j==1) {
 					lisattavaNimi += sotilasnimet.get(r.nextInt(sotilasnimet.size()));
-				case 2:
+				}
+				if (j==2) {
 					lisattavaNimi += uskontonimet.get(r.nextInt(uskontonimet.size()));
-				case 3:
+				}
+				if (j==3) {
 					lisattavaNimi += kauppiasnimet.get(r.nextInt(kauppiasnimet.size()));
-				case 4:
+				}
+				if (j==4) {
 					lisattavaNimi += maalaisnimet.get(r.nextInt(maalaisnimet.size()));
 				}
 			}
