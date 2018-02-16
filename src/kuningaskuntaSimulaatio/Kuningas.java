@@ -58,7 +58,7 @@ public class Kuningas {
 		laskePisteet();
 		for (int i = 0; i < vuorot; i++) {
 			Random r = new Random();
-			int x = r.nextInt(25);
+			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
 			vuoronOngelma.tulosta(this);
 			vuoronOngelma.valitsePaatos(vastaus.nextInt(),this);
@@ -159,5 +159,10 @@ public class Kuningas {
 	}
 	public void asetaRuoka(int asetettavaRuoka) {
 		this.ruoka = asetettavaRuoka;
+	}
+	public void tulostaSuvut() {
+		for (Suku tulostettava : suvut) {
+			System.out.println(tulostettava);
+		}
 	}
 }
