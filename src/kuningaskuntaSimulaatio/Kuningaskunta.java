@@ -22,6 +22,7 @@ public class Kuningaskunta {
 
 		// peli alkaa
 		kunkku.vuorokierto();
+		vastaus.close();
 	}
 
 	// Luo kaikki pelin ongelmat, pit‰‰ kutsua sukujen luonnin j‰lkeen.
