@@ -17,15 +17,14 @@ public class Suku{
   private int maalainen;				//Suvun maallisuus (0-4)
  
   
-  public Suku(String nimi, String edustaja, int populaatio, int aatelisuus, int magia, int sotilaallinen, int uskonnollinen, int kauppias, int maalainen){
-  this.populaatio = populaatio;
-  this.aatelisuus = aatelisuus;
-  
-  this.magia = magia;
-  this.sotilaallinen = sotilaallinen;
-  this.uskonnollinen = uskonnollinen;
-  this.kauppias = kauppias;
-  this.maalainen = maalainen;
+  public Suku(){ // Laitetaan default arvot, up to change.
+  this.populaatio = 0;
+  this.aatelisuus = 0;
+  this.magia = 0;
+  this.sotilaallinen = 0;
+  this.uskonnollinen = 0;
+  this.kauppias = 0;
+  this.maalainen = 0;
 }
   
   public void asetaNimi(String nimi){
@@ -94,10 +93,11 @@ public class Suku{
   public int annaMaalainen() {
 	  return maalainen;
   }
-  public void toString(Suku kohde) {
+  public void toString(Suku kohde) { //Tulostaa suvun tiedot niiss‰ paikoissa joissa ne vaaditaan, tyyppi ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
 	  System.out.println(annaNimi() + ":");
 	  System.out.println("Sukua edustaa " + annaEdustaja());
 	  System.out.println("Suku teihin on: " + annaSuhdeKuninkaaseen());
+	  // Selvitet‰‰n keihin suvulla on huonoin ja paras suhde.
 	  int huonoin = 100;
 	  Suku hsuku = suhteet.keySet().iterator().next();
 	  int paras = -100;
@@ -110,6 +110,7 @@ public class Suku{
 			  psuku = tarkasteltava;
 		  }
 	  }
+	  // selvitetty
 	  System.out.println("Heid‰n L‰heisin liittolaisensa on " + psuku);
 	  System.out.println("Heid‰n pahin vihamiehens‰ on " + hsuku);
 	  System.out.println("Suvussa on " + annaPopulaatio() + " j‰sent‰.");
