@@ -14,8 +14,8 @@ public class Kuningas {
 	private boolean havitty = false;
 	@SuppressWarnings("unused")
 	private Scanner vastaus = new Scanner(System.in);
-	public ArrayList<Ongelma> ongelmat;
-	public ArrayList<Suku> suvut;
+	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
+	public ArrayList<Suku> suvut = new ArrayList<Suku>();
 	public ArrayList<String> maalaisnimet = new ArrayList<>(
 			Arrays.asList("Kuokka", "Vilja", "Vihre�", "Lihava", "Pelto", "Aura", "Terve", "Jussi"));
 	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keih�s",
