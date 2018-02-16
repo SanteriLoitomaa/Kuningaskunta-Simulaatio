@@ -104,8 +104,8 @@ public class Kuningas {
 	private void lisaaSuku() {
 		Random r = new Random();
 		int[] tyyppi = new int[5];
-		tyyppi[r.nextInt(6)] += r.nextInt(1) + 1;
-		tyyppi[r.nextInt(6)] += r.nextInt(1) + 1;
+		tyyppi[r.nextInt(4)] += r.nextInt(1) + 1;
+		tyyppi[r.nextInt(4)] += r.nextInt(1) + 1;
 		// haetaan tyyppiin kuuluva nimi
 		String lisattavaNimi = "";
 		for (int j = 0; j < tyyppi.length; j++) {
