@@ -7,6 +7,7 @@ public class Ongelma {
 	private String selitys;
 	private Suku esittelijaSuku;
 	private ArrayList<Paatos> paatokset;
+	private ArrayList<Paatos> sallitut;
 
 	// Ongelman luonnin jälkeen pitää ne lisätä arraylistiin.
 	public Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset) {
@@ -14,6 +15,7 @@ public class Ongelma {
 		this.selitys = selitys;
 		this.esittelijaSuku = esittelijaSuku;
 		this.paatokset = paatokset;
+		this.sallitut = paatokset;
 	}
 
 	// Mahdollisesti vaikeusastelisäys näille ajan myötä
@@ -26,6 +28,14 @@ public class Ongelma {
 	// Pelaajan valitsema päätös lähtee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
+	}
+	
+	public ArrayList<Paatos> annaSallitut() {
+		return sallitut;
+	}
+	
+	public void asetaSallitut(ArrayList<Paatos> sallitut) {
+		this.sallitut = sallitut;
 	}
 }
 
@@ -64,9 +74,9 @@ enum Tyyppi {
 class Vaatimus {
 	private Tyyppi tyyppi;
 	private int arvo;
-	private ArrayList<Suku> kohde;
+	private Suku kohde;
 
-	public Vaatimus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde) {
+	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
 		if (kohde != null)
@@ -78,15 +88,23 @@ class Vaatimus {
 		if (tyyppi == Tyyppi.RAHA) {
 			if (kunkku.annaRaha() >= this.arvo)
 				return true;
+			else {
+				
+			}
 		}
 		if (tyyppi == Tyyppi.RUOKA) {
 			if (kunkku.annaRuoka() >= this.arvo)
 				return true;
+			else {
+				
+			}
 		}
 		if (tyyppi == Tyyppi.SUKUSUHDE) {
-			for (Suku s : kohde) {
-				if (s.annaSuhdeKuninkaaseen() >= arvo)
-					return true;
+			boolean on = false;
+			if (kohde.annaSuhdeKuninkaaseen() >= arvo)
+				return true;
+			else {
+				
 			}
 		}
 		return false;
