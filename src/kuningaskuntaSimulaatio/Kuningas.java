@@ -91,11 +91,6 @@ public class Kuningas {
 	private void tulostaPisteet() {
 		System.out.println("Valtakautesi on p‰‰ttynyt.");
 	}
-
-	@SuppressWarnings("unused")
-	private void generoiNimi(Suku nimettava) {
-		nimettava.asetaNimi("randomnimi");
-	}
   
 	private void generoiSukuSuhteet() {
 		Random r = new Random();
