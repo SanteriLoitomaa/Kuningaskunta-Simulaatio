@@ -11,7 +11,7 @@ public class Kuningas {
 	private int vuorot;
 	private int sukujenLKM;
 	private boolean havitty = false;
-	private Scanner vastaus = new Scanner(System.in);
+	public Scanner vastaus = new Scanner(System.in);
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
 	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihreä", "Lihava",
@@ -61,7 +61,14 @@ public class Kuningas {
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
 			vuoronOngelma.tulosta(this);
-			vuoronOngelma.valitsePaatos(vastaus.nextInt(),this);
+			System.out.print("Päätöksesi numero on: ");
+			while(true) {
+				String s = vastaus.next();
+				if(vuoronOngelma.onSallittu(s)) {
+					vuoronOngelma.valitsePaatos(Integer.parseInt(s),this);
+					break;
+				}
+			}
 			laskePisteet();
 			if (havitty)
 				break;

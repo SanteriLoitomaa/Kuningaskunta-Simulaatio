@@ -28,7 +28,18 @@ public class Ongelma {
 
 	// Pelaajan valitsema päätös lähtee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
-		paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
+		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
+	}
+	
+	public boolean onSallittu(String paatos) {
+		try {
+			System.out.print("Päätöksesi numero on: ");
+			int valinta = Integer.parseInt(paatos);
+			if(this.sallitut.get(valinta - 1) == null) return false;
+			return true;
+		}catch(NullPointerException | InputMismatchException | NumberFormatException | IndexOutOfBoundsException e) {
+			return false;
+		}
 	}
 	
 	public ArrayList<Paatos> annaSallitut() {
@@ -76,7 +87,7 @@ class Paatos {
 }
 
 enum Tyyppi {
-	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, NULL
 }
 
 class Vaatimus {
@@ -106,7 +117,9 @@ class Vaatimus {
 			if (kunkku.annaRahaTuotto() >= this.arvo)
 				return true;
 			else {
-				
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
 			}
 		}
 		if (tyyppi == Tyyppi.RUOKA) {
@@ -122,7 +135,9 @@ class Vaatimus {
 			if (kunkku.annaRuokaTuotto() >= this.arvo)
 				return true;
 			else {
-				
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
 			}
 		}
 		if (tyyppi == Tyyppi.SUKUSUHDE) {
@@ -133,6 +148,9 @@ class Vaatimus {
 				sallitut.set(paatosIndex, null);
 				o.asetaSallitut(sallitut);
 			}
+		}
+		if(tyyppi == Tyyppi.NULL) {
+			return true;
 		}
 		return false;
 	}
