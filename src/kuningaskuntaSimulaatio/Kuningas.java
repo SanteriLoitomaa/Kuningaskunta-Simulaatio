@@ -11,7 +11,7 @@ public class Kuningas {
 	private int vuorot;
 	private int sukujenLKM;
 	private boolean havitty = false;
-	public Scanner vastaus = new Scanner(System.in);
+	private Scanner vastaus = new Scanner(System.in);
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
 	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihreä", "Lihava",

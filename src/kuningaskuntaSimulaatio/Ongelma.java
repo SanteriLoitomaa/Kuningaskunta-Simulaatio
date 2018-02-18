@@ -31,6 +31,7 @@ public class Ongelma {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
 	}
 	
+	//Onko päätös laillista tehdä?
 	public boolean onSallittu(String paatos) {
 		try {
 			System.out.print("Päätöksesi numero on: ");
