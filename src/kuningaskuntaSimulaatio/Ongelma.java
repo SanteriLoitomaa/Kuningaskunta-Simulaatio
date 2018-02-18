@@ -68,7 +68,7 @@ class Paatos {
 }
 
 enum Tyyppi {
-	RAHA, RUOKA, SUKUSUHDE
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE
 }
 
 class Vaatimus {
@@ -92,6 +92,13 @@ class Vaatimus {
 				
 			}
 		}
+		if (tyyppi == Tyyppi.RAHA_T) {
+			if (kunkku.annaRahaTuotto() >= this.arvo)
+				return true;
+			else {
+				
+			}
+		}
 		if (tyyppi == Tyyppi.RUOKA) {
 			if (kunkku.annaRuoka() >= this.arvo)
 				return true;
@@ -99,8 +106,14 @@ class Vaatimus {
 				
 			}
 		}
+		if (tyyppi == Tyyppi.RUOKA_T) {
+			if (kunkku.annaRuokaTuotto() >= this.arvo)
+				return true;
+			else {
+				
+			}
+		}
 		if (tyyppi == Tyyppi.SUKUSUHDE) {
-			boolean on = false;
 			if (kohde.annaSuhdeKuninkaaseen() >= arvo)
 				return true;
 			else {
@@ -128,8 +141,14 @@ class Seuraus {
 		if (tyyppi == Tyyppi.RAHA) {
 			kunkku.asetaRaha(kunkku.annaRaha() + this.arvo);
 		}
+		if (tyyppi == Tyyppi.RAHA_T) {
+			kunkku.asetaRahaTuotto(kunkku.annaRahaTuotto() + this.arvo);
+		}
 		if (tyyppi == Tyyppi.RUOKA) {
 			kunkku.asetaRuoka(kunkku.annaRuoka() + this.arvo);
+		}
+		if (tyyppi == Tyyppi.RUOKA_T) {
+			kunkku.asetaRuokaTuotto(kunkku.annaRuokaTuotto() + this.arvo);
 		}
 		if (tyyppi == Tyyppi.SUKUSUHDE) {
 			for (Suku s : kohde) {

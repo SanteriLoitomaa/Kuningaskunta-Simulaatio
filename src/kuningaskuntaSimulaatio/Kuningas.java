@@ -173,4 +173,20 @@ public class Kuningas {
 			System.out.println(tulostettava);
 		}
 	}
+
+	public int annaRahaTuotto() {
+		return this.rahaTuotto;
+	}
+
+	public void asetaRahaTuotto(int rahaTuotto) {
+		this.rahaTuotto = rahaTuotto;
+	}
+	
+	public int annaRuokaTuotto() {
+		return this.ruokaTuotto;
+	}
+	
+	public void asetaRuokaTuotto(int ruokaTuotto) {
+		this.ruokaTuotto = ruokaTuotto;
+	}
 }
