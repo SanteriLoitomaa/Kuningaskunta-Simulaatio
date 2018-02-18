@@ -169,6 +169,24 @@ public class Kuningas {
 			System.out.println(tulostettava);
 		}
 	}
+	
+	public Suku annaAatelisin() {
+		int aatelisuus = 0;
+		Suku aatelisin = this.suvut.get(0);
+		for(Suku s : this.suvut) {
+			if(s.annaAatelisuus() > 0) {
+				aatelisuus = s.annaAatelisuus();
+				aatelisin = s;
+				break;
+			}
+		}
+		for(Suku s : this.suvut) {
+			if(s.annaAatelisuus() > aatelisuus) {
+				aatelisin = s;
+			}
+		}
+		return aatelisin;
+	}
 
 	public int annaRahaTuotto() {
 		return this.rahaTuotto;

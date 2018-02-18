@@ -40,6 +40,6 @@ public class Kuningaskunta {
 		kunkku.ongelmat.add(new Ongelma("Maanjäristys",
 				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän "
 						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
-				kunkku.suvut.get(0), paatokset));
+				kunkku.annaAatelisin(), paatokset));
 	}
 }

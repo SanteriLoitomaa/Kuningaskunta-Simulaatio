@@ -20,8 +20,9 @@ public class Ongelma {
 
 	// Mahdollisesti vaikeusastelisäys näille ajan myötä
 	public void tulosta(Kuningas kunkku) {
+		System.out.println(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
-			p.tulostaPaatosrivi(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys, kunkku, this, paatokset.indexOf(p));
+			p.tulostaPaatosrivi(kunkku, this, paatokset.indexOf(p));
 		}
 	}
 
@@ -42,14 +43,16 @@ public class Ongelma {
 class Paatos {
 	private Vaatimus[] vaatimukset;
 	private Seuraus[] seuraukset;
+	private String viesti;
 
 	public Paatos(Vaatimus[] v, Seuraus[] s, String viesti) {
 		this.vaatimukset = v;
 		this.seuraukset = s;
+		this.viesti = viesti;
 	}
 
 	// Tulostaa mahdollisuudet
-	public void tulostaPaatosrivi(String selitys, Kuningas kunkku, Ongelma o, int paatosIndex) {
+	public void tulostaPaatosrivi(Kuningas kunkku, Ongelma o, int paatosIndex) {
 		boolean b = false;
 		for (Vaatimus v : vaatimukset) {
 			if (v.tarkistaVaatimus(kunkku, paatosIndex, o)) {
@@ -61,7 +64,7 @@ class Paatos {
 			}
 		}
 		if(b)
-			System.out.println((paatosIndex + 1) + ". " + selitys);
+			System.out.println((paatosIndex + 1) + ". " + this.viesti);
 	}
 
 	// Toteuta paatos
