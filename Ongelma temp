@@ -13,7 +13,7 @@ Paatokset: 	 1. "Voin auttaa teitä korjaustöissä viidellä kullalla per suku.
            	 4. "En näe miten tämä ongelma koskee minua."
 
 Vaikutukset: 1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
-						 2. +10 Ei uskonnolisten sukujen välit, -10 uskonnolisten sukujen välit kuninkaaseen ja maagiseen sukuun, jolta kuningas sai idean. (paitsi jos myös maaginen).
+	     2. +10 Ei uskonnolisten sukujen välit, -10 uskonnolisten sukujen välit kuninkaaseen ja maagiseen sukuun, jolta kuningas sai idean. (paitsi jos myös maaginen).
              3. +10 Vaikutettujen sukujen välit paitsi -10 neitsyen suvun välit kuninkaaseen ja uskonnoliseen sukuun, jolta kuningas sai idean.
              4. -20 Kaikkien sukujen välit.
 
@@ -25,13 +25,13 @@ Selitys: "Viimeisen viikon sisään on 4 aatelisen tiluksilla ollut tuhoisia tul
 
 Kohteet: 4 sattumanvaraista sukua joilla on aatelisuusastetta.
 
-Paatokset:	 1. "Järjestetään sotilaat vartioimaan alueita, nappaamme polttajan kyllä!" (jos hyvissä väleissä sotilassuvun kanssa)
-						 2. "Korvataan vahingot kullalla, kaikki asiat voidaan ratkaista sillä." (jos varaa)
+Paatokset:   1. "Järjestetään sotilaat vartioimaan alueita, nappaamme polttajan kyllä!" (jos hyvissä väleissä sotilassuvun kanssa)
+	     2. "Korvataan vahingot kullalla, kaikki asiat voidaan ratkaista sillä." (jos varaa)
              3. "Uskottelemme heille tekevämme kaikkemme, eiköhän se riitä. Kyllä polttaja lopulta rauhoittuu" (jos hyvissä väleissä aatelissukujen kanssa)
              4. "Aatelisten ongelma se on, ei minun."
 
 Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
-						 2. -20 kultaa, +10 välit aatelissukujen kanssa
+	     2. -20 kultaa, +10 välit aatelissukujen kanssa
              3. +10 atteliskohteiden välit -20 muiden aatelissukujen välit 
              4. -20 Aatelissukujen välit
 
@@ -43,13 +43,13 @@ Selitys: "Olemme hiljattain saaneet haltuumme harvinaisen hedelmälajikkeen liik
 
 Kohteet: Kauppias-Maanviljely suku
 
-Paatokset:	 1. "Tottakai, paljonko tarvitsette?" (Jos varat riittävät alkusijoitukseen)
-						 2. "Järjestän teille maa-alaa muilta suvuilta, saatte tilanne."
+Paatokset:   1. "Tottakai, paljonko tarvitsette?" (Jos varat riittävät alkusijoitukseen)
+	     2. "Järjestän teille maa-alaa muilta suvuilta, saatte tilanne."
              3. "Kokeilen mielelläni tätä, mutta vain itse!"
              4. "Viekää rehunne muualle."
 
 Vaikutukset: 1. -30 kultaa, + 20 ruokaa ja +5 kultaa + tyytyväisyys kohteen kanssa.
-						 2. -tyytyväisyys muilta maalaissuvuilta, +20 ruokaa +5 kultaa + tyytyväisyys kohteen kanssa.
+	     2. -tyytyväisyys muilta maalaissuvuilta, +20 ruokaa +5 kultaa + tyytyväisyys kohteen kanssa.
              3. - tyytyväisyys kaikilta maalaissuvuilta, +15 ruokaa +10 kultaa.
              4. - tyytyväisyys kohteen kanssa.
 
@@ -62,15 +62,15 @@ Selitys: "X:n isäntä Jussi on ojittanut pellon ja rakentanut talon kirkon maal
 
 Kohteet: Maanviljelijäsuku
 
-Paatokset:	 1. "Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
-						 2. "Vuokrasopimus on kohtuullistettava ja vuokran määräksi riittää vain kaksi viljasäkkiä vuodessa"
+Paatokset:   1. "Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
+	     2. "Vuokrasopimus on kohtuullistettava ja vuokran määräksi riittää vain kaksi viljasäkkiä vuodessa"
              3. "Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla."
              4. "(Älä tee mitään)"
 
 Vaikutukset: 1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän tuottavuutensa kasvaa. 
 								Suhde: Maalaissuku - Uskonnollinen suku +10
 								Suhde: Uskonnollinen suku - Kuningas -20
-						 2. Uskonnollisten sukujen kunnioitus +20
+	     2. Uskonnollisten sukujen kunnioitus +20
              3. X:n kunnioitus -10 ruoka +10
              4. Uskonnollisten sukujen kunnioitus +10
 
