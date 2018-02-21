@@ -29,6 +29,7 @@ public class Ongelma {
 	// Pelaajan valitsema päätös lähtee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
+		this.sallitut = this.paatokset;
 	}
 	
 	//Onko päätös laillista tehdä?
