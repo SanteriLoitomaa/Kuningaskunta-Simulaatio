@@ -1,8 +1,10 @@
 package kuningaskuntaSimulaatio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Ongelma {
+public class Ongelma implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String nimi;
 	private String selitys;
 	private Suku esittelijaSuku;
@@ -53,7 +55,8 @@ public class Ongelma {
 	}
 }
 
-class Paatos {
+class Paatos implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Vaatimus[] vaatimukset;
 	private Seuraus[] seuraukset;
 	private String viesti;
@@ -88,11 +91,12 @@ class Paatos {
 	}
 }
 
-enum Tyyppi {
+enum Tyyppi implements Serializable{
 	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, NULL
 }
 
-class Vaatimus {
+class Vaatimus implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Tyyppi tyyppi;
 	private int arvo;
 	private Suku kohde;
@@ -158,7 +162,8 @@ class Vaatimus {
 	}
 }
 
-class Seuraus {
+class Seuraus implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Tyyppi tyyppi;
 	private int arvo;
 	private ArrayList<Suku> kohde;

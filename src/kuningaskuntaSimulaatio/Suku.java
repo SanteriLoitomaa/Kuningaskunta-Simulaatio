@@ -1,8 +1,10 @@
 package kuningaskuntaSimulaatio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Suku {
+public class Suku implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int suhdeKuninkaaseen;
 	private HashMap<Suku, Integer> suhteet = new HashMap<Suku, Integer>();
 	private String nimi;

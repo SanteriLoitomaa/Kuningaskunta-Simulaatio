@@ -1,8 +1,10 @@
 package kuningaskuntaSimulaatio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Kuningas {
+public class Kuningas implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String nimi;
 	private int raha;
 	private int ruoka;
@@ -11,7 +13,7 @@ public class Kuningas {
 	private int vuorot;
 	private int sukujenLKM;
 	private boolean havitty = false;
-	private Scanner vastaus = new Scanner(System.in);
+	transient private Scanner vastaus;
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
 	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihre‰", "Lihava",
@@ -55,30 +57,35 @@ public class Kuningas {
 	}
 
 	public void vuorokierto() { // Koko peli t‰‰ll‰
-		laskePisteet();
+		laskePisteet(false);
 		for (int i = 0; i < vuorot; i++) {
 			Random r = new Random();
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
 			vuoronOngelma.tulosta(this);
 			System.out.print("P‰‰tˆksesi numero on: ");
+			String s = "";
 			while(true) {
-				String s = vastaus.next();
+				s = vastaus.next();
 				if(vuoronOngelma.onSallittu(s)) {
 					vuoronOngelma.valitsePaatos(Integer.parseInt(s),this);
 					break;
 				}
 			}
-			laskePisteet();
+			laskePisteet(true);
 			if (havitty)
 				break;
+			else
+				TallennaLataa.tallenna(this);
 		}
 		tulostaPisteet();
 	}
 
-	private void laskePisteet() {
-		this.raha += this.rahaTuotto;
-		this.ruoka += this.ruokaTuotto;
+	private void laskePisteet(Boolean lisaaPisteet) {
+		if(lisaaPisteet) {
+			this.raha += this.rahaTuotto;
+			this.ruoka += this.ruokaTuotto;
+		}
 		if (ruoka < 1 || raha < 1) {
 			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
 			havitty = true;
@@ -204,5 +211,9 @@ public class Kuningas {
 	
 	public void asetaRuokaTuotto(int ruokaTuotto) {
 		this.ruokaTuotto = ruokaTuotto;
+	}
+
+	public void scan(Scanner vastaus) {
+		this.vastaus = vastaus;
 	}
 }
