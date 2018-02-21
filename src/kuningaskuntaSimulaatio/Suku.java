@@ -36,6 +36,7 @@ public class Suku {
 
 	public void asetaSuhdeSukuun(int Suhdeluku, Suku kohde) {
 		suhteet.put(kohde, Suhdeluku);
+		kohde.suhteet.put(this, Suhdeluku);
 	}
 
 	public void asetaEdustaja(String edustaja) {
