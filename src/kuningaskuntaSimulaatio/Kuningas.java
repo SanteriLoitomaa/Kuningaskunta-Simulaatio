@@ -75,8 +75,19 @@ public class Kuningas implements Serializable{
 			laskePisteet(true);
 			if (havitty)
 				break;
-			else
+			else {
 				TallennaLataa.tallenna(this);
+				System.out.println("Haluatko poistua?");
+				System.out.println("1. Kyllä");
+				System.out.println("2. En");
+				while (!vastaus.hasNextInt()) {
+					vastaus.next();
+				}
+				int vast = vastaus.nextInt();
+				if(vast == 1) {
+					System.exit(1);
+				}
+			}
 		}
 		tulostaPisteet();
 	}

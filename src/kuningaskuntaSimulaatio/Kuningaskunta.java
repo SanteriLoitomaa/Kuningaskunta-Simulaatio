@@ -17,7 +17,7 @@ public class Kuningaskunta{
 		int vast = vastaus.nextInt();
 		if(vast == 1) {
 			System.out.println("Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
-			String nimi = vastaus.nextLine();
+			String nimi = vastaus.next();
 			System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
 			while (!vastaus.hasNextInt()) {
 				vastaus.next();
