@@ -31,7 +31,7 @@ public class Kuningaskunta{
 			kunkku.vuorokierto();
 		}
 		if(vast == 2) {
-			Kuningas kunkku = TallennaLataa.lataa();
+			Kuningas kunkku = TallennaLataaPisteet.lataa();
 			System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
 			kunkku.scan(vastaus);
 			kunkku.vuorokierto();

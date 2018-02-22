@@ -76,7 +76,7 @@ public class Kuningas implements Serializable{
 			if (havitty)
 				break;
 			else {
-				TallennaLataa.tallenna(this);
+				TallennaLataaPisteet.tallenna(this);
 				System.out.println("Haluatko poistua?");
 				System.out.println("1. Kyllä");
 				System.out.println("2. En");

@@ -208,7 +208,6 @@ class Seuraus implements Serializable {
 		}
 		if (tyyppi == Tyyppi.SUKUVALIT) {
 			kohde.get(0).asetaSuhdeSukuun(arvo + kohde.get(0).annaSuhdeSukuun(kohde.get(1)), kohde.get(1));
-			kohde.get(1).asetaSuhdeSukuun(arvo + kohde.get(1).annaSuhdeSukuun(kohde.get(0)), kohde.get(0));
 		}
 	}
 }
