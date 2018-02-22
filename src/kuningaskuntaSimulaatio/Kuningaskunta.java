@@ -59,12 +59,12 @@ public class Kuningaskunta{
 	public static void meillaOnOngelmia(Kuningas kunkku) {
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null) },
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), null),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
 				"Voin auttaa teitä korjaustöissä viidellä kullalla per suku."));
 		
-		/*paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSuosituinMagia().get(0)) },
+		/*paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSuosituinMagia().get(0), null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.etsiSuosituinUskonnollinen()),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, etsisuku(maaginen & uskonnollinen)),
@@ -77,14 +77,14 @@ public class Kuningaskunta{
 		ArrayList<Suku> uhri = new ArrayList<Suku>(Arrays.asList(x));
 		// Huumori mielessä jätimem mahdolliseksi tapattaa ehdottajan tyttären xD
 		
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSuosituinUskonnollinen().get(0)) },
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSuosituinUskonnollinen().get(0), null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, uhri),
 						new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
 						Puuttuu vielä sukujen väliset muutokset},
 				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten."));*/
 		
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0, null) },
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.suvut)},
 				"En näe miten tämä ongelma koskee minua."));
 		

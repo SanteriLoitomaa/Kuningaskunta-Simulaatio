@@ -92,7 +92,7 @@ class Paatos implements Serializable {
 }
 
 enum Tyyppi implements Serializable{
-	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, NULL
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, NULL
 }
 
 class Vaatimus implements Serializable{
@@ -100,12 +100,15 @@ class Vaatimus implements Serializable{
 	private Tyyppi tyyppi;
 	private int arvo;
 	private Suku kohde;
+	private Suku kohde2;
 
-	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde) {
+	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde, Suku kohde2) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
 		if (kohde != null)
 			this.kohde = kohde;
+		if (kohde2 != null)
+			this.kohde2 = kohde2;
 	}
 
 	// Tarkista mahdollisuus
@@ -155,6 +158,15 @@ class Vaatimus implements Serializable{
 				o.asetaSallitut(sallitut);
 			}
 		}
+		if (tyyppi == Tyyppi.SUKUVALIT) {
+			if (kohde.annaSuhdeSukuun(kohde2) >= arvo)
+				return true;
+			else {
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
+			}
+		}
 		if(tyyppi == Tyyppi.NULL) {
 			return true;
 		}
@@ -193,6 +205,10 @@ class Seuraus implements Serializable {
 			for (Suku s : kohde) {
 				s.asetaSuhdeKuninkaaseen(s.annaSuhdeKuninkaaseen() + arvo);
 			}
+		}
+		if (tyyppi == Tyyppi.SUKUVALIT) {
+			kohde.get(0).asetaSuhdeSukuun(arvo + kohde.get(0).annaSuhdeSukuun(kohde.get(1)), kohde.get(1));
+			kohde.get(1).asetaSuhdeSukuun(arvo + kohde.get(1).annaSuhdeSukuun(kohde.get(0)), kohde.get(0));
 		}
 	}
 }
