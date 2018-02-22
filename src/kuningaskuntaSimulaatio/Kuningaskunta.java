@@ -5,53 +5,66 @@ import java.util.*;
 public class Kuningaskunta{
 
 	public static void main(String[] args) {
-
-		// prologi
 		Scanner vastaus = new Scanner(System.in);
-		System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
-		System.out.println("1. aloittaa uuden pelin? (Mahdollinen vanha pelisi katoaa)");
-		System.out.println("2. jatkaa siitä, mihin jäit?");
-		while (!vastaus.hasNextInt()) {
-			vastaus.next();
-		}
-		int vast = vastaus.nextInt();
-		if(vast == 1) {
-			System.out.println("Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
-			String nimi = vastaus.next();
-			System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
+		while(true) {
+			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
+			System.out.println("1. aloittaa uuden pelin? (Mahdollinen vanha pelisi katoaa)");
+			System.out.println("2. jatkaa siitä, mihin jäit?");
+			System.out.println("3. nähdä parhaimmat pisteet?");
+			System.out.println("4. nollata pisteet?");
+			System.out.println("5. poistua pelistä?");
 			while (!vastaus.hasNextInt()) {
 				vastaus.next();
 			}
-			int vuorot = vastaus.nextInt();
-			vuorot = vuorot * 12;
-			Kuningas kunkku = new Kuningas(nimi, vuorot);
-			meillaOnOngelmia(kunkku);
-			System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
-			kunkku.scan(vastaus);
-			kunkku.vuorokierto();
-		}
-		if(vast == 2) {
-			Kuningas kunkku = TallennaLataaPisteet.lataa();
-			System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
-			kunkku.scan(vastaus);
-			kunkku.vuorokierto();
-		}
-		if(vast == 1337) {
-			Kuningas kunkku = new Kuningas("Kuningas Arthur", 80);
-			kunkku.asetaRaha(10000);
-			kunkku.asetaRuoka(10000);
-			kunkku.asetaRahaTuotto(10);
-			kunkku.asetaRuokaTuotto(10);
-			for(Suku s : kunkku.suvut) {
-				s.asetaSuhdeKuninkaaseen(80);
+			int vast = vastaus.nextInt();
+			// Peli alkaa tästä
+			if(vast == 1) {
+				System.out.println("Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
+				String nimi = vastaus.next();
+				System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
+				while (!vastaus.hasNextInt()) {
+					vastaus.next();
+				}
+				int vuorot = vastaus.nextInt();
+				vuorot = vuorot * 12;
+				Kuningas kunkku = new Kuningas(nimi, vuorot);
+				meillaOnOngelmia(kunkku);
+				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
+				kunkku.scan(vastaus);
+				kunkku.vuorokierto();
 			}
-			kunkku.tulostaSuvut();
-			meillaOnOngelmia(kunkku);
-			System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
-			kunkku.scan(vastaus);
-			kunkku.vuorokierto();
+			// Pelin lataus
+			if(vast == 2) {
+				Kuningas kunkku = TallennaLataaPisteet.lataa();
+				System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
+				kunkku.scan(vastaus);
+				kunkku.vuorokierto();
+			}
+			// Parhaat pisteet
+			if(vast == 3) {
+				TallennaLataaPisteet.tulostaPisteet();
+			}
+			// Resetoi pisteet
+			if(vast == 4) TallennaLataaPisteet.luoPisteet();
+			// Poistu pelistä
+			if(vast == 5) break;
+			// Huijauskoodi
+			if(vast == 1337) {
+				Kuningas kunkku = new Kuningas("Kuningas Arthur", 80);
+				kunkku.asetaRaha(10000);
+				kunkku.asetaRuoka(10000);
+				kunkku.asetaRahaTuotto(10);
+				kunkku.asetaRuokaTuotto(10);
+				for(Suku s : kunkku.suvut) {
+					s.asetaSuhdeKuninkaaseen(80);
+				}
+				kunkku.tulostaSuvut();
+				meillaOnOngelmia(kunkku);
+				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
+				kunkku.scan(vastaus);
+				kunkku.vuorokierto();
+			}
 		}
-		
 		vastaus.close();
 	}
 
