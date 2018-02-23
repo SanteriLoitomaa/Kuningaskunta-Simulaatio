@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 
 public class TallennaLataaPisteet implements Serializable{
 
@@ -37,68 +36,71 @@ public class TallennaLataaPisteet implements Serializable{
 		return null;
 	}
 	
-	@SuppressWarnings({ "unchecked", "unlikely-arg-type" })
 	public static void lisaaPisteet(int pist, String nimi) {
-		HashMap<String, String> pisteet = new HashMap<String, String>();
-		String piste = "" + pist;
 		try {
 			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
-			pisteet = (HashMap<String, String>) lataa.readObject();
+			Pisteet pisteet = (Pisteet) lataa.readObject();
 			lataa.close();
 			tiedosto.close();
-			if(pisteet.containsKey(piste)) piste = "0" + piste;
-			pisteet.put(piste, nimi);
-			int[] pis = new int[pisteet.size()];
-			int x = 0;
-			for(String s : pisteet.keySet()) {
-				pis[x] = Integer.parseInt(s);
-				x++;
+			int[] piste = pisteet.annaPisteet();
+			int[] temp = new int[11];
+			for(int i = 0; i < piste.length; i++) {
+				temp[i] = piste[i];
 			}
-			java.util.Arrays.sort(pis);
-			for(int i = 0; i < pis.length / 2; i++) {
-			    int temp = pis[i];
-			    pis[i] = pis[pis.length - i - 1];
-			    pis[pis.length - i - 1] = temp;
+			temp[10] = pist;
+			String[] nimet = pisteet.annaNimet();
+			String[] tem = new String[11];
+			for(int i = 0; i < piste.length; i++) {
+				tem[i] = nimet[i];
 			}
-			if(pis.length == 11)
-				pisteet.remove(pis[10]);
-			String[] pistee = new String[pisteet.size()];
-			for(int i = 0; i < pisteet.size(); i++) {
-				pistee[i] = pis[i] + "";
+			tem[10] = nimi;
+			Arrays.sort(temp);
+			for(int i = 0; i < temp.length / 2; i++) {
+			    int tempo = temp[i];
+			    temp[i] = temp[temp.length - i - 1];
+			    temp[temp.length - i - 1] = tempo;
 			}
-			HashMap<String, String> uusi = new HashMap<String, String>();
-			for(int i = 0; i < pisteet.size(); i++)
-				if(uusi.containsKey(pistee[i])) {
-					uusi.put("0" + pistee[i], pisteet.get(pistee[i]));
+			int nykyinen = 10;
+			if(temp[10] != pist) {
+				for(int i = 0; i < 10; i++) {
+					if(temp[i] != piste[i]) {
+						nykyinen = i;
+						break;
+					}
 				}
-				else uusi.put(pistee[i], pisteet.get(pistee[i]));
+				for(int i = nykyinen + 1; i < 10; i++) {
+					tem[i] = nimet[i - 1];
+				}
+				tem[nykyinen] = nimi;
+			}
+			for(int i = 0; i < 10; i++) {
+				nimet[i] = tem[i];
+				piste[i] = temp[i];
+			}
+			pisteet.asetaNimet(nimet);
+			pisteet.asetaPisteet(piste);
 			FileOutputStream tiedosto1 = new FileOutputStream("pisteet.pis");
 			ObjectOutputStream tallenna = new ObjectOutputStream(tiedosto1);
-			tallenna.writeObject(uusi);
+			tallenna.writeObject(pisteet);
 			tallenna.close();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void tulostaPisteet() {
-		HashMap<String, String> pisteet = new HashMap<String, String>();
 		try {
 			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
-			pisteet = (HashMap<String, String>) lataa.readObject();
+			Pisteet pisteet = (Pisteet) lataa.readObject();
 			lataa.close();
 			tiedosto.close();
+			int[] piste = pisteet.annaPisteet();
+			String[] nimet = pisteet.annaNimet();
 			System.out.println("Parhaat pisteet ovat saaneet: ");
-			for(String i : pisteet.keySet()) {
-				String p = i;
-				for(int x = 0; x < p.length(); x++) {
-					if(p.charAt(x) == '0') p = p.substring(1, p.length());
-					else break;
-				}
-				System.out.println(pisteet.get(i) + "           " + Integer.parseInt(i));
+			for(int i = 0; i < 10; i++) {
+				System.out.println(nimet[i] + " sai " + piste[i] + " pistettä.");
 			}
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -106,11 +108,10 @@ public class TallennaLataaPisteet implements Serializable{
 	}
 	
 	public static void luoPisteet() {
-		HashMap<String, String> pisteet = new HashMap<String, String>();
-		pisteet.put("10000", "King Arthur");
-		pisteet.put("010000", "King Arthur");
-		pisteet.put("0010000", "King Arthur");
-		pisteet.put("00010000", "King Arthur");
+		Pisteet pisteet = new Pisteet(
+			new int[] {100000, 75000, 50000, 25000, 10000, 7500, 5000, 2500, 1000, 100},
+			new String[] {"Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur",
+					"Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur"});
 		try {
 			FileOutputStream tiedosto = new FileOutputStream("pisteet.pis");
 			ObjectOutputStream tallenna = new ObjectOutputStream(tiedosto);
@@ -122,12 +123,30 @@ public class TallennaLataaPisteet implements Serializable{
 	}
 }
 
-class Pisteet{
-	ArrayList<Integer> pisteet = new ArrayList<Integer>();
-	ArrayList<String> nimet = new ArrayList<String>();
+class Pisteet implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private int[] pisteet;
+	private String[] nimet;
 	
-	public Pisteet() {
-		
+	public Pisteet(int[] pisteet, String[] nimet) {
+		this.pisteet = pisteet;
+		this.nimet = nimet;
+	}
+	
+	public int[] annaPisteet() {
+		return this.pisteet;
+	}
+	
+	public String[] annaNimet() {
+		return this.nimet;
+	}
+	
+	public void asetaPisteet(int[] pisteet) {
+		this.pisteet = pisteet;
+	}
+	
+	public void asetaNimet(String[] nimet) {
+		this.nimet = nimet;
 	}
 	
 }
