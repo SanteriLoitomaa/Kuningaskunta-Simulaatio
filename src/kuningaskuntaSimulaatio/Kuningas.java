@@ -251,7 +251,7 @@ public class Kuningas implements Serializable{
 		}
 		
 		//Järjestetään kun comparatori on päivitetty sukuun
-		//Arrays.sort(palautettava); 
+		Collections.sort(palautettava); 
 		
 		return palautettava;
 	}
