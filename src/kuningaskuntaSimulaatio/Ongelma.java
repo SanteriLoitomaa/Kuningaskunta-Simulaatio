@@ -17,7 +17,7 @@ public class Ongelma implements Serializable {
 		this.selitys = selitys;
 		this.esittelijaSuku = esittelijaSuku;
 		this.paatokset = paatokset;
-		this.sallitut = paatokset;
+		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 
 	// Mahdollisesti vaikeusastelis�ys n�ille ajan my�t�
@@ -31,7 +31,7 @@ public class Ongelma implements Serializable {
 	// Pelaajan valitsema p��t�s l�htee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
-		this.sallitut = this.paatokset;
+		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 	
 	//Onko p��t�s laillista tehd�?
