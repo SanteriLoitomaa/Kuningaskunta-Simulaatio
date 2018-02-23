@@ -77,14 +77,14 @@ public class Kuningas implements Serializable{
 				break;
 			else {
 				TallennaLataaPisteet.tallenna(this);
-				System.out.println("Haluatko poistua?");
+				System.out.println("Haluatko Jatkaa?");
 				System.out.println("1. Kyllï¿½");
 				System.out.println("2. En");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
 				}
 				int vast = vastaus.nextInt();
-				if(vast == 1) {
+				if(vast == 2) {
 					System.exit(1);
 				}
 			}
@@ -108,6 +108,32 @@ public class Kuningas implements Serializable{
 	// pelin lopetus
 	private void tulostaPisteet() {
 		System.out.println("Valtakautesi on pï¿½ï¿½ttynyt.");
+		double pisteet = 0;
+		pisteet += annaRaha();
+		pisteet += annaRuoka();
+		pisteet += annaRahaTuotto()*10;
+		pisteet += annaRuokaTuotto()*10;
+		for (int i=0;i<suvut.size();i++) {
+			if (suvut.get(i).annaAatelisuus() > 0) {
+				pisteet += suvut.get(i).annaSuhdeKuninkaaseen()*10;
+			}else if (suvut.get(i).annaSuhdeKuninkaaseen() > 0) {
+				pisteet += suvut.get(i).annaSuhdeKuninkaaseen()*3;
+			}else {
+				pisteet += suvut.get(i).annaSuhdeKuninkaaseen();
+			}
+		}
+		if (havitty) {
+			pisteet = pisteet*0.2;
+		}
+		int truPisteet = (int)pisteet;
+		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
+		/*
+		 jos valtakunta hajosi pisteistä pois 80%
+		 Sukujen väliset tyytyväisyyssuhteet summataan keskenään, positiivisten tulee painaa negatiivisia
+		 enemmän.
+		 Aatelien tyytyväisyys faktoroidaan*10
+		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin myös.
+		 */
 	}
   
 	private void generoiSukuSuhteet() {
