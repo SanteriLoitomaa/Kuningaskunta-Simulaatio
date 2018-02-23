@@ -11,7 +11,7 @@ public class Ongelma implements Serializable {
 	private ArrayList<Paatos> paatokset;
 	private ArrayList<Paatos> sallitut;
 
-	// Ongelman luonnin jälkeen pitää ne lisätä arraylistiin.
+	// Ongelman luonnin jï¿½lkeen pitï¿½ï¿½ ne lisï¿½tï¿½ arraylistiin.
 	public Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset) {
 		this.nimi = nimi;
 		this.selitys = selitys;
@@ -20,7 +20,7 @@ public class Ongelma implements Serializable {
 		this.sallitut = paatokset;
 	}
 
-	// Mahdollisesti vaikeusastelisäys näille ajan myötä
+	// Mahdollisesti vaikeusastelisï¿½ys nï¿½ille ajan myï¿½tï¿½
 	public void tulosta(Kuningas kunkku) {
 		System.out.println(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
@@ -28,16 +28,16 @@ public class Ongelma implements Serializable {
 		}
 	}
 
-	// Pelaajan valitsema päätös lähtee liikkeelle
+	// Pelaajan valitsema pï¿½ï¿½tï¿½s lï¿½htee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
 		this.sallitut = this.paatokset;
 	}
 	
-	//Onko päätös laillista tehdä?
+	//Onko pï¿½ï¿½tï¿½s laillista tehdï¿½?
 	public boolean onSallittu(String paatos) {
 		try {
-			System.out.print("Päätöksesi numero on: ");
+			System.out.print("Pï¿½ï¿½tï¿½ksesi numero on: ");
 			int valinta = Integer.parseInt(paatos);
 			if(this.sallitut.get(valinta - 1) == null) return false;
 			return true;
@@ -101,7 +101,8 @@ class Vaatimus implements Serializable{
 	private int arvo;
 	private Suku kohde;
 	private Suku kohde2;
-
+	
+	//kaksi useampi konstruktori johon ei laitettaisi null-arvoja
 	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde, Suku kohde2) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
@@ -109,6 +110,16 @@ class Vaatimus implements Serializable{
 			this.kohde = kohde;
 		if (kohde2 != null)
 			this.kohde2 = kohde2;
+	}
+	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde) {
+		this.tyyppi = tyyppi;
+		this.arvo = arvo;
+		if (kohde != null)
+			this.kohde = kohde;
+	}
+	public Vaatimus(Tyyppi tyyppi, int arvo) {
+		this.tyyppi = tyyppi;
+		this.arvo = arvo;
 	}
 
 	// Tarkista mahdollisuus
