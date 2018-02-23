@@ -153,6 +153,7 @@ public class Kuningas implements Serializable{
 		lisattava.asetaNimi(lisattavaNimi);
 		lisattava.asetaPopulaatio(r.nextInt(30) + 20);
 		lisattava.asetaAatelisuus(0);
+		lisattava.asetaSuhdeKuninkaaseen(r.nextInt(20)-10);
 		
 		lisattava.asetaMagia(tyyppi[0]);	
 		lisattava.asetaSotilaallinen(tyyppi[1]);
@@ -165,6 +166,7 @@ public class Kuningas implements Serializable{
 		suvut.add(new Suku());
 		Suku lisattava = suvut.get(suvut.size()-1);
 		lisattava.asetaAatelisuus(r.nextInt(2) + 2);
+		lisattava.asetaSuhdeKuninkaaseen(r.nextInt(5)+5);
 		
 		lisattava.asetaMagia(0);	
 		lisattava.asetaSotilaallinen(0);
