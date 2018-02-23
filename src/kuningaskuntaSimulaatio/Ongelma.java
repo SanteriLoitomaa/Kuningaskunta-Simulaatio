@@ -92,7 +92,7 @@ class Paatos implements Serializable {
 }
 
 enum Tyyppi implements Serializable{
-	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, NULL
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUVALIT_MON, NULL
 }
 
 class Vaatimus implements Serializable{
@@ -102,7 +102,7 @@ class Vaatimus implements Serializable{
 	private Suku kohde;
 	private Suku kohde2;
 	
-	//kaksi useampi konstruktori johon ei laitettaisi null-arvoja
+	//kaksi useampaa konstruktoria joihin ei laitettaisi null-arvoja
 	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde, Suku kohde2) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
@@ -122,7 +122,7 @@ class Vaatimus implements Serializable{
 		this.arvo = arvo;
 	}
 
-	// Tarkista mahdollisuus
+	// Tarkista mahdollisuus. Jos ei mahdollista, poista sallituista päätöksistä.
 	public boolean tarkistaVaatimus(Kuningas kunkku, int paatosIndex, Ongelma o) {
 		if (tyyppi == Tyyppi.RAHA) {
 			if (kunkku.annaRaha() >= this.arvo)
@@ -178,6 +178,15 @@ class Vaatimus implements Serializable{
 				o.asetaSallitut(sallitut);
 			}
 		}
+		if (tyyppi == Tyyppi.SUKUVALIT_NEG) {
+			if (kohde.annaSuhdeSukuun(kohde2) <= arvo)
+				return true;
+			else {
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
+			}
+		}
 		if(tyyppi == Tyyppi.NULL) {
 			return true;
 		}
@@ -190,12 +199,25 @@ class Seuraus implements Serializable {
 	private Tyyppi tyyppi;
 	private int arvo;
 	private ArrayList<Suku> kohde;
+	private ArrayList<Suku> uhri;
 
+	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
+		this.tyyppi = tyyppi;
+		this.arvo = arvo;
+		if (kohde != null)
+			this.kohde = kohde;
+		if(uhri != null)
+			this.uhri = uhri;
+	}
 	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
 		if (kohde != null)
 			this.kohde = kohde;
+	}
+	public Seuraus(Tyyppi tyyppi, int arvo) {
+		this.tyyppi = tyyppi;
+		this.arvo = arvo;
 	}
 
 	// Tee muutokset
@@ -219,6 +241,13 @@ class Seuraus implements Serializable {
 		}
 		if (tyyppi == Tyyppi.SUKUVALIT) {
 			kohde.get(0).asetaSuhdeSukuun(arvo + kohde.get(0).annaSuhdeSukuun(kohde.get(1)), kohde.get(1));
+		}
+		if (tyyppi == Tyyppi.SUKUVALIT_MON) {
+			for(Suku s : kohde) {
+				for(Suku u : uhri) {
+					s.asetaSuhdeSukuun(arvo + s.annaSuhdeSukuun(u), u);
+				}
+			}
 		}
 	}
 }
