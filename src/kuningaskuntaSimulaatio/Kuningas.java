@@ -16,15 +16,15 @@ public class Kuningas implements Serializable{
 	transient private Scanner vastaus;
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
-	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihreä", "Lihava",
+	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihreï¿½", "Lihava",
 			"Pelto", "Aura", "Terve", "Jussi"));
-	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keihäs",
-			"Soturi", "Tappava", "Nuoli", "Lävistävä", "Verinen", "Lalli", "Punainen"));
-	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyhä", "Loistava", "Siunattu",
+	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keihï¿½s",
+			"Soturi", "Tappava", "Nuoli", "Lï¿½vistï¿½vï¿½", "Verinen", "Lalli", "Punainen"));
+	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyhï¿½", "Loistava", "Siunattu",
 			"Jeesus", "Jumalan", "Hymni", "Synagoga", "Protestantti", "Sutra", "Valkoinen"));
-	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "äveriäs",
-			"Roope", "Tuote", "Lentävä", "Kärryt", "Lompakko"));
-	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikäärme", "Salamoiva", "Liekehtivä",
+	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "ï¿½veriï¿½s",
+			"Roope", "Tuote", "Lentï¿½vï¿½", "Kï¿½rryt", "Lompakko"));
+	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikï¿½ï¿½rme", "Salamoiva", "Liekehtivï¿½",
 			"Feenix", "Potter", "Milla", "Sauva", "Alkemisti", "Haltija"));
 
 	public Kuningas(String nimi, int vuorot) {
@@ -56,14 +56,14 @@ public class Kuningas implements Serializable{
 		return nimi;
 	}
 
-	public void vuorokierto() { // Koko peli täällä
+	public void vuorokierto() { // Koko peli tï¿½ï¿½llï¿½
 		laskePisteet(false);
 		for (int i = 0; i < vuorot; i++) {
 			Random r = new Random();
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
 			vuoronOngelma.tulosta(this);
-			System.out.print("Päätöksesi numero on: ");
+			System.out.print("Pï¿½ï¿½tï¿½ksesi numero on: ");
 			String s = "";
 			while(true) {
 				s = vastaus.next();
@@ -78,7 +78,7 @@ public class Kuningas implements Serializable{
 			else {
 				TallennaLataaPisteet.tallenna(this);
 				System.out.println("Haluatko poistua?");
-				System.out.println("1. Kyllä");
+				System.out.println("1. Kyllï¿½");
 				System.out.println("2. En");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
@@ -107,7 +107,7 @@ public class Kuningas implements Serializable{
 
 	// pelin lopetus
 	private void tulostaPisteet() {
-		System.out.println("Valtakautesi on päättynyt.");
+		System.out.println("Valtakautesi on pï¿½ï¿½ttynyt.");
 	}
   
 	private void generoiSukuSuhteet() {
@@ -226,5 +226,33 @@ public class Kuningas implements Serializable{
 
 	public void scan(Scanner vastaus) {
 		this.vastaus = vastaus;
+	}
+	
+	/*
+	 * Palauttaa kaikki suvut, jotka on merkitty boolean parametreihin ja jÃ¤rjestÃ¤Ã¤ ne
+	 * suosituimmuusjÃ¤rjestykseen
+	 */
+	ArrayList<Suku> etsiSukuTyypit(boolean magia, boolean sotilas, boolean uskonnollinen, boolean kauppias, boolean maalainen){
+		ArrayList<Suku> palautettava = new ArrayList<Suku>();
+		
+		//LisÃ¤tÃ¤Ã¤n suvut joita kysytÃ¤Ã¤n
+		for ( Suku tarkasteltava : suvut ) {
+			if ( magia && tarkasteltava.annaMagia() > 0 ) {
+				palautettava.add(tarkasteltava);
+			} else if (sotilas && tarkasteltava.annaSotilaallinen() > 0) {
+				palautettava.add(tarkasteltava);
+			} else if (uskonnollinen && tarkasteltava.annaUskonnollinen() > 0) {
+				palautettava.add(tarkasteltava);
+			} else if (kauppias && tarkasteltava.annaKauppias() > 0) {
+				palautettava.add(tarkasteltava);
+			} else if (maalainen && tarkasteltava.annaMaalainen() > 0) {
+				palautettava.add(tarkasteltava);
+			} 
+		}
+		
+		//JÃ¤rjestetÃ¤Ã¤n kun comparatori on pÃ¤ivitetty sukuun
+		//Arrays.sort(palautettava); 
+		
+		return palautettava;
 	}
 }
