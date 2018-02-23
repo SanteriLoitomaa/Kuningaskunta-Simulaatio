@@ -72,6 +72,10 @@ public class Kuningaskunta{
 	public static void meillaOnOngelmia(Kuningas kunkku) {
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 
+		//Paatos(Vaatimus[] v, Seuraus[] s, String viesti)
+		//Vaatimus(Tyyppi tyyppi, int arvo [{, Suku kohde}, Suku kohde2])
+		//Seuraus(Tyyppi tyyppi, int arvo[, ArrayList<Suku> kohde])
+		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), null),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
@@ -100,6 +104,8 @@ public class Kuningaskunta{
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.suvut)},
 				"En näe miten tämä ongelma koskee minua."));
+		
+		//Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset)
 		
 		kunkku.ongelmat.add(new Ongelma("Maanjäristys",
 				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän "
