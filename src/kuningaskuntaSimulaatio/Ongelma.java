@@ -17,7 +17,7 @@ public class Ongelma implements Serializable {
 		this.selitys = selitys;
 		this.esittelijaSuku = esittelijaSuku;
 		this.paatokset = paatokset;
-		this.sallitut = paatokset;
+		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 
 	// Mahdollisesti vaikeusastelis�ys n�ille ajan my�t�
@@ -31,7 +31,7 @@ public class Ongelma implements Serializable {
 	// Pelaajan valitsema p��t�s l�htee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
-		this.sallitut = this.paatokset;
+		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 	
 	//Onko p��t�s laillista tehd�?
@@ -198,30 +198,35 @@ class Seuraus implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Tyyppi tyyppi;
 	private int arvo;
+	private String kuvaus;
 	private ArrayList<Suku> kohde;
 	private ArrayList<Suku> uhri;
 
-	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
+	public Seuraus(Tyyppi tyyppi, int arvo, String kuvaus, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
+		this.kuvaus = kuvaus;
 		if (kohde != null)
 			this.kohde = kohde;
 		if(uhri != null)
 			this.uhri = uhri;
 	}
-	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde) {
+	public Seuraus(Tyyppi tyyppi, int arvo, String kuvaus, ArrayList<Suku> kohde) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
+		this.kuvaus = kuvaus;
 		if (kohde != null)
 			this.kohde = kohde;
 	}
-	public Seuraus(Tyyppi tyyppi, int arvo) {
+	public Seuraus(Tyyppi tyyppi, int arvo, String kuvaus) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
+		this.kuvaus = kuvaus;
 	}
 
 	// Tee muutokset
 	public void toteuta(Kuningas kunkku) {
+		System.out.println(kuvaus);
 		if (tyyppi == Tyyppi.RAHA) {
 			kunkku.asetaRaha(kunkku.annaRaha() + this.arvo);
 		}
