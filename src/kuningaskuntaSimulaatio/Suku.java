@@ -3,7 +3,7 @@ package kuningaskuntaSimulaatio;
 import java.io.Serializable;
 import java.util.*;
 
-public class Suku implements Serializable{
+public class Suku implements Serializable, Comparable<Suku>{
 	private static final long serialVersionUID = 1L;
 	private int suhdeKuninkaaseen;
 	private HashMap<Suku, Integer> suhteet = new HashMap<Suku, Integer>();
@@ -14,7 +14,7 @@ public class Suku implements Serializable{
 
 	private int magia; // Suvun maagisuus (0-4)
 	private int sotilaallinen; // Suvun sotilaallisuus (0-4)
-	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENSä 4 PER SUKU!
+	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENSï¿½ 4 PER SUKU!
 	private int kauppias; // Suvun kauppiaisuus (0-4)
 	private int maalainen; // Suvun maallisuus (0-4)
 
@@ -117,13 +117,13 @@ public class Suku implements Serializable{
 		return maalainen;
 	}
 
-	public String toString() { // Muuttaa stringiksi suvun tiedot niissä paikoissa joissa ne vaaditaan, tyyppi
+	public String toString() { // Muuttaa stringiksi suvun tiedot niissï¿½ paikoissa joissa ne vaaditaan, tyyppi
 											// ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
 		String mjono = "";
 		mjono += annaNimi() + ":\n";
 		mjono += "Sukua edustaa " + annaEdustaja() + "\n";
 		mjono += "Suku teihin on: " + annaSuhdeKuninkaaseen() + "\n";
-		// Selvitetään keihin suvulla on huonoin ja paras suhde.
+		// Selvitetï¿½ï¿½n keihin suvulla on huonoin ja paras suhde.
 
 		int huonoin = 100;
 		Suku hsuku = suhteet.keySet().iterator().next();
@@ -141,9 +141,9 @@ public class Suku implements Serializable{
 		}
 		
 		// selvitetty
-		mjono += "Heidän Läheisin liittolaisensa on " + psuku.annaNimi() + "\n";
-		mjono += "Heidän pahin vihamiehensä on " + hsuku.annaNimi() + "\n";
-		mjono += "Suvussa on " + annaPopulaatio() + " jäsentä.\n";
+		mjono += "Heidï¿½n Lï¿½heisin liittolaisensa on " + psuku.annaNimi() + "\n";
+		mjono += "Heidï¿½n pahin vihamiehensï¿½ on " + hsuku.annaNimi() + "\n";
+		mjono += "Suvussa on " + annaPopulaatio() + " jï¿½sentï¿½.\n";
 		if (annaAatelisuus() > 0) {
 			mjono += "Suku on aatelinen.\n";
 		}
@@ -169,5 +169,8 @@ public class Suku implements Serializable{
 		for (Suku tarkasteltava : suhteet.keySet()) {
 			System.out.println(tarkasteltava.annaNimi() + ": " + suhteet.get(tarkasteltava));
 		}
+	}
+	public int compareTo(Suku verrattava) {
+		return this.annaSuhdeKuninkaaseen() - verrattava.annaSuhdeKuninkaaseen();
 	}
 }
