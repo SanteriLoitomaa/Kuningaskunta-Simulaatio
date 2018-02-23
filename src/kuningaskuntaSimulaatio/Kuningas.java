@@ -91,13 +91,36 @@ public class Kuningas implements Serializable{
 		}
 		tulostaPisteet();
 	}
+	// Laskee vallankumouksen mahdin kun se iskee
+	public int coupDeTat() { 
+		int vihamiehet = 0;
+		for (int i=0; i<suvut.size();i++) {
+			if(suvut.get(i).annaSuhdeKuninkaaseen() < -50) {
+				if(suvut.get(i).annaSotilaallinen() >0) {
+					vihamiehet += suvut.get(i).annaSotilaallinen();
+				}else {
+					vihamiehet++;
+				}
+			}
+		}
+		vihamiehet += -5;
+		return vihamiehet;
+	}
+	//Laskee sinua puolustavat joukot
+	public int sotilasmahti() {
+		int joukot = 0;
+		for (int i=0; i<suvut.size();i++) {
+			joukot += suvut.get(i).annaSotilaallinen();
+		}
+		return joukot;
+	}
 
 	private void laskePisteet(Boolean lisaaPisteet) {
 		if(lisaaPisteet) {
 			this.raha += this.rahaTuotto;
 			this.ruoka += this.ruokaTuotto;
 		}
-		if (ruoka < 1 || raha < 1) {
+		if (ruoka < 1 || raha < 1 || coupDeTat() > sotilasmahti()) { //Vallankaappaushäviö pitää ottaa edelliseen ifiin.
 			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
 			havitty = true;
 		} else
