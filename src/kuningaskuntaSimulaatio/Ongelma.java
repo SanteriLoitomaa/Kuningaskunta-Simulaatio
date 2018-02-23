@@ -102,7 +102,7 @@ class Vaatimus implements Serializable{
 	private Suku kohde;
 	private Suku kohde2;
 	
-	//kaksi useampi konstruktori johon ei laitettaisi null-arvoja
+	//kaksi useampaa konstruktoria joihin ei laitettaisi null-arvoja
 	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde, Suku kohde2) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
@@ -122,7 +122,7 @@ class Vaatimus implements Serializable{
 		this.arvo = arvo;
 	}
 
-	// Tarkista mahdollisuus
+	// Tarkista mahdollisuus. Jos ei mahdollista, poista sallituista päätöksistä.
 	public boolean tarkistaVaatimus(Kuningas kunkku, int paatosIndex, Ongelma o) {
 		if (tyyppi == Tyyppi.RAHA) {
 			if (kunkku.annaRaha() >= this.arvo)
