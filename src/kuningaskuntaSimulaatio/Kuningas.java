@@ -120,7 +120,7 @@ public class Kuningas implements Serializable{
 			this.raha += this.rahaTuotto;
 			this.ruoka += this.ruokaTuotto;
 		}
-		if (ruoka < 1 || raha < 1 || coupDeTat() > sotilasmahti()) { //Vallankaappaushäviö pitää ottaa edelliseen ifiin.
+		if (ruoka < 1 || raha < 1 || coupDeTat() > sotilasmahti()) { //Vallankaappaushï¿½viï¿½ pitï¿½ï¿½ ottaa edelliseen ifiin.
 			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
 			havitty = true;
 		} else
@@ -152,11 +152,11 @@ public class Kuningas implements Serializable{
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
 		TallennaLataaPisteet.tulostaPisteet();
 		/*
-		 jos valtakunta hajosi pisteistä pois 80%
-		 Sukujen väliset tyytyväisyyssuhteet summataan keskenään, positiivisten tulee painaa negatiivisia
-		 enemmän.
-		 Aatelien tyytyväisyys faktoroidaan*10
-		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin myös.
+		 jos valtakunta hajosi pisteistï¿½ pois 80%
+		 Sukujen vï¿½liset tyytyvï¿½isyyssuhteet summataan keskenï¿½ï¿½n, positiivisten tulee painaa negatiivisia
+		 enemmï¿½n.
+		 Aatelien tyytyvï¿½isyys faktoroidaan*10
+		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin myï¿½s.
 		 */
 	}
   
@@ -304,6 +304,20 @@ public class Kuningas implements Serializable{
 		
 		//JÃ¤rjestetÃ¤Ã¤n kun comparatori on pÃ¤ivitetty sukuun
 		Collections.sort(palautettava); 
+		
+		return palautettava;
+	}
+	
+	ArrayList<Suku> etsiAateliset() {
+		ArrayList<Suku> palautettava = new ArrayList<Suku>();
+		
+		for ( Suku tarkasteltava : suvut) {
+			if ( tarkasteltava.annaAatelisuus() > 0 ) {
+				palautettava.add(tarkasteltava);
+			}
+		}
+		
+		Collections.sort(palautettava);
 		
 		return palautettava;
 	}
