@@ -127,6 +127,7 @@ public class Kuningas implements Serializable{
 		}
 		int truPisteet = (int)pisteet;
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
+		TallennaLataaPisteet.tulostaPisteet();
 		/*
 		 jos valtakunta hajosi pisteist‰ pois 80%
 		 Sukujen v‰liset tyytyv‰isyyssuhteet summataan kesken‰‰n, positiivisten tulee painaa negatiivisia
