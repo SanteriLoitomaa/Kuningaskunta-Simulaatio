@@ -92,7 +92,7 @@ class Paatos implements Serializable {
 }
 
 enum Tyyppi implements Serializable{
-	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, NULL
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUVALIT_MON, NULL
 }
 
 class Vaatimus implements Serializable{
@@ -199,7 +199,16 @@ class Seuraus implements Serializable {
 	private Tyyppi tyyppi;
 	private int arvo;
 	private ArrayList<Suku> kohde;
+	private ArrayList<Suku> uhri;
 
+	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
+		this.tyyppi = tyyppi;
+		this.arvo = arvo;
+		if (kohde != null)
+			this.kohde = kohde;
+		if(uhri != null)
+			this.uhri = uhri;
+	}
 	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
@@ -232,6 +241,13 @@ class Seuraus implements Serializable {
 		}
 		if (tyyppi == Tyyppi.SUKUVALIT) {
 			kohde.get(0).asetaSuhdeSukuun(arvo + kohde.get(0).annaSuhdeSukuun(kohde.get(1)), kohde.get(1));
+		}
+		if (tyyppi == Tyyppi.SUKUVALIT_MON) {
+			for(Suku s : kohde) {
+				for(Suku u : uhri) {
+					s.asetaSuhdeSukuun(arvo + s.annaSuhdeSukuun(u), u);
+				}
+			}
 		}
 	}
 }
