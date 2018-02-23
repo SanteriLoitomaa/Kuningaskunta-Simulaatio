@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class TallennaLataaPisteet implements Serializable{
 
@@ -120,4 +120,14 @@ public class TallennaLataaPisteet implements Serializable{
 			e.printStackTrace();
 		}
 	}
+}
+
+class Pisteet{
+	ArrayList<Integer> pisteet = new ArrayList<Integer>();
+	ArrayList<String> nimet = new ArrayList<String>();
+	
+	public Pisteet() {
+		
+	}
+	
 }
