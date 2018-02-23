@@ -171,6 +171,6 @@ public class Suku implements Serializable, Comparable<Suku>{
 		}
 	}
 	public int compareTo(Suku verrattava) {
-		return this.annaSuhdeKuninkaaseen() - verrattava.annaSuhdeKuninkaaseen();
+		return verrattava.annaSuhdeKuninkaaseen() - this.annaSuhdeKuninkaaseen();
 	}
 }
