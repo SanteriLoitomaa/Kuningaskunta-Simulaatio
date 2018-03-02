@@ -2,6 +2,7 @@ package kuningaskuntaSimulaatio;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Suku implements Serializable, Comparable<Suku>{
 	private static final long serialVersionUID = 1L;
@@ -26,6 +27,13 @@ public class Suku implements Serializable, Comparable<Suku>{
 		this.uskonnollinen = 0;
 		this.kauppias = 0;
 		this.maalainen = 0;
+		
+		String[] etunimet = {"Santtu", "Tommi", "Pasi", "Juho", "Johannes", "Matti",
+							 "Kalle", "Johan", "Emil","Antti","Väinö","Heikki","Kari",
+							 "Maria", "Anna", "Sofia", "Hilma","Johanna","Hilda",
+							 "Matilda","Ida","Amanda"};
+		Random r = new Random();
+		this.edustaja = etunimet[r.nextInt(etunimet.length)];
 	}
 
 	public void asetaNimi(String nimi) {
