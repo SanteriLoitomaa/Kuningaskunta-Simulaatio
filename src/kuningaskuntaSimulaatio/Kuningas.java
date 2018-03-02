@@ -59,13 +59,16 @@ public class Kuningas implements Serializable{
 	public void vuorokierto() { // Koko peli täällä
 		laskePisteet(false);
 		for (int i = 0; i < vuorot; i++) {
+			if (ongelmat.size() <1) {
+				Kuningaskunta.meillaOnOngelmia(this);
+			}
 			Random r = new Random();
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
 			vuoronOngelma.tulosta(this);
-			System.out.print("Päätöksesi numero: ");
 			String s = "";
 			while(true) {
+				System.out.print("Päätöksesi numero: ");
 				s = vastaus.next();
 				if(vuoronOngelma.onSallittu(s)) {
 					vuoronOngelma.valitsePaatos(Integer.parseInt(s),this);
@@ -87,6 +90,7 @@ public class Kuningas implements Serializable{
 				if(vast == 2) {
 					System.exit(1);
 				}
+				ongelmat.remove(x);
 			}
 		}
 		tulostaPisteet();
@@ -161,12 +165,11 @@ public class Kuningas implements Serializable{
 				}
 			}
 		}else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
-					+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ").");
+					+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
+				"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
 	}
 
-	// pelin lopetus
-	private void tulostaPisteet() {
-		System.out.println("Valtakautesi on päättynyt.");
+	public int annaPisteet() { //Laskee pelissä tämänhetkiset pisteet
 		double pisteet = 0;
 		pisteet += annaRaha();
 		pisteet += annaRuoka();
@@ -186,6 +189,13 @@ public class Kuningas implements Serializable{
 			pisteet = pisteet*0.2;
 		}
 		int truPisteet = (int)pisteet;
+		return truPisteet;
+	}
+	
+	// pelin lopetus
+	private void tulostaPisteet() {
+		System.out.println("Valtakautesi on päättynyt.");
+		int truPisteet = annaPisteet();
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
 		TallennaLataaPisteet.tulostaPisteet();
 		/*
