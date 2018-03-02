@@ -93,7 +93,7 @@ class Paatos implements Serializable {
 }
 
 enum Tyyppi implements Serializable{
-	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUVALIT_MON, SUKUPOPULAATIO, NULL
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUVALIT_MON, SUKUPOPULAATIO, SUKUPOPULAATIO_NEG, NULL
 }
 
 class Vaatimus implements Serializable{
@@ -190,6 +190,15 @@ class Vaatimus implements Serializable{
 		}
 		if (tyyppi == Tyyppi.SUKUPOPULAATIO) {
 			if (kohde.annaPopulaatio() >= arvo)
+				return true;
+			else {
+				ArrayList<Paatos> sallitut = o.annaSallitut();
+				sallitut.set(paatosIndex, null);
+				o.asetaSallitut(sallitut);
+			}
+		}
+		if (tyyppi == Tyyppi.SUKUPOPULAATIO_NEG) {
+			if (kohde.annaPopulaatio() <= arvo)
 				return true;
 			else {
 				ArrayList<Paatos> sallitut = o.annaSallitut();
