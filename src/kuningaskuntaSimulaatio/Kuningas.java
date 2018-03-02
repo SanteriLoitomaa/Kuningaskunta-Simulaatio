@@ -131,6 +131,15 @@ public class Kuningas implements Serializable{
 			return false;
 		}
 	}
+	public ArrayList<Suku> kapinalliset(){ //Palauttaa listan kapinoineista suvuista
+		ArrayList<Suku> kapinat = new ArrayList<Suku>();
+		for (int i=0; i<suvut.size();i++) {
+			if(suvut.get(i).annaSuhdeKuninkaaseen() < -50) {
+				kapinat.add(suvut.get(i));
+			}
+		}
+		return kapinat;
+	}
 
 	private void laskePisteet(Boolean lisaaPisteet) {
 		if(lisaaPisteet) {
@@ -146,6 +155,10 @@ public class Kuningas implements Serializable{
 				havitty = true;
 			}else {
 				System.out.println("Kansan tyytymättömyys nosti osan heistä kapinoimaan, onnistuimem kuitenkin kukistamaan heidät omalla armeijallamme. Osa kapinoitsijista toki kuoli taistelussa, eiköhän se opeta heille vallan merkityksen!");
+				ArrayList<Suku> rankaistavat = kapinalliset();
+				for (int uhri =0;uhri<rankaistavat.size();uhri++) {
+					rankaistavat.get(uhri).asetaPopulaatio((int)(rankaistavat.get(uhri).annaPopulaatio()*0.8));
+				}
 			}
 		}else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
 					+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ").");
@@ -168,6 +181,7 @@ public class Kuningas implements Serializable{
 				pisteet += suvut.get(i).annaSuhdeKuninkaaseen();
 			}
 		}
+		pisteet += pisteet*suhteellinenVakimaara();
 		if (havitty) {
 			pisteet = pisteet*0.2;
 		}
@@ -181,6 +195,15 @@ public class Kuningas implements Serializable{
 		 Aatelien tyytyväisyys faktoroidaan*10
 		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin myäs.
 		 */
+	}
+	public double suhteellinenVakimaara() { //palauttaa doublen, joka on yli 1 jos väkilukua on oletusta enemmän ja alle 1 jos väkiluku on oletusta pienempi
+		int perus = 25*35;
+		int oikea = 0;
+		for (int i=0; i<suvut.size();i++) {
+			oikea += suvut.get(i).annaPopulaatio();
+		}
+		double kerroin = oikea/perus;
+		return kerroin;
 	}
   
 	private void generoiSukuSuhteet() {
