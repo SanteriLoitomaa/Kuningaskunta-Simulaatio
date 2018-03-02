@@ -97,13 +97,12 @@ public class Kuningas implements Serializable{
 		for (int i=0; i<suvut.size();i++) {
 			if(suvut.get(i).annaSuhdeKuninkaaseen() < -50) {
 				if(suvut.get(i).annaSotilaallinen() >0) {
-					vihamiehet += suvut.get(i).annaSotilaallinen();
+					vihamiehet += 1 + suvut.get(i).annaSotilaallinen();
 				}else {
 					vihamiehet++;
 				}
 			}
 		}
-		vihamiehet += -5;
 		return vihamiehet;
 	}
 	//Laskee sinua puolustavat joukot
@@ -114,17 +113,41 @@ public class Kuningas implements Serializable{
 		}
 		return joukot;
 	}
+	//Palauttaa true jos kana haluaa vallankumouksen
+	public boolean kumotaanko() {
+		ArrayList<Suku> halukkaat = new ArrayList<Suku>();
+		for (int i=0; i<suvut.size();i++) {
+			if(suvut.get(i).annaSuhdeKuninkaaseen() < -50) {
+				halukkaat.add(suvut.get(i));
+			}
+		}
+		int maara = 0;
+		for (int j=0; j<halukkaat.size();j++) {
+			maara += halukkaat.get(j).annaPopulaatio();
+		}
+		if (halukkaat.size()>4 && maara >180) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	private void laskePisteet(Boolean lisaaPisteet) {
 		if(lisaaPisteet) {
 			this.raha += this.rahaTuotto;
 			this.ruoka += this.ruokaTuotto;
 		}
-		if (ruoka < 1 || raha < 1 || coupDeTat() > sotilasmahti()) { //Vallankaappaushäviä pitää ottaa edelliseen ifiin.
+		if (ruoka < 1 || raha < 1) { //Resurssipulaloppu
 			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
 			havitty = true;
-		} else
-			System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
+		} else if (kumotaanko()) { //Vallankaappausloppu
+			if (coupDeTat() > sotilasmahti()) {
+				System.out.println("Kapiset kapinalliset ovat kylästyneet valtaasi, sinut karkotettiin maasta ja koko perheesi teloitettiin!");
+				havitty = true;
+			}else {
+				System.out.println("Kansan tyytymättömyys nosti osan heistä kapinoimaan, onnistuimem kuitenkin kukistamaan heidät omalla armeijallamme. Osa kapinoitsijista toki kuoli taistelussa, eiköhän se opeta heille vallan merkityksen!");
+			}
+		}else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
 					+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ").");
 	}
 
@@ -175,8 +198,8 @@ public class Kuningas implements Serializable{
 	private void lisaaSuku() {
 		Random r = new Random();
 		int[] tyyppi = new int[5];
-		tyyppi[r.nextInt(4)] += r.nextInt(1) + 1;
-		tyyppi[r.nextInt(4)] += r.nextInt(1) + 1;
+		tyyppi[r.nextInt(5)] += r.nextInt(1) + 1;
+		tyyppi[r.nextInt(5)] += r.nextInt(1) + 1;
 		// haetaan tyyppiin kuuluva nimi
 		String lisattavaNimi = "";
 		for (int j = 0; j < tyyppi.length; j++) {
