@@ -1,7 +1,7 @@
 package kuningaskuntaSimulaatio;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
 
 public class Suku implements Serializable, Comparable<Suku>{
 	private static final long serialVersionUID = 1L;
