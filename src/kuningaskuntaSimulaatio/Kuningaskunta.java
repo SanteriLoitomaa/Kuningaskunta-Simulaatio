@@ -120,16 +120,13 @@ public class Kuningaskunta{
 		
 		paatokset = new ArrayList<Paatos>();
 
-		ArrayList<Suku> maalaiset = new ArrayList<Suku>();
-		cloneSukuLista(kunkku.etsiSukuTyypit(false, false, false, false, true),maalaiset);
+		ArrayList<Suku> maalaiset = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, false, false, true));
 		
 		System.out.println(maalaiset.size());
 		
-		ArrayList<Suku> uskonnolliset = new ArrayList<Suku>();
-		cloneSukuLista(kunkku.etsiSukuTyypit(false, false, true, false, false),uskonnolliset);
+		ArrayList<Suku> uskonnolliset = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, true, false, false));
 		
-		ArrayList<Suku> aateliset = new ArrayList<Suku>();
-		cloneSukuLista(kunkku.etsiAateliset(),aateliset);
+		ArrayList<Suku> aateliset = new ArrayList<Suku>(kunkku.etsiAateliset());
 		
 		x = maalaiset.get(r.nextInt(maalaiset.size())); //arvotaan x maalaissuku
 		Suku y = uskonnolliset.get(r.nextInt(uskonnolliset.size())); // arvotaan y uskonnollissuku
@@ -144,16 +141,15 @@ public class Kuningaskunta{
 		xyList.add(x);
 		xyList.add(y);
 
-
 		paatokset.add(
 			new Paatos(
 				new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
 				new Seuraus[]{
-					new Seuraus(Tyyppi.SUKUSUHDE, 15, "Maalaissuku X kiittää ", xList),
+					new Seuraus(Tyyppi.SUKUSUHDE, 15, "Maalaissuku " + x.annaNimi() + " kiittää ", xList),
 					new Seuraus(Tyyppi.SUKUSUHDE,  5, "ja muistakin maalaisista tuntuu kivalta", maalaiset),
-					new Seuraus(Tyyppi.SUKUSUHDE,-10, "Suku Y ei tykkää yhtään", yList),
+					new Seuraus(Tyyppi.SUKUSUHDE,-10, "Suku " + y.annaNimi() + " ei tykkää yhtään", yList),
 					new Seuraus(Tyyppi.SUKUSUHDE, -5, "Eikä myöskään kirkko tykkää", uskonnolliset),
-					new Seuraus(Tyyppi.SUKUVALIT,-15, "X ja Y eivät tykkää toisistaan", xyList)
+					new Seuraus(Tyyppi.SUKUVALIT,-15, x.annaNimi() + " ja " + y.annaNimi() + " eivät tykkää toisistaan", xyList)
 				},
 				"Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
 			)
@@ -193,9 +189,9 @@ public class Kuningaskunta{
 		);
 
 		kunkku.ongelmat.add(
-			new Ongelma("Maakiista","X:n edustaja Jussi on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon" 
-					+"(Korkein uskonnollinen suku Y) kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo"+
-					" ja osa pellosta siirtyisi isännän Jussin omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\n Nyt Y"+
+			new Ongelma("Maakiista","Suvun " + x.annaNimi() + " edustaja " + x.annaEdustaja() + " on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon suvun " 
+					+ y.annaNimi() + " kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo"+
+					" ja osa pellosta siirtyisi isännän " + x.annaEdustaja() + " omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\n Nyt suku "+y.annaNimi()+
 					" on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
 					, x
 					,paatokset)
