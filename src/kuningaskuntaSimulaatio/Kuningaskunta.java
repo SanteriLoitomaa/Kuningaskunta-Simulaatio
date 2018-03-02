@@ -81,13 +81,13 @@ public class Kuningaskunta{
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), null),
-						new Seuraus(Tyyppi.SUKUSUHDE, 20, "", kunkku.suvut) },
+						new Seuraus(Tyyppi.SUKUSUHDE, 20, "Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!", kunkku.suvut) },
 				"Voin auttaa teitä korjaustäissä viidellä kullalla per suku."));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(true, false, false, false, false).get(0), null) },
-				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut),
-						new Seuraus(Tyyppi.SUKUSUHDE, -20, "", kunkku.etsiSukuTyypit(false, false, true, false, false)),
-						new Seuraus(Tyyppi.SUKUSUHDE, 20, "", kunkku.etsiSukuTyypit(false, false, true, false, false))},
+				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "Kaikki suvut tykkäävät selityksestäsi", kunkku.suvut),
+						new Seuraus(Tyyppi.SUKUSUHDE, -20, "paitsi uskonnolliset suvut joiden uskomuksia se loukkaa", kunkku.etsiSukuTyypit(false, false, true, false, false)),
+						new Seuraus(Tyyppi.SUKUSUHDE, 20, "", kunkku.etsiSukuTyypit(false, false, true, true, false))},
 				//Puuttuu vielä sukujen väliset muutokset//,
 				"Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui."));
 
@@ -99,13 +99,13 @@ public class Kuningaskunta{
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(false, false, true, false, false).get(0), null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut),
-						new Seuraus(Tyyppi.SUKUSUHDE, -20, "", uhri),
-						new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut)},
+						new Seuraus(Tyyppi.SUKUSUHDE, -20, x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta, mutta", uhri),
+						new Seuraus(Tyyppi.SUKUSUHDE, 10, "muut suvut huokaisevat helpotuksesta, koska heihin ei kohdistu vaaraa", kunkku.suvut)},
 						//Puuttuu vielä sukujen väliset muutokset},//
 				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten."));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0, null, null) },
-				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, "", kunkku.suvut)},
+				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, "Kaikki ovat tyytymättömiä ratkaisuun!", kunkku.suvut)},
 				"En näe miten tämä ongelma koskee minua."));
 		
 		//Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset)
@@ -115,8 +115,8 @@ public class Kuningaskunta{
 						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
 				kunkku.annaAatelisin(), paatokset));
 		
-		//
-		//
+		//Ongelma: Maakiista! Maalainen on ojittanut pellon ja rakentanut talon kirkon maalle...
+		//...mutta kirkko haluaa maat
 		
 		paatokset = new ArrayList<Paatos>();
 
@@ -189,9 +189,9 @@ public class Kuningaskunta{
 		);
 
 		kunkku.ongelmat.add(
-			new Ongelma("Maakiista","Suvun " + x.annaNimi() + " edustaja " + x.annaEdustaja() + " on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon suvun " 
+			new Ongelma("Maakiista","Suvun " + x.annaNimi() + " edustaja " + x.annaEdustaja() + " on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon suvun \n" 
 					+ y.annaNimi() + " kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo"+
-					" ja osa pellosta siirtyisi isännän " + x.annaEdustaja() + " omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\n Nyt suku "+y.annaNimi()+
+					" ja osa pellosta siirtyisi isännän " + x.annaEdustaja() + " omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\nNyt suku "+y.annaNimi()+
 					" on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
 					, x
 					,paatokset)
