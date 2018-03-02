@@ -79,8 +79,8 @@ public class Kuningaskunta{
 		// Ongelma : Maanjäristys, Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän 
 		// tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?
 		
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null, null) },
-				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), null),
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5) },
+				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), ""),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, "Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!", kunkku.suvut) },
 				"Voin auttaa teitä korjaustäissä viidellä kullalla per suku."));
 		
@@ -97,14 +97,14 @@ public class Kuningaskunta{
 		ArrayList<Suku> uhri = new ArrayList<Suku>(Arrays.asList(x));
 		// Huumori mielessä jätimem mahdolliseksi tapattaa ehdottajan tyttären xD
 		
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(false, false, true, false, false).get(0), null) },
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(false, false, true, false, false).get(0)) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta, mutta", uhri),
 						new Seuraus(Tyyppi.SUKUSUHDE, 10, "muut suvut huokaisevat helpotuksesta, koska heihin ei kohdistu vaaraa", kunkku.suvut)},
 						//Puuttuu vielä sukujen väliset muutokset},//
 				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten."));
 		
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0, null, null) },
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, "Kaikki ovat tyytymättömiä ratkaisuun!", kunkku.suvut)},
 				"En näe miten tämä ongelma koskee minua."));
 		
