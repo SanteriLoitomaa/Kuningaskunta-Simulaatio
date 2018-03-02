@@ -16,15 +16,15 @@ public class Kuningas implements Serializable{
 	transient private Scanner vastaus;
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
-	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihre�", "Lihava",
+	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihreä", "Lihava",
 			"Pelto", "Aura", "Terve", "Jussi"));
-	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keih�s",
-			"Soturi", "Tappava", "Nuoli", "L�vist�v�", "Verinen", "Lalli", "Punainen"));
-	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyh�", "Loistava", "Siunattu",
+	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keihäs",
+			"Soturi", "Tappava", "Nuoli", "Lävistävä", "Verinen", "Lalli", "Punainen"));
+	public ArrayList<String> uskontonimet = new ArrayList<>(Arrays.asList("Risti", "Pyhä", "Loistava", "Siunattu",
 			"Jeesus", "Jumalan", "Hymni", "Synagoga", "Protestantti", "Sutra", "Valkoinen"));
-	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "�veri�s",
-			"Roope", "Tuote", "Lent�v�", "K�rryt", "Lompakko"));
-	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohik��rme", "Salamoiva", "Liekehtiv�",
+	public ArrayList<String> kauppiasnimet = new ArrayList<>(Arrays.asList("Kultainen", "Varakas", "Kolikko", "Äveriäs",
+			"Roope", "Tuote", "Lentävä", "Kärryt", "Lompakko"));
+	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikäärme", "Salamoiva", "Liekehtivä",
 			"Feenix", "Potter", "Milla", "Sauva", "Alkemisti", "Haltija"));
 
 	public Kuningas(String nimi, int vuorot) {
@@ -56,14 +56,14 @@ public class Kuningas implements Serializable{
 		return nimi;
 	}
 
-	public void vuorokierto() { // Koko peli t��ll�
+	public void vuorokierto() { // Koko peli täällä
 		laskePisteet(false);
 		for (int i = 0; i < vuorot; i++) {
 			Random r = new Random();
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
 			vuoronOngelma.tulosta(this);
-			System.out.print("P��t�ksesi numero on: ");
+			System.out.print("Päätöksesi numero: ");
 			String s = "";
 			while(true) {
 				s = vastaus.next();
@@ -78,7 +78,7 @@ public class Kuningas implements Serializable{
 			else {
 				TallennaLataaPisteet.tallenna(this);
 				System.out.println("Haluatko Jatkaa?");
-				System.out.println("1. Kyll�");
+				System.out.println("1. Kyllä");
 				System.out.println("2. En");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
@@ -120,7 +120,7 @@ public class Kuningas implements Serializable{
 			this.raha += this.rahaTuotto;
 			this.ruoka += this.ruokaTuotto;
 		}
-		if (ruoka < 1 || raha < 1 || coupDeTat() > sotilasmahti()) { //Vallankaappaush�vi� pit�� ottaa edelliseen ifiin.
+		if (ruoka < 1 || raha < 1 || coupDeTat() > sotilasmahti()) { //Vallankaappaushäviä pitää ottaa edelliseen ifiin.
 			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
 			havitty = true;
 		} else
@@ -130,7 +130,7 @@ public class Kuningas implements Serializable{
 
 	// pelin lopetus
 	private void tulostaPisteet() {
-		System.out.println("Valtakautesi on p��ttynyt.");
+		System.out.println("Valtakautesi on päättynyt.");
 		double pisteet = 0;
 		pisteet += annaRaha();
 		pisteet += annaRuoka();
@@ -152,11 +152,11 @@ public class Kuningas implements Serializable{
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
 		TallennaLataaPisteet.tulostaPisteet();
 		/*
-		 jos valtakunta hajosi pisteist� pois 80%
-		 Sukujen v�liset tyytyv�isyyssuhteet summataan kesken��n, positiivisten tulee painaa negatiivisia
-		 enemm�n.
-		 Aatelien tyytyv�isyys faktoroidaan*10
-		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin my�s.
+		 jos valtakunta hajosi pisteistä pois 80%
+		 Sukujen väliset tyytyväisyyssuhteet summataan keskenään, positiivisten tulee painaa negatiivisia
+		 enemmän.
+		 Aatelien tyytyväisyys faktoroidaan*10
+		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin myäs.
 		 */
 	}
   

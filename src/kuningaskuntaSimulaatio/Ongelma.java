@@ -11,7 +11,7 @@ public class Ongelma implements Serializable {
 	private ArrayList<Paatos> paatokset;
 	private ArrayList<Paatos> sallitut;
 
-	// Ongelman luonnin j�lkeen pit�� ne lis�t� arraylistiin.
+	// Ongelman luonnin jälkeen pitää ne lisätä arraylistiin.
 	public Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset) {
 		this.nimi = nimi;
 		this.selitys = selitys;
@@ -20,7 +20,7 @@ public class Ongelma implements Serializable {
 		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 
-	// Mahdollisesti vaikeusastelis�ys n�ille ajan my�t�
+	// Mahdollisesti vaikeusastelisäys näille ajan myätä
 	public void tulosta(Kuningas kunkku) {
 		System.out.println(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
@@ -28,16 +28,16 @@ public class Ongelma implements Serializable {
 		}
 	}
 
-	// Pelaajan valitsema p��t�s l�htee liikkeelle
+	// Pelaajan valitsema päätäs lähtee liikkeelle
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
 		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 	
-	//Onko p��t�s laillista tehd�?
+	//Onko päätäs laillista tehdä?
 	public boolean onSallittu(String paatos) {
 		try {
-			System.out.print("P��t�ksesi numero on: ");
+			System.out.print("Päätäksesi numero on: ");
 			int valinta = Integer.parseInt(paatos);
 			if(this.sallitut.get(valinta - 1) == null) return false;
 			return true;
@@ -122,7 +122,7 @@ class Vaatimus implements Serializable{
 		this.arvo = arvo;
 	}
 
-	// Tarkista mahdollisuus. Jos ei mahdollista, poista sallituista p��t�ksist�.
+	// Tarkista mahdollisuus. Jos ei mahdollista, poista sallituista päätäksistä.
 	public boolean tarkistaVaatimus(Kuningas kunkku, int paatosIndex, Ongelma o) {
 		if (tyyppi == Tyyppi.RAHA) {
 			if (kunkku.annaRaha() >= this.arvo)

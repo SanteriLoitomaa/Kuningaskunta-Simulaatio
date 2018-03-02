@@ -14,7 +14,7 @@ public class Suku implements Serializable, Comparable<Suku>{
 
 	private int magia; // Suvun maagisuus (0-4)
 	private int sotilaallinen; // Suvun sotilaallisuus (0-4)
-	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENS� 4 PER SUKU!
+	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENSä 4 PER SUKU!
 	private int kauppias; // Suvun kauppiaisuus (0-4)
 	private int maalainen; // Suvun maallisuus (0-4)
 
@@ -117,13 +117,13 @@ public class Suku implements Serializable, Comparable<Suku>{
 		return maalainen;
 	}
 
-	public String toString() { // Muuttaa stringiksi suvun tiedot niiss� paikoissa joissa ne vaaditaan, tyyppi
+	public String toString() { // Muuttaa stringiksi suvun tiedot niissä paikoissa joissa ne vaaditaan, tyyppi
 											// ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
 		String mjono = "";
 		mjono += annaNimi() + ":\n";
 		mjono += "Sukua edustaa " + annaEdustaja() + "\n";
 		mjono += "Suku teihin on: " + annaSuhdeKuninkaaseen() + "\n";
-		// Selvitet��n keihin suvulla on huonoin ja paras suhde.
+		// Selvitetään keihin suvulla on huonoin ja paras suhde.
 
 		int huonoin = 100;
 		Suku hsuku = suhteet.keySet().iterator().next();
@@ -141,9 +141,9 @@ public class Suku implements Serializable, Comparable<Suku>{
 		}
 		
 		// selvitetty
-		mjono += "Heid�n L�heisin liittolaisensa on " + psuku.annaNimi() + "\n";
-		mjono += "Heid�n pahin vihamiehens� on " + hsuku.annaNimi() + "\n";
-		mjono += "Suvussa on " + annaPopulaatio() + " j�sent�.\n";
+		mjono += "Heidän Läheisin liittolaisensa on " + psuku.annaNimi() + "\n";
+		mjono += "Heidän pahin vihamiehensä on " + hsuku.annaNimi() + "\n";
+		mjono += "Suvussa on " + annaPopulaatio() + " jäsentä.\n";
 		if (annaAatelisuus() > 0) {
 			mjono += "Suku on aatelinen.\n";
 		}

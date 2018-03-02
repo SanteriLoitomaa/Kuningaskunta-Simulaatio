@@ -9,17 +9,17 @@ public class Kuningaskunta{
 		while(true) {
 			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
 			System.out.println("1. aloittaa uuden pelin? (Mahdollinen vanha pelisi katoaa)");
-			System.out.println("2. jatkaa siit‰, mihin j‰it?");
-			System.out.println("3. n‰hd‰ parhaimmat pisteet?");
+			System.out.println("2. jatkaa siit√§, mihin j√§it?");
+			System.out.println("3. n√§hd√§ parhaimmat pisteet?");
 			System.out.println("4. nollata pisteet?");
-			System.out.println("5. poistua pelist‰?");
+			System.out.println("5. poistua pelist√§?");
 			while (!vastaus.hasNextInt()) {
 				vastaus.next();
 			}
 			int vast = vastaus.nextInt();
-			// Peli alkaa t‰st‰
+			// Peli alkaa t√§st√§
 			if(vast == 1) {
-				System.out.println("Miten haluatte ett‰ kutsun teit‰, teid‰n ylh‰isyytenne? (nimi ja titteli)");
+				System.out.println("Miten haluatte ett√§ kutsun teit√§, teid√§n ylh√§isyytenne? (nimi ja titteli)");
 				String nimi = vastaus.next();
 				System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
 				while (!vastaus.hasNextInt()) {
@@ -29,14 +29,14 @@ public class Kuningaskunta{
 				vuorot = vuorot * 12;
 				Kuningas kunkku = new Kuningas(nimi, vuorot);
 				meillaOnOngelmia(kunkku);
-				System.out.println("On kunnia tavata teid‰t, " + kunkku.annaNimi());
+				System.out.println("On kunnia tavata teid√§t, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto();
 			}
 			// Pelin lataus
 			if(vast == 2) {
 				Kuningas kunkku = TallennaLataaPisteet.lataa();
-				System.out.println("Hyv‰ ett‰ palasitte, " + kunkku.annaNimi());
+				System.out.println("Hyv√§ ett√§ palasitte, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto();
 			}
@@ -46,7 +46,7 @@ public class Kuningaskunta{
 			}
 			// Resetoi pisteet
 			if(vast == 4) TallennaLataaPisteet.luoPisteet();
-			// Poistu pelist‰
+			// Poistu pelist√§
 			if(vast == 5) break;
 			// Huijauskoodi
 			if(vast == 1337) {
@@ -60,7 +60,7 @@ public class Kuningaskunta{
 				}
 				kunkku.tulostaSuvut();
 				meillaOnOngelmia(kunkku);
-				System.out.println("On kunnia tavata teid‰t, " + kunkku.annaNimi());
+				System.out.println("On kunnia tavata teid√§t, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto();
 			}
@@ -68,7 +68,7 @@ public class Kuningaskunta{
 		vastaus.close();
 	}
 
-	// Luo kaikki pelin ongelmat, pit‰‰ kutsua sukujen luonnin j‰lkeen.
+	// Luo kaikki pelin ongelmat, pit√§√§ kutsua sukujen luonnin j√§lkeen.
 	public static void meillaOnOngelmia(Kuningas kunkku) {
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 
@@ -79,36 +79,36 @@ public class Kuningaskunta{
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), null),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, "", kunkku.suvut) },
-				"Voin auttaa teit‰ korjaustˆiss‰ viidell‰ kullalla per suku."));
+				"Voin auttaa teit√§ korjaust√§iss√§ viidell√§ kullalla per suku."));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(true, false, false, false, false).get(0), null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, "", kunkku.etsiSukuTyypit(false, false, true, false, false)),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, "", kunkku.etsiSukuTyypit(false, false, true, false, false))},
-				//Puuttuu viel‰ sukujen v‰liset muutokset//,
-				"Kansa on selv‰stikkin k‰sitt‰nyt jotain v‰‰rin. Annas kun selit‰n, mist‰ t‰m‰ johtui."));
+				//Puuttuu viel√§ sukujen v√§liset muutokset//,
+				"Kansa on selv√§stikkin k√§sitt√§nyt jotain v√§√§rin. Annas kun selit√§n, mist√§ t√§m√§ johtui."));
 
 		Random r = new Random();
 		Suku x = kunkku.suvut.get(r.nextInt(kunkku.suvut.size()));
 		String neitsyenKoti = x.annaNimi();
 		ArrayList<Suku> uhri = new ArrayList<Suku>(Arrays.asList(x));
-		// Huumori mieless‰ j‰timem mahdolliseksi tapattaa ehdottajan tytt‰ren xD
+		// Huumori mieless√§ j√§timem mahdolliseksi tapattaa ehdottajan tytt√§ren xD
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(false, false, true, false, false).get(0), null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, "", uhri),
 						new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut)},
-						//Puuttuu viel‰ sukujen v‰liset muutokset},//
-				"Jos jumalat ovat tosiaan niin vihaisia meid‰n on uhrattava neitsyt " + neitsyenKoti + " suvulta mit‰ pikimmiten."));
+						//Puuttuu viel√§ sukujen v√§liset muutokset},//
+				"Jos jumalat ovat tosiaan niin vihaisia meid√§n on uhrattava neitsyt " + neitsyenKoti + " suvulta mit√§ pikimmiten."));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0, null, null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, "", kunkku.suvut)},
-				"En n‰e miten t‰m‰ ongelma koskee minua."));
+				"En n√§e miten t√§m√§ ongelma koskee minua."));
 		
 		//Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset)
 		
-		kunkku.ongelmat.add(new Ongelma("Maanj‰ristys",
-				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heid‰n "
+		kunkku.ongelmat.add(new Ongelma("Maanj√§ristys",
+				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heid√§n "
 						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
 				kunkku.annaAatelisin(), paatokset));
 	}
