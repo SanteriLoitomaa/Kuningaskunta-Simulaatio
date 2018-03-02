@@ -38,7 +38,6 @@ public class Ongelma implements Serializable {
 	//Onko päätäs laillista tehdä?
 	public boolean onSallittu(String paatos) {
 		try {
-			System.out.print("Päätäksesi numero: ");
 			int valinta = Integer.parseInt(paatos);
 			if(this.sallitut.get(valinta - 1) == null) return false;
 			return true;
