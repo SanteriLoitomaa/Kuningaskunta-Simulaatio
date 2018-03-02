@@ -41,12 +41,27 @@ public class Suku implements Serializable, Comparable<Suku>{
 	}
 
 	public void asetaSuhdeKuninkaaseen(int suhdeKuninkaaseen) {
-		this.suhdeKuninkaaseen = suhdeKuninkaaseen;
+		if (suhdeKuninkaaseen > 100) {
+			this.suhdeKuninkaaseen = 100;
+		} else if (suhdeKuninkaaseen < - 100 ) {
+			this.suhdeKuninkaaseen = -100;
+		} else {
+			this.suhdeKuninkaaseen = suhdeKuninkaaseen;
+		}
 	}
 
-	public void asetaSuhdeSukuun(int Suhdeluku, Suku kohde) {
-		suhteet.put(kohde, Suhdeluku);
-		kohde.suhteet.put(this, Suhdeluku);
+	public void asetaSuhdeSukuun(int suhdeluku, Suku kohde) {
+		if ( suhdeluku < -100 ) {
+			suhteet.put(kohde, -100);
+			kohde.suhteet.put(this, -100);
+		} else if (suhdeluku > 100) {
+			suhteet.put(kohde, 100);
+			kohde.suhteet.put(this, 100);
+		} else {
+			suhteet.put(kohde, suhdeluku);
+			kohde.suhteet.put(this, suhdeluku);
+		}
+		
 	}
 
 	public void asetaEdustaja(String edustaja) {
