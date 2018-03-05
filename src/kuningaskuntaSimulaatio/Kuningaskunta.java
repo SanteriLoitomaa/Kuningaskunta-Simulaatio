@@ -121,7 +121,7 @@ public class Kuningaskunta{
 						new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUVALIT, -20, new ArrayList<Suku>(Arrays.asList(x, y)))},
 				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten.",
-				x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta ja suuttui " + x + " suvulle. Muut suvut huokaisevat helpotuksesta,"+
+				x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta ja suuttui " + x.annaNimi() + " suvulle. Muut suvut huokaisevat helpotuksesta,"+
 					" koska heihin ei kohdistu vaaraa."));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
