@@ -60,11 +60,13 @@ class Paatos implements Serializable {
 	private Vaatimus[] vaatimukset;
 	private Seuraus[] seuraukset;
 	private String viesti;
+	private String lopputulos;
 
-	public Paatos(Vaatimus[] v, Seuraus[] s, String viesti) {
+	public Paatos(Vaatimus[] v, Seuraus[] s, String viesti, String lopputulos) {
 		this.vaatimukset = v;
 		this.seuraukset = s;
 		this.viesti = viesti;
+		this.lopputulos = lopputulos;
 	}
 
 	// Tulostaa mahdollisuudet
@@ -88,6 +90,7 @@ class Paatos implements Serializable {
 		for (Seuraus s : seuraukset) {
 			s.toteuta(kunkku);
 		}
+		System.out.println(lopputulos);
 	}
 }
 
@@ -216,35 +219,30 @@ class Seuraus implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Tyyppi tyyppi;
 	private int arvo;
-	private String kuvaus;
 	private ArrayList<Suku> kohde;
 	private ArrayList<Suku> uhri;
 
-	public Seuraus(Tyyppi tyyppi, int arvo, String kuvaus, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
+	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
-		this.kuvaus = kuvaus;
 		if (kohde != null)
 			this.kohde = kohde;
 		if(uhri != null)
 			this.uhri = uhri;
 	}
-	public Seuraus(Tyyppi tyyppi, int arvo, String kuvaus, ArrayList<Suku> kohde) {
+	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
-		this.kuvaus = kuvaus;
 		if (kohde != null)
 			this.kohde = kohde;
 	}
-	public Seuraus(Tyyppi tyyppi, int arvo, String kuvaus) {
+	public Seuraus(Tyyppi tyyppi, int arvo) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
-		this.kuvaus = kuvaus;
 	}
 
 	// Tee muutokset
 	public void toteuta(Kuningas kunkku) {
-		System.out.println(kuvaus);
 		if (tyyppi == Tyyppi.RAHA) {
 			kunkku.asetaRaha(kunkku.annaRaha() + this.arvo);
 		}

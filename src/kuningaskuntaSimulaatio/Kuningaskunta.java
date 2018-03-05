@@ -76,37 +76,58 @@ public class Kuningaskunta{
 		//Vaatimus(Tyyppi tyyppi, int arvo [{, Suku kohde}, Suku kohde2])
 		//Seuraus(Tyyppi tyyppi, int arvo, String kuvaus[, ArrayList<Suku> kohde])
 		
-		// Ongelma : Maanjäristys, Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän 
-		// tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?
+		/*
+       	Nimi: Maanjäristys (TOTEUTETTU)
+
+		Selitys: "Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?"
+
+		Kohteet: Kaikki
+
+		Paatokset: 	 	1. "Voin auttaa teitä korjaustöissä viidellä kullalla per suku." (jos varaa)
+           	 			2. "Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui." (jos hyvissä väleissä maagisen suvun kanssa)
+           	 			3. "Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt (x) suvulta mitä pikimmiten." (jos hyvissä väleissä uskonnollisen suvun kanssa)
+           	 			4. "En näe miten tämä ongelma koskee minua."
+
+		Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
+			 			2. +10 Ei uskonnolisten sukujen välit, -10 uskonnolisten sukujen välit kuninkaaseen ja maagiseen sukuun, jolta kuningas sai idean. (paitsi jos myös maaginen).
+             			3. +10 Vaikutettujen sukujen välit paitsi -10 neitsyen suvun välit kuninkaaseen ja uskonnoliseen sukuun, jolta kuningas sai idean.
+             			4. -20 Kaikkien sukujen välit.
+       	*/
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5) },
-				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5), ""),
-						new Seuraus(Tyyppi.SUKUSUHDE, 20, "Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!", kunkku.suvut) },
-				"Voin auttaa teitä korjaustäissä viidellä kullalla per suku."));
+				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5)),
+						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
+				"Voin auttaa teitä korjaustäissä viidellä kullalla per suku.",
+				"Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!"));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(true, false, false, false, false).get(0), null) },
-				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "Kaikki suvut tykkäävät selityksestäsi", kunkku.suvut),
-						new Seuraus(Tyyppi.SUKUSUHDE, -20, "paitsi uskonnolliset suvut joiden uskomuksia se loukkaa", kunkku.etsiSukuTyypit(false, false, true, false, false)),
-						new Seuraus(Tyyppi.SUKUSUHDE, 20, "", kunkku.etsiSukuTyypit(false, false, true, true, false))},
+				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
+						new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.etsiSukuTyypit(false, false, true, false, false)),
+						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.etsiSukuTyypit(false, false, true, true, false))},
 				//Puuttuu vielä sukujen väliset muutokset//,
-				"Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui."));
+				"Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui.",
+				"Kaikki suvut tykkäävät selityksestäsi paitsi uskonnolliset suvut joiden uskomuksia se loukkaa."));
 
 		Random r = new Random();
 		Suku x = kunkku.suvut.get(r.nextInt(kunkku.suvut.size()));
+		Suku y = kunkku.etsiSukuTyypit(false, false, true, false, false).get(0);
 		String neitsyenKoti = x.annaNimi();
 		ArrayList<Suku> uhri = new ArrayList<Suku>(Arrays.asList(x));
 		// Huumori mielessä jätimem mahdolliseksi tapattaa ehdottajan tyttären xD
 		
-		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(false, false, true, false, false).get(0)) },
-				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, "", kunkku.suvut),
-						new Seuraus(Tyyppi.SUKUSUHDE, -20, x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta, mutta", uhri),
-						new Seuraus(Tyyppi.SUKUSUHDE, 10, "muut suvut huokaisevat helpotuksesta, koska heihin ei kohdistu vaaraa", kunkku.suvut)},
-						//Puuttuu vielä sukujen väliset muutokset},//
-				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten."));
+		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, y) },
+				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
+						new Seuraus(Tyyppi.SUKUSUHDE, -20, uhri),
+						new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
+						new Seuraus(Tyyppi.SUKUVALIT, -20, new ArrayList<Suku>(Arrays.asList(x, y)))},
+				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten.",
+				x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta ja suuttui " + x + " suvulle. Muut suvut huokaisevat helpotuksesta,"+
+					" koska heihin ei kohdistu vaaraa."));
 		
 		paatokset.add(new Paatos(new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
-				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, "Kaikki ovat tyytymättömiä ratkaisuun!", kunkku.suvut)},
-				"En näe miten tämä ongelma koskee minua."));
+				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.suvut)},
+				"En näe miten tämä ongelma koskee minua.",
+				"Kaikki ovat tyytymättömiä ratkaisuun!"));
 		
 		//Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset)
 		
@@ -115,8 +136,24 @@ public class Kuningaskunta{
 						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
 				kunkku.annaAatelisin(), paatokset));
 		
-		//Ongelma: Maakiista! Maalainen on ojittanut pellon ja rakentanut talon kirkon maalle...
-		//...mutta kirkko haluaa maat
+		/*Nimi: Maakiista (TOTEUTETTU)
+
+		Selitys: "X:n isäntä Jussi on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon (Korkein uskonnollinen suku Y) kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo ja osa pellosta siirtyisi isännän Jussin omistukseen, mikäli hänen peltonsa tuottaisi hyvin.
+			Nyt Y on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
+
+		Kohteet: Maanviljelijäsuku
+
+		Paatokset:	1. "Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
+					2. "Vuokrasopimus on kohtuullistettava ja vuokran määräksi riittää vain kaksi viljasäkkiä vuodessa"
+		            3. "Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla."
+		            4. "(Älä tee mitään)"
+
+		Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän tuottavuutensa kasvaa. 
+										Suhde: Maalaissuku - Uskonnollinen suku +10
+										Suhde: Uskonnollinen suku - Kuningas -20
+						2. Uskonnollisten sukujen kunnioitus +20
+		            	3. X:n kunnioitus -10 ruoka +10
+		            	4. Uskonnollisten sukujen kunnioitus +10 */
 		
 		paatokset = new ArrayList<Paatos>();
 
@@ -129,7 +166,7 @@ public class Kuningaskunta{
 		ArrayList<Suku> aateliset = new ArrayList<Suku>(kunkku.etsiAateliset());
 		
 		x = maalaiset.get(r.nextInt(maalaiset.size())); //arvotaan x maalaissuku
-		Suku y = uskonnolliset.get(r.nextInt(uskonnolliset.size())); // arvotaan y uskonnollissuku
+		y = uskonnolliset.get(r.nextInt(uskonnolliset.size())); // arvotaan y uskonnollissuku
 
 		ArrayList<Suku> xList = new ArrayList<Suku>(); //lista jossa on vain x
 		xList.add(x);
@@ -142,60 +179,67 @@ public class Kuningaskunta{
 		xyList.add(y);
 
 		paatokset.add(
-			new Paatos(
-				new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
-				new Seuraus[]{
-					new Seuraus(Tyyppi.SUKUSUHDE, 15, "Maalaissuku " + x.annaNimi() + " kiittää ", xList),
-					new Seuraus(Tyyppi.SUKUSUHDE,  5, "ja muistakin maalaisista tuntuu kivalta", maalaiset),
-					new Seuraus(Tyyppi.SUKUSUHDE,-10, "Suku " + y.annaNimi() + " ei tykkää yhtään", yList),
-					new Seuraus(Tyyppi.SUKUSUHDE, -5, "Eikä myöskään kirkko tykkää", uskonnolliset),
-					new Seuraus(Tyyppi.SUKUVALIT,-15, x.annaNimi() + " ja " + y.annaNimi() + " eivät tykkää toisistaan", xyList)
-				},
-				"Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
-			)
-		);
+				new Paatos(
+					new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
+					new Seuraus[]{
+						new Seuraus(Tyyppi.SUKUSUHDE, 15, xList),
+						new Seuraus(Tyyppi.SUKUSUHDE,  5, maalaiset),
+						new Seuraus(Tyyppi.SUKUSUHDE,-10, yList),
+						new Seuraus(Tyyppi.SUKUSUHDE, -5, uskonnolliset),
+						new Seuraus(Tyyppi.SUKUVALIT,-15, xyList)
+					},"Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
+	                ,"Maalaissuku " + x.annaNimi() + " kiittää ja muistakin maalaisista tuntuu kivalta."
+	              	+"Suku " + y.annaNimi() + " ja kirkko ei tykkää yhtään ja " + x.annaNimi() 
+	                + " ja " + y.annaNimi() + " eivät tykkää toisistaan"
+				)
+			);
 
-		paatokset.add(
-			new Paatos(
-				new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
-				new Seuraus[]{
-					new Seuraus(Tyyppi.SUKUSUHDE, 20, "Kirkko on tyytyväinen, että maaoikeuksia kunnioitetaan", uskonnolliset),
-					new Seuraus(Tyyppi.SUKUSUHDE, -10, "Maalaissuvun edustaja raahataan itkevänä pois", xList),
-					new Seuraus(Tyyppi.SUKUSUHDE, 1, "Aateliset tykkää aina, kun duunaria kyykytetään", aateliset)
-				},
-				"Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla." //uskonnolliset +20 ja x -20
-			)
-		);
+			paatokset.add(
+				new Paatos(
+					new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
+					new Seuraus[]{
+						new Seuraus(Tyyppi.SUKUSUHDE, 20, uskonnolliset),
+						new Seuraus(Tyyppi.SUKUSUHDE, -10, xList),
+						new Seuraus(Tyyppi.SUKUSUHDE, 1, aateliset)
+					},
+					"Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla." //uskonnolliset +20 ja x -20
+	              	, "Kirkko on tyytyväinen, että maaoikeuksia kunnioitetaan"
+	              	+ "Maalaissuvun " + x.annaEdustaja() + " raahataan itkevänä pois. "
+	              	+ "Positiivisena puolena on, että aateliset tykkää aina, kun duunaria kyykytetään."
+				)
+			);
 
-		paatokset.add(
-			new Paatos(
-				new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
-				new Seuraus[]{
-					new Seuraus(Tyyppi.RUOKA_T, 1, "Maalaissuku tekee hommia ankarammin, jotta vuokra saadaan maksettua.")
-				},
-				"Vuokrasopimus on kirjattava ja kohtuullistettava. Vuokraksi riittää vain kaksi viljasäkkiä vuodessa" //x -10 ruoka +10
-			)
-		);
+			paatokset.add(
+				new Paatos(
+					new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0, null, null)},
+					new Seuraus[]{
+						new Seuraus(Tyyppi.RUOKA_T, 1)
+					},
+					"Vuokrasopimus on kirjattava ja kohtuullistettava. Vuokraksi riittää vain kaksi viljasäkkiä vuodessa" //x -10 ruoka +10
+	              	, "Maalaissuku tekee hommia ankarammin, jotta vuokra saadaan maksettua."
+				)
+			);
 
-		paatokset.add(
-			new Paatos(
-				new Vaatimus[]{ new Vaatimus(Tyyppi.NULL, 0, null, null) },
-				new Seuraus[]{
-					new Seuraus(Tyyppi.SUKUSUHDE, 10, "Riitely jatkuu viikkoja, mutta lopulta kirkko saa tahtonsa läpi", yList),
-					new Seuraus(Tyyppi.SUKUVALIT, -5, "Riitelyn kauna leviää myös muihin sukuihin", aateliset, maalaiset)
-				},
-				"(Älä tee mitään)" 
-			)
-		);
+			paatokset.add(
+				new Paatos(
+					new Vaatimus[]{ new Vaatimus(Tyyppi.NULL, 0, null, null) },
+					new Seuraus[]{
+						new Seuraus(Tyyppi.SUKUSUHDE, 10, yList),
+						new Seuraus(Tyyppi.SUKUVALIT, -5, aateliset, maalaiset)
+					},
+					"(Älä tee mitään)"
+	              	,"Riitely jatkuu viikkoja, mutta lopulta kirkko saa tahtonsa läpi ja maalaisille jää karvas maku suuhun."
+				)
+			);
 
-		kunkku.ongelmat.add(
-			new Ongelma("Maakiista","Suvun " + x.annaNimi() + " edustaja " + x.annaEdustaja() + " on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon suvun \n" 
-					+ y.annaNimi() + " kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo"+
-					" ja osa pellosta siirtyisi isännän " + x.annaEdustaja() + " omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\nNyt suku "+y.annaNimi()+
-					" on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
-					, x
-					,paatokset)
-		);
+			kunkku.ongelmat.add(
+				new Ongelma("Maakiista","Suvun " + x.annaNimi() + " edustaja " + x.annaEdustaja() + " on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon suvun \n" 
+						+ y.annaNimi() + " kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo"+
+						" ja osa pellosta siirtyisi isännän " + x.annaEdustaja() + " omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\nNyt suku "+y.annaNimi()+
+						" on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
+						, x
+						,paatokset)
+			);
 	}
 	
 	static void cloneSukuLista(ArrayList<Suku> source, ArrayList<Suku> target) {
