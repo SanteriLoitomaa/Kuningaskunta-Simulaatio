@@ -69,7 +69,11 @@ public class Suku implements Serializable, Comparable<Suku>{
 	}
 
 	public void asetaPopulaatio(int populaatio) {
-		this.populaatio = populaatio;
+		if (populaatio < 0) {
+			this.populaatio = 0;
+		} else {
+			this.populaatio = populaatio;
+		}
 	}
 
 	public void asetaAatelisuus(int aatelisuus) {
