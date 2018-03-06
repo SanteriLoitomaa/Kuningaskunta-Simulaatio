@@ -151,7 +151,7 @@ public class Kuningas implements Serializable{
 	public int annaKuningaskunnanPopulaatio() {
 		int popula = 0;
 		for (int i=0; i<suvut.size();i++) {
-			popula = suvut.get(i).annaPopulaatio();
+			popula += suvut.get(i).annaPopulaatio();
 		}
 		return popula;
 	}
@@ -169,12 +169,15 @@ public class Kuningas implements Serializable{
 				System.out.println("Kapiset kapinalliset ovat kyllästyneet valtaasi, sinut karkotettiin maasta ja koko perheesi teloitettiin!");
 				havitty = true;
 			}else {
-				System.out.println("Kansan tyytymättömyys nosti osan heistä kapinoimaan, onnistuimem kuitenkin kukistamaan heidät omalla armeijallamme. Osa kapinoitsijista toki kuoli taistelussa, eiköhän se opeta heille vallan merkityksen!");
+				System.out.println("Kansan tyytymättömyys nosti osan heistä kapinoimaan, onnistuimme kuitenkin kukistamaan heidät omalla armeijallamme. Osa kapinoitsijista toki kuoli taistelussa, eiköhän se opeta heille vallan merkityksen!");
 				ArrayList<Suku> rankaistavat = kapinalliset();
 				for (int uhri =0;uhri<rankaistavat.size();uhri++) {
 					rankaistavat.get(uhri).asetaPopulaatio((int)(rankaistavat.get(uhri).annaPopulaatio()*0.8));
 				}
 			}
+		} else if (annaKuningaskunnanPopulaatio() <100) { //Kansa vähyysloppu
+			System.out.println("Kansasi on pienentynyt niin paljon ettei mitään hallittavaa enää juuri ole. Valittavat aatelisetkin jättivät sinut.");
+			havitty = true;
 		}else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
 					+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
 				"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
