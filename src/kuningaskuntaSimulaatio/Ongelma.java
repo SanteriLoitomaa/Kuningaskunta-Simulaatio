@@ -95,7 +95,7 @@ class Paatos implements Serializable {
 }
 
 enum Tyyppi implements Serializable{
-	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUVALIT_MON, SUKUPOPULAATIO, SUKUPOPULAATIO_NEG, NULL
+	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUPOPULAATIO, SUKUPOPULAATIO_NEG, NULL
 }
 
 class Vaatimus implements Serializable{
@@ -261,9 +261,6 @@ class Seuraus implements Serializable {
 			}
 		}
 		if (tyyppi == Tyyppi.SUKUVALIT) {
-			kohde.get(0).asetaSuhdeSukuun(arvo + kohde.get(0).annaSuhdeSukuun(kohde.get(1)), kohde.get(1));
-		}
-		if (tyyppi == Tyyppi.SUKUVALIT_MON) {
 			for(Suku s : kohde) {
 				for(Suku u : uhri) {
 					s.asetaSuhdeSukuun(arvo + s.annaSuhdeSukuun(u), u);
