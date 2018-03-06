@@ -382,6 +382,7 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
           muut.add(kunkku.suvut.get(i));
         }
       }
+      try {
       	paatokset.add(
         	new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.SUKUSUHDE,40,kunkku.etsiSukuKombo(true,true,false,false,false).get(0))},
@@ -394,6 +395,9 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
             	"Arkaaniset tiedot ja sotilasmahti yhdessä kukistivat lohikäärmeen ilman suurempia ongelmia."
             )
         );
+      }catch(IndexOutOfBoundsException e) {
+    	  paatokset.add(null);
+      }
       paatokset.add(
       		new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.RUOKA, 200), new Vaatimus (Tyyppi.RAHA, 200)},
@@ -451,6 +455,7 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
              4. -10 tyytyväisyys kohteen kanssa.
 */
 
+       	try {
 		paatokset = new ArrayList<Paatos>();
       	x = kunkku.etsiSukuKombo(false, false, false, true, true).get(0);
       
@@ -493,7 +498,9 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
                 " Uskomme sen viljelyn tuottavan meille suurta voittoa, tarvitsemme kuitenkin tukea isomman"+
                 " tilan perustamiseen. Voisitteko kenties tukea yhteistä hyväämme?",
 				x, paatokset));
+       	}catch(IndexOutOfBoundsException e) {
       	
+        }
 
 /*
 Nimi: Barbaarihyökkäys (TOTEUTETTU)
