@@ -364,6 +364,53 @@ public class Kuningas implements Serializable{
 		return palautettava;
 	}
 	
+	ArrayList<Suku> etsiSukuKombo(boolean magia, boolean sotilas, boolean uskonnollinen, boolean kauppias, boolean maalainen) {
+		ArrayList<Suku> palautettava = new ArrayList<Suku>();
+		boolean[] tyypit = {magia,sotilas,uskonnollinen,kauppias,maalainen};
+		
+		int summa = 0; //tarkastetaan että kyse on kombosta
+		for (boolean tyyppi : tyypit) {
+			if (tyyppi == true) {
+				summa++;
+			}
+		}
+		if ( summa > 2) {
+			return palautettava;
+		} else if ( summa == 1 ) { // tilanne jossa haetaan uniikkia tyyppiä
+			ArrayList<Suku> kaikki = etsiSukuTyypit(tyypit[0],tyypit[1],tyypit[2], tyypit[3], tyypit[4]);
+			for ( Suku tarkasteltava : kaikki ) {
+				if (etsiSukuTyypit(!tyypit[0],!tyypit[1],!tyypit[2],!tyypit[3],!tyypit[4]).contains(tarkasteltava)) {
+					kaikki.remove(tarkasteltava);
+				}
+			}
+			return kaikki;
+		} else if ( summa == 0 ) {
+			return palautettava;
+		}
+		
+		//normaalitilanne, jossa true-arvoja on tasan kaksi
+		boolean[] ensimmainen = new boolean[5];
+		boolean[] toinen      = new boolean[5];
+		for ( int i = 0; i < 5; i++ ) {
+			for ( int j = i+1; j < 5; j++) {
+				if ( tyypit[i] == true && tyypit[j] == true) {
+					ensimmainen[i] = true;
+					toinen[j] = true;
+					break;
+				}
+			}
+		}
+		ArrayList<Suku> ensimmainenLista = etsiSukuTyypit(ensimmainen[0],ensimmainen[1],ensimmainen[2],ensimmainen[3],ensimmainen[4]);
+		
+		for ( Suku eka : ensimmainenLista) {
+			if ( etsiSukuTyypit(toinen[0],toinen[1],toinen[2],toinen[3],toinen[4]).contains(eka) ) {
+				palautettava.add(eka);
+			}
+		}
+		
+		return palautettava;
+	}
+	
 	ArrayList<Suku> etsiAateliset() {
 		ArrayList<Suku> palautettava = new ArrayList<Suku>();
 		
