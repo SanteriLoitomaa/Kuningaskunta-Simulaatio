@@ -215,6 +215,12 @@ public class Kuningas implements Serializable{
 		double kerroin = oikea/perus;
 		return kerroin;
 	}
+	
+	/**
+	 * Asetetaan sukujenväliset suhteet satunnaiseksi
+	 * 
+	 * @author Pasi Toivanen
+	 */
   
 	private void generoiSukuSuhteet() {
 		Random r = new Random();
@@ -227,7 +233,11 @@ public class Kuningas implements Serializable{
 		}
 	}
 	
-	//Luodaan suku
+	/**
+	 * Metodi joka luo uuden satunnaisen suvun kuninkaalle. Aatelissuvuille on oma metodi alempana.
+	 * 
+	 * @author Pasi Toivanen
+	 */
 	private void lisaaSuku() {
 		Random r = new Random();
 		int[] tyyppi = new int[5];
@@ -267,6 +277,12 @@ public class Kuningas implements Serializable{
 		lisattava.asetaKauppias(tyyppi[3]);
 		lisattava.asetaMaalainen(tyyppi[4]);	
 	}
+	
+	/**
+	 * Metodi joka luo uuden aatelissuvun kuninkaalle
+	 * 
+	 * @author Pasi Toivanen
+	 */
 	private void lisaaAatelisSuku() {
 		Random r = new Random();
 		suvut.add(new Suku());
@@ -280,6 +296,7 @@ public class Kuningas implements Serializable{
 		lisattava.asetaKauppias(0);
 		lisattava.asetaMaalainen(0);	
 	}
+	
 	public int annaRaha() {
 		return raha;
 	}
@@ -297,6 +314,11 @@ public class Kuningas implements Serializable{
 			System.out.println(tulostettava);
 		}
 	}
+	
+	/**
+	 * @author Pasi Toivanen
+	 * @return palauttaa kaikista aatelisimman suvun (huom eri asia kuin suosituin aatelisin suku)
+	 */
 	
 	public Suku annaAatelisin() {
 		int aatelisuus = 0;
@@ -336,9 +358,15 @@ public class Kuningas implements Serializable{
 		this.vastaus = vastaus;
 	}
 	
-	/*
-	 * Palauttaa kaikki suvut, jotka on merkitty boolean parametreihin ja järjestää ne
-	 * suosituimmuusjärjestykseen
+	/**
+	 * Palauttaa ne suvut, joiden tyypistä löytyy jotain merkattuja true-arvoisia tyyppejä
+	 * 
+	 * @param magia
+	 * @param sotilas
+	 * @param uskonnollinen
+	 * @param kauppias
+	 * @param maalainen
+	 * @return Palauttaa ArrayListana kaikki löydetyt suvut suosituimmuusjärjestyksessä
 	 */
 	ArrayList<Suku> etsiSukuTyypit(boolean magia, boolean sotilas, boolean uskonnollinen, boolean kauppias, boolean maalainen){
 		ArrayList<Suku> palautettava = new ArrayList<Suku>();
@@ -364,6 +392,26 @@ public class Kuningas implements Serializable{
 		return palautettava;
 	}
 	
+	/**
+	 * @author Pasi Toivanen
+	 * 
+	 * Syötetään kahteen parametriin arvo true (muihin false) jonka jälkeen palautetaan leikkaus
+	 * hauista: esimerkiksi (true,false,false,true,false)
+	 * etsiSukuTyypit(true,false,false,false,false)
+	 * etsiSukuTyypit(false,false,false,true,false)
+	 * eli siis suvut joilta löytyy kumpikin haettava tyyppi
+	 * 
+	 * Huom! tämä metodi helposti palauttaa tyhjän listan! Etenkin jos true arvoa esiintyy parametreissä
+	 * useammin kuin kahdesti
+	 * 
+	 * @param magia Haetaanko maagista sukua
+	 * @param sotilas Haetaanko sotilaallista sukua
+	 * @param uskonnollinen Haetaanko uskonnollista sukua
+	 * @param kauppias Haetaanko kauppiassukua
+	 * @param maalainen Haetaanko maalaissukua
+	 * @return Palauttaa ArrayListana kaikki kombinaation toteuttavat suvut
+	 */
+	
 	ArrayList<Suku> etsiSukuKombo(boolean magia, boolean sotilas, boolean uskonnollinen, boolean kauppias, boolean maalainen) {
 		ArrayList<Suku> palautettava = new ArrayList<Suku>();
 		boolean[] tyypit = {magia,sotilas,uskonnollinen,kauppias,maalainen};
@@ -385,7 +433,7 @@ public class Kuningas implements Serializable{
 			}
 			return kaikki;
 		} else if ( summa == 0 ) {
-			return palautettava;
+			return etsiSukuTyypit(true,true,true,true,true);
 		}
 		
 		//normaalitilanne, jossa true-arvoja on tasan kaksi
@@ -407,6 +455,8 @@ public class Kuningas implements Serializable{
 				palautettava.add(eka);
 			}
 		}
+		
+		Collections.sort(palautettava);
 		
 		return palautettava;
 	}
