@@ -1,7 +1,11 @@
 package kuningaskuntaSimulaatio;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Kuningas implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -101,9 +105,9 @@ public class Kuningas implements Serializable{
 		for (int i=0; i<suvut.size();i++) {
 			if(suvut.get(i).annaSuhdeKuninkaaseen() < -50) {
 				if(suvut.get(i).annaSotilaallinen() >0) {
-					vihamiehet += 1 + suvut.get(i).annaSotilaallinen();
+					vihamiehet += suvut.get(i).annaPopulaatio()*(suvut.get(i).annaSotilaallinen());
 				}else {
-					vihamiehet++;
+					vihamiehet += suvut.get(i).annaPopulaatio()/2;
 				}
 			}
 		}
@@ -113,7 +117,7 @@ public class Kuningas implements Serializable{
 	public int sotilasmahti() {
 		int joukot = 0;
 		for (int i=0; i<suvut.size();i++) {
-			joukot += suvut.get(i).annaSotilaallinen();
+			joukot += (suvut.get(i).annaSotilaallinen()+1)*suvut.get(i).annaPopulaatio();
 		}
 		return joukot;
 	}
@@ -155,7 +159,7 @@ public class Kuningas implements Serializable{
 			havitty = true;
 		} else if (kumotaanko()) { //Vallankaappausloppu
 			if (coupDeTat() > sotilasmahti()) {
-				System.out.println("Kapiset kapinalliset ovat kylästyneet valtaasi, sinut karkotettiin maasta ja koko perheesi teloitettiin!");
+				System.out.println("Kapiset kapinalliset ovat kyllästyneet valtaasi, sinut karkotettiin maasta ja koko perheesi teloitettiin!");
 				havitty = true;
 			}else {
 				System.out.println("Kansan tyytymättömyys nosti osan heistä kapinoimaan, onnistuimem kuitenkin kukistamaan heidät omalla armeijallamme. Osa kapinoitsijista toki kuoli taistelussa, eiköhän se opeta heille vallan merkityksen!");
