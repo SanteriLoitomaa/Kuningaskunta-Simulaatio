@@ -410,13 +410,18 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
             	"Kirennätte vyötä ja kavennatte leipää, henkenne säästyi mutta kyllä se maksoi."
             )
       	);
+      int kesk =0;
+      for (int i = 0; i<kunkku.suvut.size();i++) {
+    	  kesk += kunkku.suvut.get(i).annaPopulaatio();
+      }
+      kesk = kesk/(kunkku.suvut.size()*2);
       paatokset.add(
       		new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
             	new Seuraus[]{
                   new Seuraus(Tyyppi.RAHA,-100),
                   new Seuraus(Tyyppi.RUOKA,-100),
-                  new Seuraus(Tyyppi.SUKUSUHDE, -20,kunkku.suvut),
+                  new Seuraus(Tyyppi.SUKUSUHDE, -kesk,kunkku.suvut),
                   new Seuraus(Tyyppi.RAHA_T,-5),
                   new Seuraus(Tyyppi.RUOKA_T,-5),
                   new Seuraus(Tyyppi.SUKUPOPULAATIO,-20,kunkku.suvut)
