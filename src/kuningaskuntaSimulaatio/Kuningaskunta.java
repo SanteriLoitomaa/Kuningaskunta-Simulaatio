@@ -68,7 +68,12 @@ public class Kuningaskunta{
 		vastaus.close();
 	}
 
-	// Luo kaikki pelin ongelmat, pitää kutsua sukujen luonnin jälkeen.
+	/**
+	 * Luo kaikki pelin ongelmat, pitää kutsua joka kerta ennen kuin pelissä tarvitaan ongelmia.
+	 * Tässä metodissa on pääasiassa kaikki pelin sisältö, joka on niputettu kunkku.ongelmat listaan.
+	 * @author Pasi Toivanen, Tommi Heikkinen, Santeri Loitomaa
+	 * @param kunkku
+	 */
 	public static void meillaOnOngelmia(Kuningas kunkku) {
 		ArrayList<Paatos> paatokset = new ArrayList<Paatos>();
 

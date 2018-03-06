@@ -432,7 +432,7 @@ public class Kuningas implements Serializable{
 				}
 			}
 			return kaikki;
-		} else if ( summa == 0 ) {
+		} else if ( summa == 0 ) { // jos etsitään komboa, jossa ei rajoiteta mitään, niin silloin palautetaan kaikki
 			return etsiSukuTyypit(true,true,true,true,true);
 		}
 		
