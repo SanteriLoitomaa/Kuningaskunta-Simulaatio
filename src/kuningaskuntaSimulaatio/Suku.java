@@ -18,6 +18,16 @@ public class Suku implements Serializable, Comparable<Suku>{
 	private int uskonnollinen; // Suvun uskonnollisuus (0-4) ARVOT YHTEENSä 4 PER SUKU!
 	private int kauppias; // Suvun kauppiaisuus (0-4)
 	private int maalainen; // Suvun maallisuus (0-4)
+	
+	/**
+	 * 
+	 * Konstruktori, joka tekee tyhjän oletussuvun ja asettaa suvun edustajan etunimeksi jonkun satunnaisen
+	 * suomalaisen etunimen. Jokaisen suvun luonnin jälkeen atribuuteille asetetaan arvo Kuningas-luokassa
+	 * metodissa lisaaSuku(). Tämä siksi, koska konstruktorille tulisi muuten kohtuuton määrä parametreja.
+	 * 
+	 * @author Pasi Toivanen, Tommi Heikkinen
+	 * 
+	 */
 
 	public Suku() { // Laitetaan default arvot, up to change.
 		this.populaatio = 0;
@@ -35,6 +45,13 @@ public class Suku implements Serializable, Comparable<Suku>{
 		Random r = new Random();
 		this.edustaja = etunimet[r.nextInt(etunimet.length)];
 	}
+	
+	/**
+	 * Getterit ja setterit kaikille atribuuteille
+	 * 
+	 * @author Tommi Heikkinen
+	 * 
+	 */
 
 	public void asetaNimi(String nimi) {
 		this.nimi = nimi;
@@ -143,6 +160,15 @@ public class Suku implements Serializable, Comparable<Suku>{
 	public int annaMaalainen() {
 		return maalainen;
 	}
+	
+	/**
+	 * 
+	 * Palauttaa kuvauksen suvusta
+	 * 
+	 * @author Tommi Heikkinen
+	 * @return Palauttaa kuvauksen useampirivisenä String-muodossa
+	 * 
+	 */
 
 	public String toString() { // Muuttaa stringiksi suvun tiedot niissä paikoissa joissa ne vaaditaan, tyyppi
 											// ja aatelisuus tulostetaan vain silloin kun ne ovat olemassa.
@@ -191,12 +217,31 @@ public class Suku implements Serializable, Comparable<Suku>{
 		}
 		return mjono;
 	}
+	
+	/**
+	 * 
+	 * Hakee kaikki suvut joihin suvulla on suhde ja tulostaa niitä vastaavat kunnioitusta kuvaavat kokonaisluvut
+	 * 
+	 * @author Pasi Toivanen, Tommi Heikkinen
+	 * @return Tulostaa suoraan suhteet, tätä on käytetty lähinnä debugaukseen
+	 * 
+	 */
 	public void tulostaSuhteet() {
 		System.out.println("Suvulla " + this.annaNimi() + " on seuraavat suhteet muihin sukuihin:");
 		for (Suku tarkasteltava : suhteet.keySet()) {
 			System.out.println(tarkasteltava.annaNimi() + ": " + suhteet.get(tarkasteltava));
 		}
 	}
+	
+	/**
+	 * 
+	 * Suvut ovat aina järjestettävissä suosituimmuusjärjestykseen.
+	 * 
+	 * @author Pasi Toivanen
+	 * @param Suku johon vertaillaan
+	 * @return +200 ja -200 väliltä kokonaisluvun. Positiivinen jos verrattava on suositumpi.
+	 * 
+	 */
 	public int compareTo(Suku verrattava) {
 		return verrattava.annaSuhdeKuninkaaseen() - this.annaSuhdeKuninkaaseen();
 	}
