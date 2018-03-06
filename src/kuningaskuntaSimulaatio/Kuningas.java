@@ -133,7 +133,7 @@ public class Kuningas implements Serializable{
 		for (int j=0; j<halukkaat.size();j++) {
 			maara += halukkaat.get(j).annaPopulaatio();
 		}
-		if (halukkaat.size()>4 && maara >180) {
+		if (halukkaat.size()>4 && maara >annaKuningaskunnanPopulaatio()/4) {
 			return true;
 		} else {
 			return false;
@@ -147,6 +147,13 @@ public class Kuningas implements Serializable{
 			}
 		}
 		return kapinat;
+	}
+	public int annaKuningaskunnanPopulaatio() {
+		int popula = 0;
+		for (int i=0; i<suvut.size();i++) {
+			popula = suvut.get(i).annaPopulaatio();
+		}
+		return popula;
 	}
 
 	private void laskePisteet(Boolean lisaaPisteet) {
