@@ -189,10 +189,6 @@ public class Kuningaskunta{
 		ArrayList<Suku> yList = new ArrayList<Suku>(); //lista jossa on vain y
 		yList.add(y);
 
-		ArrayList<Suku> xyList = new ArrayList<Suku>(); //lista jossa on x ja y
-		xyList.add(x);
-		xyList.add(y);
-
 		paatokset.add(
 			new Paatos(
 				new Vaatimus[]{new Vaatimus(Tyyppi.NULL, 0)},
@@ -201,7 +197,7 @@ public class Kuningaskunta{
 					new Seuraus(Tyyppi.SUKUSUHDE,  5, maalaiset),
 					new Seuraus(Tyyppi.SUKUSUHDE,-10, yList),
 					new Seuraus(Tyyppi.SUKUSUHDE, -5, uskonnolliset),
-					new Seuraus(Tyyppi.SUKUVALIT,-15, xyList)
+					new Seuraus(Tyyppi.SUKUVALIT,-15, xList, yList)
 				},"Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
                 ,"Maalaissuku " + x.annaNimi() + " kiittää ja muistakin maalaisista tuntuu kivalta."
               	+"Suku " + y.annaNimi() + " ja kirkko ei tykkää yhtään ja " + x.annaNimi() 
