@@ -20,6 +20,8 @@ public class Kuningas implements Serializable{
 	transient private Scanner vastaus;
 	public ArrayList<Ongelma> ongelmat = new ArrayList<Ongelma>();
 	public ArrayList<Suku> suvut = new ArrayList<Suku>();
+	
+	//alla olevat listat ovat satunnaisnimien muodostamista varten
 	public ArrayList<String> maalaisnimet = new ArrayList<>(Arrays.asList("Kuokka", "Vilja", "Vihreä", "Lihava",
 			"Pelto", "Aura", "Terve", "Jussi"));
 	public ArrayList<String> sotilasnimet = new ArrayList<>(Arrays.asList("Miekka", "Kilpi", "Rohkea", "Keihäs",
@@ -41,7 +43,7 @@ public class Kuningas implements Serializable{
 		this.ruokaTuotto = 2;
 		this.sukujenLKM = 25;
 
-		//luodaan suvut
+		//luodaan sukuja yhteensä 25 kpltta
 		for (int i = 0; i < sukujenLKM - 2; i++) {
 			lisaaSuku();
 		}
