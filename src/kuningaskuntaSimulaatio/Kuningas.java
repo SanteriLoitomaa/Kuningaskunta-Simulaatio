@@ -374,6 +374,8 @@ public class Kuningas implements Serializable{
 	
 	/**
 	 * Palauttaa ne suvut, joiden tyypistä löytyy jotain merkattuja true-arvoisia tyyppejä
+	 * esimerkiksi kaikki suvut joiden tyyppi on edes osaltaan uskonnollinen etsittäisiin näin:
+	 * etsiäSukuTyypit(false,false,true,false,false)
 	 * 
 	 * @param magia
 	 * @param sotilas
@@ -475,6 +477,10 @@ public class Kuningas implements Serializable{
 		return palautettava;
 	}
 	
+	/**
+	 * Erillinen metodi aatelisia varten, koska aatelissuku ei voi olla osa mitään muuta tyyppiä
+	 * @return Palauttaa aateliset ArrayListinä suosituimmuusjärjestyksessä
+	 */
 	ArrayList<Suku> etsiAateliset() {
 		ArrayList<Suku> palautettava = new ArrayList<Suku>();
 		
