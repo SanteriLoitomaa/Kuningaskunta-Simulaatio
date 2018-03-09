@@ -86,21 +86,21 @@ public class Kuningaskunta{
     	//ArrayList<Suku> etsiSukuTyypit(boolean magia, boolean sotilas, boolean uskonnollinen, boolean kauppias, boolean maalainen)
 		
       	/*
-       	Nimi: Maanjäristys (TOTEUTETTU)
+Nimi: Maanjäristys (TOTEUTETTU)
 
-		Selitys: "Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?"
+Selitys: "Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?"
 
-		Kohteet: Kaikki
+Kohteet: Kaikki
 
-		Paatokset: 	 	1. "Voin auttaa teitä korjaustöissä viidellä kullalla per suku." (jos varaa)
-           	 			2. "Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui." (jos hyvissä väleissä maagisen suvun kanssa)
-           	 			3. "Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt (x) suvulta mitä pikimmiten." (jos hyvissä väleissä uskonnollisen suvun kanssa)
-           	 			4. "En näe miten tämä ongelma koskee minua."
+Paatokset: 	 	1. "Voin auttaa teitä korjaustöissä viidellä kullalla per suku." (jos varaa)
+	 			2. "Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui." (jos hyvissä väleissä maagisen suvun kanssa)
+        			3. "Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt (x) suvulta mitä pikimmiten." (jos hyvissä väleissä uskonnollisen suvun kanssa)
+    	 			4. "En näe miten tämä ongelma koskee minua."
 
-		Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
-			 			2. +10 Ei uskonnolisten sukujen välit, -10 uskonnolisten sukujen välit kuninkaaseen ja maagiseen sukuun, jolta kuningas sai idean. (paitsi jos myös maaginen).
-             			3. +10 Vaikutettujen sukujen välit paitsi -10 neitsyen suvun välit kuninkaaseen ja uskonnoliseen sukuun, jolta kuningas sai idean.
-             			4. -20 Kaikkien sukujen välit.
+Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
+	 			2. +10 Ei uskonnolisten sukujen välit, -10 uskonnolisten sukujen välit kuninkaaseen ja maagiseen sukuun, jolta kuningas sai idean. (paitsi jos myös maaginen).
+     			3. +10 Vaikutettujen sukujen välit paitsi -10 neitsyen suvun välit kuninkaaseen ja uskonnoliseen sukuun, jolta kuningas sai idean.
+     			4. -20 Kaikkien sukujen välit.
        	*/
       
       
@@ -150,25 +150,25 @@ public class Kuningaskunta{
 						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
 				kunkku.annaAatelisin(), paatokset));
 		
-		/*Nimi: Maakiista (TOTEUTETTU)
+/*Nimi: Maakiista (TOTEUTETTU)
 
-		Selitys: "X:n isäntä Jussi on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon (Korkein uskonnollinen suku Y) kanssa on ollut suullinen sopimus,
+Selitys: "X:n isäntä Jussi on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon (Korkein uskonnollinen suku Y) kanssa on ollut suullinen sopimus,
         että joutomaalle rakennettu talo ja osa pellosta siirtyisi isännän Jussin omistukseen, mikäli hänen peltonsa tuottaisi hyvin.
 		Nyt Y on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
 
-		Kohteet: Maanviljelijäsuku
+Kohteet: Maanviljelijäsuku
 
-		Paatokset:	1. "Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
-					2. "Vuokrasopimus on kohtuullistettava ja vuokran määräksi riittää vain kaksi viljasäkkiä vuodessa"
-		            3. "Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla."
-		            4. "(Älä tee mitään)"
+Paatokset:	1. "Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
+			2. "Vuokrasopimus on kohtuullistettava ja vuokran määräksi riittää vain kaksi viljasäkkiä vuodessa"
+            3. "Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla."
+            4. "(Älä tee mitään)"
 
-		Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän tuottavuutensa kasvaa. 
+Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän tuottavuutensa kasvaa. 
 										Suhde: Maalaissuku - Uskonnollinen suku +10
 										Suhde: Uskonnollinen suku - Kuningas -20
-						2. Uskonnollisten sukujen kunnioitus +20
-		            	3. X:n kunnioitus -10 ruoka +10
-		            	4. Uskonnollisten sukujen kunnioitus +10 */
+			2. Uskonnollisten sukujen kunnioitus +20
+            	3. X:n kunnioitus -10 ruoka +10
+            	4. Uskonnollisten sukujen kunnioitus +10 */
 		
 		paatokset = new ArrayList<Paatos>();
 
