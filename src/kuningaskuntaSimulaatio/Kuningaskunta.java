@@ -626,78 +626,78 @@ Vaikutukset:	1. kauppias-, x++, raha-
             	4. x-, maalaiset+	*/
 		
 		
-	paatokset = new ArrayList<Paatos>();
-	
-	x = kunkku.etsiAateliset().get(r.nextInt(kunkku.etsiAateliset().size()));
-	xList = new ArrayList<Suku>();
-	xList.add(x);
-	
-	paatokset.add(
-        new Paatos(
-            new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE,5,kunkku.etsiSukuTyypit(false,false,false,true,false).get(0)) },
-            new Seuraus[]{
-              new Seuraus(Tyyppi.RAHA,-4),
-              new Seuraus(Tyyppi.SUKUSUHDE, -2,kunkku.etsiSukuTyypit(false,false,false,true,false)),
-              new Seuraus(Tyyppi.SUKUSUHDE, 20, xList)
-            },
-            "Lähetän kauppiaita hakemaan parhaimpia viinirypäleitä",
-            "Kauppiaat eivät ole kovinkaan riemuissaan ylimääräisistä vaarallisista kaupparetkistä \n"
-            + ", mutta " + x.annaEdustaja() + " itkahtaa ilosta, kun kuninkaalta löytyy rahaa ostaa \n"
-            + "lisää viinirypäleitä!"
-        )
-    );
-    
-	paatokset.add(
-        new Paatos(
-            new Vaatimus[] {new Vaatimus(Tyyppi.SUKUSUHDE,-3,kunkku.etsiSukuTyypit(false,false,false,false,true).get(0)) },
-            new Seuraus[]{
-              new Seuraus(Tyyppi.RAHA_T,1),
-              new Seuraus(Tyyppi.RUOKA_T,1),
-              new Seuraus(Tyyppi.SUKUSUHDE, -5,xList)
-            },
-            "Maanviljelijät viljelkööt tästä lähtien useamman palstan viinirypäleitä.",
-            "Rahan ja ruuan tuotanto lisääntyy, kun viinirypäletilukset alkavat kantaa hedelmää\n ja kauppiaat saavat "
-            + "uusia vientituotteita. Rypäleiden saantiin kestää kuitenkin tovi, \n"
-            + "jolloin suku " + x.annaNimi() + " joutuu pitämään monta illallista ilman herkullisia rypäleitä."
-        )
-    );
-    
-    paatokset.add(
-        new Paatos(
-            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
-            new Seuraus[]{
-              new Seuraus(Tyyppi.RAHA,2),
-              new Seuraus(Tyyppi.SUKUSUHDE, -15,xList),
-              new Seuraus(Tyyppi.SUKUSUHDE, 10, maalaiset)
-            },
-            "Ahhahhahha! Syökööt vaikka perunaa rypäleiden sijasta. Säästyypähän nekin rahat!",
-            "Rahaa säästyy, mutta vain vähän. Suku " + x.annaNimi() + " on kovin loukkaantunut \n"
-            + "vastauksestasi, mutta huhu pihtaruudestasi kiirii maalaisten korviin, mikä \n"
-            + "tekee sinusta suositumman maalaisten piireissä."
-        )
-    );
-    
-    paatokset.add(
-        new Paatos(
-            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
-            new Seuraus[]{
-              new Seuraus(Tyyppi.RAHA,2),
-              new Seuraus(Tyyppi.SUKUSUHDE, -3,xList)
-            },
-            "(Älä tee mitään)",
-            "Edustaja " + x.annaEdustaja() + " poistuu paikalta surullisin mielin. Sen päätöksen\n "
-            + "ei enää pitkään aikaan syöty rypäleitä."
-        )
-    );
-	
-	kunkku.ongelmat.add(
-		new Ongelma("Ne on loppu nyt", "Aatelissuvulta " + x.annaNimi() + " on illallispöydässä loppunut viinirypäleet \n"
-										+ "aatelissuvun edustaja " + x.annaEdustaja() + " on tullut häntä koipien välissä \n"
-										+ "pyytämään, että voisit lähettä jonkun hakemaan herkkuja lisää pöytään, \n"
-										+ "koska muuten illallisella ei voi tarjota sitä parasta mitä maailmasta löytyy"
-				, x
-				,paatokset)
-	);
+		paatokset = new ArrayList<Paatos>();
+		
+		x = kunkku.etsiAateliset().get(r.nextInt(kunkku.etsiAateliset().size()));
+		xList = new ArrayList<Suku>();
+		xList.add(x);
+		
+		paatokset.add(
+	        new Paatos(
+	            new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE,5,kunkku.etsiSukuTyypit(false,false,false,true,false).get(0)) },
+	            new Seuraus[]{
+	              new Seuraus(Tyyppi.RAHA,-4),
+	              new Seuraus(Tyyppi.SUKUSUHDE, -2,kunkku.etsiSukuTyypit(false,false,false,true,false)),
+	              new Seuraus(Tyyppi.SUKUSUHDE, 20, xList)
+	            },
+	            "Lähetän kauppiaita hakemaan parhaimpia viinirypäleitä",
+	            "Kauppiaat eivät ole kovinkaan riemuissaan ylimääräisistä vaarallisista kaupparetkistä \n"
+	            + ", mutta " + x.annaEdustaja() + " itkahtaa ilosta, kun kuninkaalta löytyy rahaa ostaa \n"
+	            + "lisää viinirypäleitä!"
+	        )
+	    );
+	    
+		paatokset.add(
+	        new Paatos(
+	            new Vaatimus[] {new Vaatimus(Tyyppi.SUKUSUHDE,-3,kunkku.etsiSukuTyypit(false,false,false,false,true).get(0)) },
+	            new Seuraus[]{
+	              new Seuraus(Tyyppi.RAHA_T,1),
+	              new Seuraus(Tyyppi.RUOKA_T,1),
+	              new Seuraus(Tyyppi.SUKUSUHDE, -5,xList)
+	            },
+	            "Maanviljelijät viljelkööt tästä lähtien useamman palstan viinirypäleitä.",
+	            "Rahan ja ruuan tuotanto lisääntyy, kun viinirypäletilukset alkavat kantaa hedelmää\n ja kauppiaat saavat "
+	            + "uusia vientituotteita. Rypäleiden saantiin kestää kuitenkin tovi, \n"
+	            + "jolloin suku " + x.annaNimi() + " joutuu pitämään monta illallista ilman herkullisia rypäleitä."
+	        )
+	    );
+	    
+	    paatokset.add(
+	        new Paatos(
+	            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+	            new Seuraus[]{
+	              new Seuraus(Tyyppi.RAHA,2),
+	              new Seuraus(Tyyppi.SUKUSUHDE, -15,xList),
+	              new Seuraus(Tyyppi.SUKUSUHDE, 10, maalaiset)
+	            },
+	            "Ahhahhahha! Syökööt vaikka perunaa rypäleiden sijasta. Säästyypähän nekin rahat!",
+	            "Rahaa säästyy, mutta vain vähän. Suku " + x.annaNimi() + " on kovin loukkaantunut \n"
+	            + "vastauksestasi, mutta huhu pihtaruudestasi kiirii maalaisten korviin, mikä \n"
+	            + "tekee sinusta suositumman maalaisten piireissä."
+	        )
+	    );
+	    
+	    paatokset.add(
+	        new Paatos(
+	            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+	            new Seuraus[]{
+	              new Seuraus(Tyyppi.RAHA,2),
+	              new Seuraus(Tyyppi.SUKUSUHDE, -3,xList)
+	            },
+	            "(Älä tee mitään)",
+	            "Edustaja " + x.annaEdustaja() + " poistuu paikalta surullisin mielin. Sen päätöksen\n "
+	            + "ei enää pitkään aikaan syöty rypäleitä."
+	        )
+	    );
+		
+		kunkku.ongelmat.add(
+			new Ongelma("Ne on loppu nyt", "Aatelissuvulta " + x.annaNimi() + " on illallispöydässä loppunut viinirypäleet \n"
+											+ "aatelissuvun edustaja " + x.annaEdustaja() + " on tullut häntä koipien välissä \n"
+											+ "pyytämään, että voisit lähettä jonkun hakemaan herkkuja lisää pöytään, \n"
+											+ "koska muuten illallisella ei voi tarjota sitä parasta mitä maailmasta löytyy"
+					, x
+					,paatokset)
+		);
 	}
 	
 	static void cloneSukuLista(ArrayList<Suku> source, ArrayList<Suku> target) {
