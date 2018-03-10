@@ -101,7 +101,12 @@ public class Kuningas implements Serializable{
 		}
 		tulostaPisteet();
 	}
-	// Laskee vallankumouksen mahdin kun se iskee
+	/**
+	 * Laskee vallankumouksen voiman, jolla määritellään päättyykö peli.
+	 * 
+	 * @author Tommi Heikkinen
+	 * @return kokonaisluku jota verrataan kuningasta suojelevien joukkojen voimaan
+	 */
 	public int coupDeTat() { 
 		int vihamiehet = 0;
 		for (int i=0; i<suvut.size();i++) {
@@ -115,15 +120,27 @@ public class Kuningas implements Serializable{
 		}
 		return vihamiehet;
 	}
-	//Laskee sinua puolustavat joukot
+	/**
+	 * Laskee kuningasta suojelevien joukkojen voiman. Ne saavat bonusta koska ne on paremmin varustettu.
+	 * 
+	 * @author Tommi Heikkinen
+	 * @return kokonaisluku jota verrataan vallankumouksen voimaan
+	 */
 	public int sotilasmahti() {
 		int joukot = 0;
 		for (int i=0; i<suvut.size();i++) {
-			joukot += (suvut.get(i).annaSotilaallinen()+1)*suvut.get(i).annaPopulaatio();
+			if (suvut.get(i).annaSotilaallinen() >0) {
+				joukot += (suvut.get(i).annaSotilaallinen()+1)*suvut.get(i).annaPopulaatio();
+			}
 		}
 		return joukot;
 	}
-	//Palauttaa true jos kana haluaa vallankumouksen
+	/**
+	 * Palauttaa true jos kansa haluaa vallankumouksen, laskee tämän kapinallisten määrän avulla.
+	 * Mitäenemmän kapinallisia on kuningaskunnasta, sen todennäköisempi kapina on.
+	 * @author Tommi Heikkinen
+	 * @return true jos kansa haluaa vallankumouksne, muussa tapauksessa false
+	 */
 	public boolean kumotaanko() {
 		ArrayList<Suku> halukkaat = new ArrayList<Suku>();
 		for (int i=0; i<suvut.size();i++) {
@@ -141,7 +158,13 @@ public class Kuningas implements Serializable{
 			return false;
 		}
 	}
-	public ArrayList<Suku> kapinalliset(){ //Palauttaa listan kapinoineista suvuista
+	
+	/**
+	 * Palauttaa listan kapinoineista suvuista rangaistusta varten
+	 * @author Tommi Heikkinen
+	 * @return listan suvuista jotka kapinoivat
+	 */
+	public ArrayList<Suku> kapinalliset(){ 
 		ArrayList<Suku> kapinat = new ArrayList<Suku>();
 		for (int i=0; i<suvut.size();i++) {
 			if(suvut.get(i).annaSuhdeKuninkaaseen() < -50) {
@@ -150,6 +173,12 @@ public class Kuningas implements Serializable{
 		}
 		return kapinat;
 	}
+	
+	/**
+	 * Kertoo kuningaskunnan väkiluvun
+	 * @author Tommi Heikkinen
+	 * @return kokonaisluvun joka on kuningaskunnan populaatio
+	 */
 	public int annaKuningaskunnanPopulaatio() {
 		int popula = 0;
 		for (int i=0; i<suvut.size();i++) {
@@ -158,6 +187,13 @@ public class Kuningas implements Serializable{
 		return popula;
 	}
 
+	/**
+	 * Lisää tuottosi resursseihisi, tarkistaa oletko hävinnyt pelin joko resurssipulan, vallankumouksen tai kansan vähyyden vuoksi.
+	 * Tulostaa tämänhetkiset tuottosi, resurssisi ja pisteesi.
+	 * @param lisaaPisteet
+	 * @author Tommi Heikkinen, Santeri Loitomaa
+	 * @return Tulostaa joko pelin lopetusviestin tai sitten tämänhetkiset resurssit, tuotot ja pisteet.
+	 */
 	private void laskePisteet(Boolean lisaaPisteet) {
 		if(lisaaPisteet) {
 			this.raha += this.rahaTuotto;
@@ -185,7 +221,12 @@ public class Kuningas implements Serializable{
 				"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
 	}
 
-	public int annaPisteet() { //Laskee pelissä tämänhetkiset pisteet
+	/**
+	 * Laskee pelisi pisteet, huomioiden populaatiot, suhteet, resurssit, tuotot, aateliset, häviön yms.
+	 * @author Tommi Heikkinen
+	 * @return Kokonaislukuna pelin tämänhetkiset pisteet.
+	 */
+	public int annaPisteet() { 
 		double pisteet = 0;
 		pisteet += annaRaha();
 		pisteet += annaRuoka();
@@ -214,15 +255,14 @@ public class Kuningas implements Serializable{
 		int truPisteet = annaPisteet();
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
 		TallennaLataaPisteet.tulostaPisteet();
-		/*
-		 jos valtakunta hajosi pisteistä pois 80%
-		 Sukujen väliset tyytyväisyyssuhteet summataan keskenään, positiivisten tulee painaa negatiivisia
-		 enemmän.
-		 Aatelien tyytyväisyys faktoroidaan*10
-		 Kokonais ruokasi ja rahasi lasketaan mukaan pisteisiin. Tuotot*10 pisteisiin myäs.
-		 */
 	}
-	public double suhteellinenVakimaara() { //palauttaa doublen, joka on yli 1 jos väkilukua on oletusta enemmän ja alle 1 jos väkiluku on oletusta pienempi
+	
+	/**
+	 * Palauttaa doublen, joka on yli 1 jos väkilukua on oletusta enemmän ja alle 1 jos väkiluku on oletusta pienempi
+	 * @author Tommi Heikkinen
+	 * @return palauttaa doublen jota käytetään kertoimena pisteiden laskussa
+	 */
+	public double suhteellinenVakimaara() {
 		int perus = 25*35;
 		int oikea = 0;
 		for (int i=0; i<suvut.size();i++) {
