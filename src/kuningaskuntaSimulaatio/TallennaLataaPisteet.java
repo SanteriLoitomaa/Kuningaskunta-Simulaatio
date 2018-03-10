@@ -100,7 +100,7 @@ public class TallennaLataaPisteet implements Serializable{
 			String[] nimet = pisteet.annaNimet();
 			System.out.println("Parhaat pisteet ovat saaneet: ");
 			for(int i = 0; i < 10; i++) {
-				System.out.println(nimet[i] + " sai " + piste[i] + " pistettä.");
+				System.out.println(nimet[i] + " sai " + piste[i] + " pistettÃ¤.");
 			}
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();

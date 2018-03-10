@@ -23,7 +23,7 @@ public class Ongelma implements Serializable {
 
 	// Mahdollisesti vaikeusastelisäys näille ajan myätä
 	public void tulosta(Kuningas kunkku) {
-		System.out.println(esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
+		System.out.println("Suku " + esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
 			p.tulostaPaatosrivi(kunkku, this, paatokset.indexOf(p));
 		}
