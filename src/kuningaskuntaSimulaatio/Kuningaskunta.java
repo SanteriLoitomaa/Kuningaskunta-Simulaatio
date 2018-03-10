@@ -348,6 +348,7 @@ Vaikutukset:	1.
 */
       
       paatokset = new ArrayList<Paatos>();
+      try {
       ArrayList<Suku> pasifistit = new ArrayList<Suku>();
       for (int i = 0; i<kunkku.suvut.size();i++){
         if (kunkku.suvut.get(i).annaSotilaallinen() == 0){
@@ -376,6 +377,9 @@ Vaikutukset:	1.
               "Sotilaat kärsivät suuria tappioita, mutta suurelta tuholta vältyttiin, \nheidän uhrauksensa musitetaan sukupolvien ajan!"
             )
         );
+      }catch(IndexOutOfBoundsException e) {
+    	  paatokset.add(null);
+      }
        ArrayList<Suku> muut = new ArrayList<Suku>();
       for (int i = 0; i<kunkku.suvut.size();i++){
         if (kunkku.suvut.get(i).annaSotilaallinen() == 0 || kunkku.suvut.get(i).annaMagia() == 0){
@@ -433,7 +437,7 @@ Vaikutukset:	1.
       
        kunkku.ongelmat.add(
 			new Ongelma("Lohikäärme hyökkää","Suvun " + kunkku.etsiAateliset().get(0).annaNimi() + " edustaja " + kunkku.etsiAateliset().get(0).annaEdustaja() +
-                    "varoittaa kuningaskuntaa lähestyvästä verenhimoisesta lohikäärmeestä, joka polttaa maat, syö ihmiset ja varastaa kullan."
+                    " varoittaa kuningaskuntaa lähestyvästä verenhimoisesta lohikäärmeestä, joka polttaa maat, syö ihmiset ja varastaa kullan."
 					, kunkku.etsiAateliset().get(0)
 					,paatokset)
 			);
@@ -701,7 +705,7 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	}
 	
 	static void cloneSukuLista(ArrayList<Suku> source, ArrayList<Suku> target) {
-		for ( Suku suku : source) {
+		for (Suku suku : source) {
 			target.add(suku);
 		}
 	}

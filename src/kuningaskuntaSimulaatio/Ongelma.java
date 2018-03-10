@@ -25,7 +25,11 @@ public class Ongelma implements Serializable {
 	public void tulosta(Kuningas kunkku) {
 		System.out.println("Suku " + esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
-			p.tulostaPaatosrivi(kunkku, this, paatokset.indexOf(p));
+			try {
+				p.tulostaPaatosrivi(kunkku, this, paatokset.indexOf(p));
+			}catch(NullPointerException e) {
+				
+			}
 		}
 	}
 
