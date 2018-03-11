@@ -1,6 +1,7 @@
 package kuningaskuntaSimulaatio;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,6 +19,7 @@ public class TallennaLataaPisteet implements Serializable{
 
 	/**
 	 * Tallenna peli tallennus.tal tiedostoon
+	 * 
 	 * @param kunkku (Kuninkaan nykyinen instanssi)
 	 */
 	public static void tallenna(Kuningas kunkku) {
@@ -33,27 +35,36 @@ public class TallennaLataaPisteet implements Serializable{
 
 	/**
 	 * Lataa peli tallennus.tal tiedostosta
-	 * @return
+	 * 
+	 * @return kuninkaan vanha instanssi
 	 */
-	public static Kuningas lataa() {
+	public static Kuningas lataa() throws FileNotFoundException, ClassNotFoundException {
 		try {
 			FileInputStream tiedosto = new FileInputStream("tallennus.tal");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
 			Kuningas kunkku = (Kuningas) lataa.readObject();
 			lataa.close();
 			return kunkku;
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+		} catch (IOException e) {
+			
 		}
 		return null;
 	}
 	
 	/**
-	 * Tarkistaa, tuleeko pisteet lisätä listaan. Jos näin, päivittää listatiedoston pisteet.pis
+	 * Tarkistaa, onko tulostaulukko olemassa ja tuleeko pisteet lisätä listaan.
+	 * Jos näin, päivittää listatiedoston pisteet.pis
+	 * 
 	 * @param pist (Pelaajan saamien pisteiden määrä)
 	 * @param nimi (Hallitsijan nimi)
 	 */
 	public static void lisaaPisteet(int pist, String nimi) {
+		try {
+			FileInputStream tiedosto3 = new FileInputStream("pisteet.pis");
+			tiedosto3.close();
+		}catch(IOException e){
+			TallennaLataaPisteet.luoPisteet();
+		}
 		try {
 			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
@@ -104,6 +115,7 @@ public class TallennaLataaPisteet implements Serializable{
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+			
 	}
 	
 	/**
