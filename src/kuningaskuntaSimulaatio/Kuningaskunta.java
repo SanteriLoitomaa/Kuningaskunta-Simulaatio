@@ -123,6 +123,9 @@ Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
 		Random r = new Random();
 		Suku x = kunkku.suvut.get(r.nextInt(kunkku.suvut.size()));
 		Suku y = kunkku.etsiSukuTyypit(false, false, true, false, false).get(0);
+		while (x.equals(y)) {
+			x = kunkku.suvut.get(r.nextInt(kunkku.suvut.size()));
+		}
 		String neitsyenKoti = x.annaNimi();
 		ArrayList<Suku> uhri = new ArrayList<Suku>(Arrays.asList(x));
 		// Huumori mielessä jätimem mahdolliseksi tapattaa ehdottajan tyttären xD
@@ -331,19 +334,20 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
       
 /*Nimi: Lohikäärme hyökkää
 
-Selitys:
+Selitys: "Kuningaskuntaa lähestyvästä verenhimoisesta lohikäärmeestä, joka polttaa maat, syö ihmiset ja varastaa kullan."
+					
 
-Kohteet:
+Kohteet: Kaikki
 
-Paatokset:	1.
-			2.
-			3.
-			4.
+Paatokset:	1. "Komentakaa sotilaamme marssimaan lohikäärmettä vastaan, suojelemme kansaa viimeiseen asti!"
+			2. "Maagiset joukkomme ovat experttejä tällaisten asioiden kanssa, jättäkää se heidän huolekseen."
+			3. "Koetetaan lahjoa petoa, kenties sen raivo laantuu jos annamme sille ruokaa ja kultaa ilman vastustusta!"
+			4. "Mitään ei ole tehtävissä, kärsikäämme kohtalomme."
 
-Vaikutukset:	1.
-			2.
-        		3.
-        		4.
+Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 sukuvälit puolustaneille ja muille, - puolet pulustus populasta
+			2. +20 tyytyväisyys kaikille ei puolustaneille, +30 sukuvälit puolustaneiden ja muidne välillä, -10 populaatio puolustaneille
+        	3. -200 kultaa, -200 ruokaa
+        	4. -100 kultaa (ei alle 1), -100 ruokaa (ei alle 1), -5 ruoka tuottoa (ei alle 0), -5 kultatuottoa (ei alle 0), - 20 tyytyväisyys kaikilta, - 15 populaatiosta. 
 
 */
       
@@ -391,7 +395,7 @@ Vaikutukset:	1.
         	new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.SUKUSUHDE,40,kunkku.etsiSukuKombo(true,true,false,false,false).get(0))},
             	new Seuraus[]{
-                  new Seuraus(Tyyppi.SUKUPOPULAATIO, -20, kunkku.etsiSukuKombo(true,true,false,false,false)),
+                  new Seuraus(Tyyppi.SUKUPOPULAATIO, -10, kunkku.etsiSukuKombo(true,true,false,false,false)),
                   new Seuraus (Tyyppi.SUKUSUHDE, +20,kunkku.suvut),
                   new Seuraus (Tyyppi.SUKUVALIT, +30, muut,kunkku.etsiSukuKombo(true,true,false,false,false))
                 },
@@ -419,16 +423,32 @@ Vaikutukset:	1.
     	  kesk += kunkku.suvut.get(i).annaPopulaatio();
       }
       kesk = kesk/(kunkku.suvut.size()*2);
+      int aamupala = 100;
+      int evaat = 100;
+      if (aamupala > kunkku.annaRaha()) {
+    	  aamupala = kunkku.annaRaha()-1;
+      }
+      if (evaat > kunkku.annaRuoka()) {
+    	  evaat = kunkku.annaRuoka()-1;
+      }
+      int raham = 5;
+      int ruokam = 5;
+      if (raham > kunkku.annaRahaTuotto()) {
+    	  raham = kunkku.annaRahaTuotto();
+      }
+      if (ruokam > kunkku.annaRuokaTuotto()) {
+    	  ruokam = kunkku.annaRuokaTuotto();
+      }
       paatokset.add(
       		new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
             	new Seuraus[]{
-                  new Seuraus(Tyyppi.RAHA,-100),
-                  new Seuraus(Tyyppi.RUOKA,-100),
+                  new Seuraus(Tyyppi.RAHA,-aamupala),
+                  new Seuraus(Tyyppi.RUOKA,-evaat),
                   new Seuraus(Tyyppi.SUKUSUHDE, -kesk,kunkku.suvut),
-                  new Seuraus(Tyyppi.RAHA_T,-5),
-                  new Seuraus(Tyyppi.RUOKA_T,-5),
-                  new Seuraus(Tyyppi.SUKUPOPULAATIO,-20,kunkku.suvut)
+                  new Seuraus(Tyyppi.RAHA_T,-raham),
+                  new Seuraus(Tyyppi.RUOKA_T,-ruokam),
+                  new Seuraus(Tyyppi.SUKUPOPULAATIO,-15,kunkku.suvut)
                 },
             	"Mitään ei ole tehtävissä, kärsikäämme kohtalomme.",
             	"Lohikäärme tuli ja poltti peltonne, varanne, ihmisenne ja ylpeytenne. \nUusi nousu tulee olemaan vaikea..."
