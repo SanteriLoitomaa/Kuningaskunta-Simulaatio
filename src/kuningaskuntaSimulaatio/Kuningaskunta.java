@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Kuningaskunta{
 
-	public static void maini(String[] args) {
+	public static void main(String[] args) {
 		Scanner vastaus = new Scanner(System.in);
 		while(true) {
 			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
