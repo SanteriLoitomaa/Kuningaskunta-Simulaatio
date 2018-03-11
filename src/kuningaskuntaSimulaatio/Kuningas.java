@@ -131,7 +131,9 @@ public class Kuningas implements Serializable{
 		int joukot = 0;
 		for (int i=0; i<suvut.size();i++) {
 			if (suvut.get(i).annaSotilaallinen() >0) {
-				joukot += (suvut.get(i).annaSotilaallinen()+1)*suvut.get(i).annaPopulaatio();
+				if (suvut.get(i).annaSuhdeKuninkaaseen()>0) {
+					joukot += (suvut.get(i).annaSotilaallinen()+1)*suvut.get(i).annaPopulaatio();
+				}
 			}
 		}
 		return joukot;
