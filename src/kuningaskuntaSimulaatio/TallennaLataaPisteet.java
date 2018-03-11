@@ -123,6 +123,12 @@ public class TallennaLataaPisteet implements Serializable{
 	 */
 	public static void tulostaPisteet() {
 		try {
+			FileInputStream tiedosto3 = new FileInputStream("pisteet.pis");
+			tiedosto3.close();
+		}catch(IOException e){
+			TallennaLataaPisteet.luoPisteet();
+		}
+		try {
 			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
 			Pisteet pisteet = (Pisteet) lataa.readObject();
