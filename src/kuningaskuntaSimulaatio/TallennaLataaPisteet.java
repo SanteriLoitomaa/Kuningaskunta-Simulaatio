@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 /**
  * Sisältää metodit tallennustiedoston ja pisteiden hallinnalle
- * @author Santtinen
+ * @author Santeri Loitomaa
  */
 public class TallennaLataaPisteet implements Serializable{
 
@@ -148,7 +148,7 @@ public class TallennaLataaPisteet implements Serializable{
 
 /**
  * Runko pistetaulukko-oliolle, joka tallennetaan tiedostoon pisteet.pis
- * @author Santtinen
+ * @author Santeri Loitomaa
  */
 class Pisteet implements Serializable{
 	private static final long serialVersionUID = 1L;
