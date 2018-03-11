@@ -33,7 +33,7 @@ public class Ongelma implements Serializable {
 	}
 
 	/**
-	 * Metodi joka tulostaa vuoron Ongelma-olion ja sen päätökset pelaajalle näkyväksi.
+	 * Metodi joka tulostaa vuoron Ongelma-olion ja sen mahdolliset päätökset pelaajalle näkyväksi.
 	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
 	 */
 	public void tulosta(Kuningas kunkku) {
