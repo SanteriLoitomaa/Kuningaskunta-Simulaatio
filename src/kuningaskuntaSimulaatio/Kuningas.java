@@ -32,6 +32,7 @@ public class Kuningas implements Serializable{
 			"Roope", "Tuote", "Lentävä", "Kärryt", "Lompakko"));
 	public ArrayList<String> magianimet = new ArrayList<>(Arrays.asList("Lohikäärme", "Salamoiva", "Liekehtivä",
 			"Feenix", "Potter", "Milla", "Sauva", "Alkemisti", "Haltija"));
+	public ArrayList<String> aatelisnimet = new ArrayList<>(Arrays.asList("Isomaha","HerraIsoHerra","Lannisteri","PikkurilliPystyssä","FancyPants"));
 
 	public Kuningas(String nimi, int vuorot) {
 		Random r = new Random();
@@ -47,7 +48,7 @@ public class Kuningas implements Serializable{
 		for (int i = 0; i < sukujenLKM - 2; i++) {
 			lisaaSuku();
 		}
-		lisaaAatelisSuku();
+		lisaaAatelisSuku(); //Aatelissukuja ei saa luoda enempää kuin aatelisnimet.size()!!! Muuten nimet loppuu kesken
 		lisaaAatelisSuku();
 		
 		generoiSukuSuhteet();
@@ -343,6 +344,10 @@ public class Kuningas implements Serializable{
 		Random r = new Random();
 		suvut.add(new Suku());
 		Suku lisattava = suvut.get(suvut.size()-1);
+		int randomIndexi = r.nextInt(aatelisnimet.size());
+		lisattava.asetaNimi(aatelisnimet.get(randomIndexi));
+		aatelisnimet.remove(randomIndexi);
+		lisattava.asetaPopulaatio(r.nextInt(30)+20);
 		lisattava.asetaAatelisuus(r.nextInt(2) + 2);
 		lisattava.asetaSuhdeKuninkaaseen(r.nextInt(5)+5);
 		
