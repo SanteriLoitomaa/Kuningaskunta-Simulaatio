@@ -1,5 +1,6 @@
 package kuningaskuntaSimulaatio;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 
 public class Kuningaskunta{
 
-	public static void main(String[] args) {
+	public static void maini(String[] args) {
 		Scanner vastaus = new Scanner(System.in);
 		while(true) {
 			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
@@ -38,10 +39,14 @@ public class Kuningaskunta{
 			}
 			// Pelin lataus
 			if(vast == 2) {
-				Kuningas kunkku = TallennaLataaPisteet.lataa();
-				System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
-				kunkku.scan(vastaus);
-				kunkku.vuorokierto();
+				try {
+					Kuningas kunkku = TallennaLataaPisteet.lataa();
+					System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
+					kunkku.scan(vastaus);
+					kunkku.vuorokierto();
+				}catch(FileNotFoundException | ClassNotFoundException | NullPointerException e) {
+					System.out.println("Tallennuksesi on korruptoitunut tai sitä ei ole. Aloita uusi peli.");
+				}
 			}
 			// Parhaat pisteet
 			if(vast == 3) {
