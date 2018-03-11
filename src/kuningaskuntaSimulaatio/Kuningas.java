@@ -83,6 +83,7 @@ public class Kuningas implements Serializable{
 				}
 			}
 			laskePisteet(true);
+			ongelmat.remove(x);
 			if (havitty)
 				break;
 			else {
@@ -97,7 +98,6 @@ public class Kuningas implements Serializable{
 				if(vast == 2) {
 					System.exit(1);
 				}
-				ongelmat.remove(x);
 			}
 		}
 		tulostaPisteet();
