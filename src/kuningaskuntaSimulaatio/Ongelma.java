@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+/**
+ * Luokka, joka toimii Ongelma-olioiden runkona.
+ * @author Santeri Loitomaa
+ */
 public class Ongelma implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nimi;
@@ -13,6 +17,13 @@ public class Ongelma implements Serializable {
 	private ArrayList<Paatos> sallitut;
 
 	// Ongelman luonnin jälkeen pitää ne lisätä arraylistiin.
+	/**
+	 * Konstruktori, joka luo Ongelma-olion runkona.
+	 * @param nimi
+	 * @param selitys (Ongelman esittelyteksti)
+	 * @param esittelijaSuku
+	 * @param paatokset (lista Ongelman mahdollisista päätöksistä)
+	 */
 	public Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset) {
 		this.nimi = nimi;
 		this.selitys = selitys;
@@ -21,7 +32,10 @@ public class Ongelma implements Serializable {
 		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 
-	// Mahdollisesti vaikeusastelisäys näille ajan myätä
+	/**
+	 * Metodi joka tulostaa vuoron Ongelma-olion ja sen päätökset pelaajalle näkyväksi.
+	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
+	 */
 	public void tulosta(Kuningas kunkku) {
 		System.out.println("Suku " + esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
@@ -33,13 +47,21 @@ public class Ongelma implements Serializable {
 		}
 	}
 
-	// Pelaajan valitsema päätäs lähtee liikkeelle
+	/**
+	 * Pelaajan valitsema päätös lähtee liikkeelle
+	 * @param valinta (pelaajan valitseman päätöksen numero
+	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
+	 */
 	public void valitsePaatos(int valinta, Kuningas kunkku) {
 		this.paatokset.get(valinta - 1).toteutaSeuraukset(kunkku);
 		this.sallitut = new ArrayList<Paatos>(paatokset);
 	}
 	
-	//Onko päätäs laillista tehdä?
+	/**
+	 * Onko päätös laillista tehdä?
+	 * @param paatos (Pelaajan päätöksen numero)
+	 * @return true/false
+	 */
 	public boolean onSallittu(String paatos) {
 		try {
 			int valinta = Integer.parseInt(paatos);
@@ -50,22 +72,41 @@ public class Ongelma implements Serializable {
 		}
 	}
 	
+	/**
+	 * Palauttaa listan sallituista Paatos-olioista
+	 * @return
+	 */
 	public ArrayList<Paatos> annaSallitut() {
 		return sallitut;
 	}
 	
+	/**
+	 * Asettaa listan sallituista Paatos-olioista
+	 * @param sallitut (lista sallituista Paatos-olioista)
+	 */
 	public void asetaSallitut(ArrayList<Paatos> sallitut) {
 		this.sallitut = sallitut;
 	}
 }
 
+/**
+ * Luokka, joka toimii Paatos-olioiden runkona.
+ * @author Santeri Loitomaa
+ */
 class Paatos implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Vaatimus[] vaatimukset;
 	private Seuraus[] seuraukset;
 	private String viesti;
 	private String lopputulos;
-
+	
+	/**
+	 * Luo päätöksen Ongelmalle
+	 * @param v (Array päätöksen Vaatimuksista)
+	 * @param s (Array päätöksen Seurauksista)
+	 * @param viesti (Selitys päätöksen Vaatimuksista)
+	 * @param lopputulos (Selitys päätöksen Seurauksista)
+	 */
 	public Paatos(Vaatimus[] v, Seuraus[] s, String viesti, String lopputulos) {
 		this.vaatimukset = v;
 		this.seuraukset = s;
@@ -73,7 +114,12 @@ class Paatos implements Serializable {
 		this.lopputulos = lopputulos;
 	}
 
-	// Tulostaa mahdollisuudet
+	/**
+	 * Tulostaa päätöksen jos vaatimukset täyttyvät
+	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
+	 * @param o (Tutkittavan Ongelman instanssi)
+	 * @param paatosIndex (Tutkittavan päätöksen indeksi Ongelman paatokset-listassa)
+	 */
 	public void tulostaPaatosrivi(Kuningas kunkku, Ongelma o, int paatosIndex) {
 		boolean b = false;
 		for (Vaatimus v : vaatimukset) {
@@ -89,7 +135,10 @@ class Paatos implements Serializable {
 			System.out.println((paatosIndex + 1) + ". " + this.viesti);
 	}
 
-	// Toteuta paatos
+	/**
+	 * Toteuta paatos
+	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
+	 */
 	public void toteutaSeuraukset(Kuningas kunkku) {
 		for (Seuraus s : seuraukset) {
 			s.toteuta(kunkku);
@@ -98,10 +147,18 @@ class Paatos implements Serializable {
 	}
 }
 
+/**
+ * Enum Tyyppi, jolla voidaan pitää kirjaa Vaatimusten ja Seurausten tyypistä
+ * @author Santeri Loitomaa
+ */
 enum Tyyppi implements Serializable{
 	RAHA, RAHA_T, RUOKA, RUOKA_T, SUKUSUHDE, SUKUVALIT, SUKUVALIT_NEG, SUKUPOPULAATIO, SUKUPOPULAATIO_NEG, NULL
 }
 
+/**
+ * Luokka, joka toimii Vaatimus-olioiden runkona.
+ * @author Santeri Loitomaa
+ */
 class Vaatimus implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Tyyppi tyyppi;
@@ -109,7 +166,13 @@ class Vaatimus implements Serializable{
 	private Suku kohde;
 	private Suku kohde2;
 	
-	//kaksi useampaa konstruktoria joihin ei laitettaisi null-arvoja
+	/**
+	 * Luo Vaatimuksen ongelmalle
+	 * @param tyyppi (Vaatimuksen tyyppi)
+	 * @param arvo (Muutos joka tyypin määrittämälle arvolle tapahtuu)
+	 * @param kohde (Jos Vaatimuksen tyyppi vaatii kohdesuvun)
+	 * @param kohde2 (Jos Vaatimuksen tyyppi vaatii toisen kohdesuvun)
+	 */
 	public Vaatimus(Tyyppi tyyppi, int arvo, Suku kohde, Suku kohde2) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
@@ -129,7 +192,13 @@ class Vaatimus implements Serializable{
 		this.arvo = arvo;
 	}
 
-	// Tarkista mahdollisuus. Jos ei mahdollista, poista sallituista päätäksistä.
+	/**
+	 * Tarkista päätöksen mahdollisuuden. Jos ei mahdollista, päätös poistetaan mahdollisten päätösten listasta.
+	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
+	 * @param paatosIndex (Tutkittavan päätöksen indeksi Ongelman paatokset-listassa)
+	 * @param o (Läpikäytävä Ongelma)
+	 * @return true (jos ei poistettu)
+	 */
 	public boolean tarkistaVaatimus(Kuningas kunkku, int paatosIndex, Ongelma o) {
 		if (tyyppi == Tyyppi.RAHA) {
 			if (kunkku.annaRaha() >= this.arvo)
@@ -219,6 +288,10 @@ class Vaatimus implements Serializable{
 	}
 }
 
+/**
+ * Luokka, joka toimii Seuraus-olioiden runkona.
+ * @author Santeri Loitomaa
+ */
 class Seuraus implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Tyyppi tyyppi;
@@ -226,6 +299,13 @@ class Seuraus implements Serializable {
 	private ArrayList<Suku> kohde;
 	private ArrayList<Suku> uhri;
 
+	/**
+	 * Luo Seurauksen ongelmalle
+	 * @param tyyppi (Vaatimuksen tyyppi)
+	 * @param arvo (Muutos joka tyypin määrittämälle arvolle tapahtuu)
+	 * @param kohde (Jos Vaatimuksen tyyppi vaatii kohdesuvun [lista])
+	 * @param uhri (Jos Vaatimuksen tyyppi vaatii toisen kohdesuvun [lista])
+	 */
 	public Seuraus(Tyyppi tyyppi, int arvo, ArrayList<Suku> kohde, ArrayList<Suku> uhri) {
 		this.tyyppi = tyyppi;
 		this.arvo = arvo;
@@ -245,7 +325,10 @@ class Seuraus implements Serializable {
 		this.arvo = arvo;
 	}
 
-	// Tee muutokset
+	/**
+	 * Toteuta Seuraus
+	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
+	 */
 	public void toteuta(Kuningas kunkku) {
 		if (tyyppi == Tyyppi.RAHA) {
 			kunkku.asetaRaha(kunkku.annaRaha() + this.arvo);
