@@ -8,10 +8,18 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * Sisältää metodit tallennustiedoston ja pisteiden hallinnalle
+ * @author Santtinen
+ */
 public class TallennaLataaPisteet implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Tallenna peli tallennus.tal tiedostoon
+	 * @param kunkku (Kuninkaan nykyinen instanssi)
+	 */
 	public static void tallenna(Kuningas kunkku) {
 		try {
 			FileOutputStream tiedosto = new FileOutputStream("tallennus.tal");
@@ -23,6 +31,10 @@ public class TallennaLataaPisteet implements Serializable{
 		}
 	}
 
+	/**
+	 * Lataa peli tallennus.tal tiedostosta
+	 * @return
+	 */
 	public static Kuningas lataa() {
 		try {
 			FileInputStream tiedosto = new FileInputStream("tallennus.tal");
@@ -36,6 +48,11 @@ public class TallennaLataaPisteet implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Tarkistaa, tuleeko pisteet lisätä listaan. Jos näin, päivittää listatiedoston pisteet.pis
+	 * @param pist (Pelaajan saamien pisteiden määrä)
+	 * @param nimi (Hallitsijan nimi)
+	 */
 	public static void lisaaPisteet(int pist, String nimi) {
 		try {
 			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
@@ -89,6 +106,9 @@ public class TallennaLataaPisteet implements Serializable{
 		}
 	}
 	
+	/**
+	 * Tulostaa pistetaulukon tiedostosta pisteet.pis
+	 */
 	public static void tulostaPisteet() {
 		try {
 			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
@@ -107,6 +127,9 @@ public class TallennaLataaPisteet implements Serializable{
 		}
 	}
 	
+	/**
+	 * Luo/Nollaa pistetaulukon pisteet.pis
+	 */
 	public static void luoPisteet() {
 		Pisteet pisteet = new Pisteet(
 			new int[] {100000, 75000, 50000, 25000, 10000, 7500, 5000, 2500, 1000, 100},
@@ -123,6 +146,10 @@ public class TallennaLataaPisteet implements Serializable{
 	}
 }
 
+/**
+ * Runko pistetaulukko-oliolle, joka tallennetaan tiedostoon pisteet.pis
+ * @author Santtinen
+ */
 class Pisteet implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int[] pisteet;
