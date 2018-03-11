@@ -229,17 +229,17 @@ public class Kuningas implements Serializable{
 	 */
 	public int annaPisteet() { 
 		double pisteet = 0;
-		pisteet += annaRaha();
-		pisteet += annaRuoka();
-		pisteet += annaRahaTuotto()*10;
-		pisteet += annaRuokaTuotto()*10;
+		pisteet += annaRaha()*3;
+		pisteet += annaRuoka()*3;
+		pisteet += annaRahaTuotto()*20;
+		pisteet += annaRuokaTuotto()*20;
 		for (int i=0;i<suvut.size();i++) {
 			if (suvut.get(i).annaAatelisuus() > 0) {
-				pisteet += suvut.get(i).annaSuhdeKuninkaaseen()*10;
+				pisteet += suvut.get(i).annaSuhdeKuninkaaseen()*5;
 			}else if (suvut.get(i).annaSuhdeKuninkaaseen() > 0) {
-				pisteet += suvut.get(i).annaSuhdeKuninkaaseen()*3;
-			}else {
 				pisteet += suvut.get(i).annaSuhdeKuninkaaseen();
+			}else {
+				pisteet += suvut.get(i).annaSuhdeKuninkaaseen()/2;
 			}
 		}
 		pisteet += pisteet*suhteellinenVakimaara();
