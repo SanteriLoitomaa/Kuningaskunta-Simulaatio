@@ -722,6 +722,143 @@ Vaikutukset:	1. kauppias-, x++, raha-
 					, x
 					,paatokset)
 		);
+		
+		/*Nimi:	Mieletön mäihä!
+		Selitys: "Kauppiaat ovat löytäneet suuren rahakätkön kauppamatkoillaan ja koska aarre on niin mittaamattoman suuri (noin 50 rahaa), he 
+					eivät tiedä mitä tehdä sillä. Saat päättää miten arteen tuoma vauraus jaetaan."
+		Kohteet: random kauppiassuku
+
+		Paatokset:	1. "Annat rahat maalaisille, jotta he voivat sijoittaa sen ruuantuotannon parantamiseen"
+					2. "Rakennutat rahoilla uuden kirkon"
+					3. "Kehität rahoilla sotilaiden hyvinvointia ja hankit heille paremmat miekat ja kilvet"
+		            4. "Sijoitat varat magian koulutukseen ja uusien loitsujen kehitykseen"
+		            5. "Kauppiaat saavat pitää aarteensa keskenään ja kehittää omaa kaupankäyntiään vapaasti"
+					6. "Kestitset rahoilla aatelisia seuraavat kaksi kuukautta"
+					7. "Jaat varat tasaisesti kaikkien kanssa"
+					8. "Pidät kaikki arteet ja rahat itselläsi"
+
+		Vaikutukset:	1. RUOKA_T++, maalaiset ++
+						2. Uskonnolliset++
+						3. Sotilaalliset++
+		            	4. Maagiset++
+		            	5. Kauppiaat++
+						6. Aateliset++
+						7. Kaikki+
+						8. Raha++ */
+				
+				
+				paatokset = new ArrayList<Paatos>();
+
+				ArrayList<Suku> kauppiaat = new ArrayList<Suku>(kunkku.etsiSukuTyypit(true, false, false, false, false));
+				
+				x = kauppiaat.get(r.nextInt(kauppiaat.size()));
+			    
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.RUOKA_T,10),
+			              new Seuraus(Tyyppi.SUKUSUHDE, 30,maalaiset),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, maalaiset)
+			            },
+			            "Haluan jakaa varat kaikista köyhimmälle kansanosallemme maalaisille!",
+						"Ruuantuotto lisääntyy, koska maalaiset sijoittavat varoja viisaasti\n" +
+						"uusiin maataloustyövälineisiin."
+			        )
+			    );
+
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(false,false,true,false,false)),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(false,false,true,false,false))
+			            },
+			            "Rakennutat rahoilla uuden kirkon.",
+						"Uskonnollisuus kuningaskunnassasi kasvaa."
+			        )
+			    );
+
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(false,true,false,false,false)),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(false,true,false,false,false))
+			            },
+			            "Kehität rahoilla sotilaiden hyvinvointia ja hankit heille paremmat miekat ja kilvet.",
+						"Kuningaskuntasi sotilasvoimat kasvavat!"
+			        )
+			    );
+
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(true,false,false,false,false)),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(true,false,false,false,false))
+			            },
+			            "Sijoitat varat magian koulutukseen ja uusien loitsujen kehitykseen",
+						"Kuningaskuntasi maagiset voimat kasvavat!"
+			        )
+			    );
+
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(false,false,false,true,false)),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(false,false,false,true,false)),
+						  new Seuraus(Tyyppi.RAHA_T, 3)
+			            },
+			            "Kauppiaat saavat pitää aarteensa keskenään ja kehittää omaa kaupankäyntiään vapaasti",
+						"Kaupankäynti kuningaskunnassasi lisääntyy ja kauppa kukoistaa!"
+			        )
+			    );
+
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.SUKUSUHDE, 30, aateliset),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, aateliset)
+			            },
+			            "Kestitset rahoilla aatelisia seuraavat kaksi kuukautta.",
+						"Aatelisten kanssa juhlitaan semmoisia juhlia, notta ei ole aiemmin nähty!"
+			        )
+			    );
+			    
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.SUKUSUHDE, 5, kunkku.etsiSukuTyypit(true, true, true, true, true)),
+						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 5, kunkku.etsiSukuTyypit(true, true, true, true, true))
+			            },
+			            "Jaat varat tasaisesti kaikkien kanssa",
+						"Kaikki hyötyy ja kuningaskuntasi kukoistaa!"
+			        )
+			    );
+
+			    paatokset.add(
+			        new Paatos(
+			            new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
+			            new Seuraus[]{
+			              new Seuraus(Tyyppi.RAHA, 52),
+						  new Seuraus(Tyyppi.SUKUSUHDE, -1, kunkku.etsiSukuTyypit(true, true, true, true, true))
+			            },
+			            "Pidät arteen kokonaan itselläsi.",
+						"Olet rikas! MUTTA kaikkia muita kyllä vähän kismittää"
+			        )
+			    );
+				
+				kunkku.ongelmat.add(
+					new Ongelma("Mieletön mäihä!", "Kauppiassuku " + x.annaNimi() + " on löytänyt suuren rahakätkön\n" 
+						+ "kauppamatkoillaan ja koska aarre on niin mittaamattoman suuri (noin 50 rahaa), \n" 
+						+ "he eivät tiedä mitä tehdä sillä. Saat päättää miten arteen tuoma vauraus jaetaan."
+							, x
+							,paatokset)
+				);
 	}
 	
 	static void cloneSukuLista(ArrayList<Suku> source, ArrayList<Suku> target) {
