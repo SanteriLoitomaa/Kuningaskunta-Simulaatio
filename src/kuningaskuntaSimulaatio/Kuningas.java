@@ -253,6 +253,7 @@ public class Kuningas implements Serializable{
 	// pelin lopetus
 	private void tulostaPisteet() {
 		System.out.println("Valtakautesi on päättynyt.");
+		System.out.println("Pisteesi ovat: " + annaPisteet());
 		int truPisteet = annaPisteet();
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
 		TallennaLataaPisteet.tulostaPisteet();
