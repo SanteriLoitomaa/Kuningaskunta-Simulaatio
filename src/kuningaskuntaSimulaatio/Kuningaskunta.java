@@ -10,6 +10,9 @@ public class Kuningaskunta{
 
 	public static void main(String[] args) {
 		Scanner vastaus = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
+		String filename = Start.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
+        System.out.println(filename);
 		while(true) {
 			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
 			System.out.println("1. aloittaa uuden pelin? (Mahdollinen vanha pelisi katoaa)");
@@ -24,7 +27,8 @@ public class Kuningaskunta{
 			// Peli alkaa tästä
 			if(vast == 1) {
 				System.out.println("Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
-				String nimi = vastaus.next();
+				String nimi = "";
+				nimi = scan.nextLine();
 				System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
@@ -39,14 +43,16 @@ public class Kuningaskunta{
 			}
 			// Pelin lataus
 			if(vast == 2) {
+				Kuningas kunkku = new Kuningas("Bugi kingi", 1);
 				try {
-					Kuningas kunkku = TallennaLataaPisteet.lataa();
-					System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
-					kunkku.scan(vastaus);
-					kunkku.vuorokierto();
+					kunkku = TallennaLataaPisteet.lataa();
 				}catch(FileNotFoundException | ClassNotFoundException | NullPointerException e) {
 					System.out.println("Tallennuksesi on korruptoitunut tai sitä ei ole. Aloita uusi peli.");
+					continue;
 				}
+				System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
+				kunkku.scan(vastaus);
+				kunkku.vuorokierto();
 			}
 			// Parhaat pisteet
 			if(vast == 3) {
@@ -74,6 +80,7 @@ public class Kuningaskunta{
 			}
 		}
 		vastaus.close();
+		scan.close();
 	}
 
 	/**
@@ -181,9 +188,7 @@ Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän
 		paatokset = new ArrayList<Paatos>();
 
 		ArrayList<Suku> maalaiset = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, false, false, true));
-		
-		System.out.println(maalaiset.size());
-		
+				
 		ArrayList<Suku> uskonnolliset = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, true, false, false));
 		
 		ArrayList<Suku> aateliset = new ArrayList<Suku>(kunkku.etsiAateliset());
@@ -326,13 +331,13 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
                   new Seuraus (Tyyppi.SUKUPOPULAATIO, -10, kunkku.etsiAateliset())
                 },
               	"Ei tämä minun ongelmani ole! Palkatkaa sotilaita, älkää tuhlatko aikaani!",
-              	"Aateliset kärsivät tuhoja toisensa perään, kunens palot mystisesti loppuivat."
+              	"Aateliset kärsivät tuhoja toisensa perään, kunnes palot mystisesti loppuivat."
             )
         );
       
       kunkku.ongelmat.add(
 			new Ongelma("Tuhopoltot","Suvun " + kunkku.etsiAateliset().get(0).annaNimi() + " edustaja " + kunkku.etsiAateliset().get(0).annaEdustaja() +
-                    "kertoo että heidän maillaan on riehunut tuhopolttaja, joka uhkaa aateliston \nhenkiä ja arvokkaita kiinteistöjä. Mikseivät he polta peltoja?"
+                    " kertoo että heidän maillaan on riehunut tuhopolttaja, joka uhkaa aateliston \nhenkiä ja arvokkaita kiinteistöjä. Mikseivät he polta peltoja?"
 					, kunkku.etsiAateliset().get(0)
 					,paatokset)
 		);
@@ -841,7 +846,7 @@ Vaikutukset:	1. kauppias-, x++, raha-
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 5, kunkku.etsiSukuTyypit(true, true, true, true, true))
 			            },
 			            "Jaat varat tasaisesti kaikkien kanssa",
-						"Kaikki hyötyy ja kuningaskuntasi kukoistaa!"
+						"Kaikki hyötyvät ja kuningaskuntasi kukoistaa!"
 			        )
 			    );
 
