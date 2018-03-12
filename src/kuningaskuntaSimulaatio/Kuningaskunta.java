@@ -570,6 +570,63 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
        	}catch(IndexOutOfBoundsException e) {
       	
         }
+       	
+       	/*
+       	Nimi: Viskialtis sijoitus (TOTEUTETTU)
+
+       	Selitys: "Olemme hiljattain saaneet haltuumme harvinaisen hedelmälajikkeen liikekumppaniltamme. Uskomme sen viljelyn tuottavan meille suurta voittoa, tarvitsemme kuitenkin tukea isomman tilan perustamiseen. Voisitteko kenties tukea yhteistä hyväämme?"
+
+       	Kohteet: Maanviljely suku
+
+       	Paatokset:	 1. "Tottakai, paljonko tarvitsette?" (Jos varat riittävät alkusijoitukseen)
+       				 2. "Järjestän teille maa-alaa muilta suvuilta, saatte tilanne."
+       	             3. "Kokeilen mielelläni tätä, mutta vain itse!"
+       	             4. "Viekää rehunne muualle."
+
+       	Vaikutukset: 1. -30 kultaa ja +10 tyytyväisyys kohteen kanssa.
+       				 2. +10 tyytyväisyys kohteelle, -10 tyytyväisyys muilta maalaissuvuilta.
+       	             3. -10 tyytyväisyys kohteen kanssa.
+       	             4. null
+       	*/
+
+       	paatokset = new ArrayList<Paatos>();
+       	x = kunkku.etsiSukuTyypit(false, false, false, false, true).get(r.nextInt(kunkku.etsiSukuTyypit(false, false, false, false, true).size()));
+       	
+       	paatokset.add(new Paatos(
+       	       new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, 30) },
+       	       new Seuraus[] {new Seuraus(Tyyppi.SUKUSUHDE, 10, new ArrayList<Suku>(Arrays.asList(x))),
+       	                     new Seuraus(Tyyppi.RAHA, -30)},
+       	       	"Tottakai, paljonko tarvitsette? (30 kultaa)",
+       			"Suku pitää sinusta nyt enemmän, koska annoit heille viinarahaa"));
+       	 
+       	 ArrayList<Suku> muutMaalaiset = kunkku.etsiSukuTyypit(false, false, false, false, true);
+       	 muutMaalaiset.remove(x);
+       	 
+       	 paatokset.add(new Paatos(
+       	        new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
+       			new Seuraus[] {new Seuraus(Tyyppi.SUKUSUHDE, 10, new ArrayList<Suku>(Arrays.asList(x))),
+       	                       new Seuraus(Tyyppi.SUKUSUHDE, -10, muutMaalaiset),
+       	                       new Seuraus(Tyyppi.SUKUVALIT, -10, new ArrayList<Suku>(Arrays.asList(x)), muutMaalaiset)},
+       			"Järjestän teille maa-alaa muilta suvuilta, saatte tilanne.",
+       			"Suku pitää sinusta nyt enemmän, koska annoit heille maata, jonka voi myydä viinaa vastaan."));
+       	 
+       	paatokset.add(new Paatos(
+       	        new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
+       			new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -10, kunkku.etsiSukuTyypit(false, false, false, false, true))},
+       			"Kokeilen mielelläni tätä, mutta vain itse!",
+       			"Suku " + x.annaNimi() + " suuttui, sillä yritit varastaa heidän viinansa."));
+       	      
+       	paatokset.add(new Paatos(
+       	        new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
+       			new Seuraus[] { new Seuraus(Tyyppi.NULL, 0)},
+       			"Viekää rehunne muualle.",
+       			"Suku " + x.annaNimi() + " ei välittänyt, sillä he olivat niin kännissä."));
+       	
+       	kunkku.ongelmat.add(new Ongelma("Viskialtis sijoitus",
+       			"Olemme hiljattain saaneet haltuumme harvinaisen hedelmälajikkeen liikekumppaniltamme.\n"+
+       	        "Uskomme sen viljelyn tuottavan meille suurta voittoa, tarvitsemme kuitenkin tukea isomman\n"+
+       	        "tilan perustamiseen. Voisitteko kenties tukea yhteistä hyväämme?",
+       			x, paatokset));
 
 /*
 Nimi: Barbaarihyökkäys (TOTEUTETTU)
