@@ -74,6 +74,10 @@ public class Kuningaskunta{
 				Kuningas kunkku = new Kuningas("Bugi kingi", 1);
 				try {
 					kunkku = TallennaLataaPisteet.lataa();
+					if(kunkku == null) {
+						System.out.println("Tallennuksesi on korruptoitunut tai sitä ei ole. Aloita uusi peli.");
+						continue;
+					}
 				}catch(FileNotFoundException | ClassNotFoundException | NullPointerException e) {
 					System.out.println("Tallennuksesi on korruptoitunut tai sitä ei ole. Aloita uusi peli.");
 					continue;
