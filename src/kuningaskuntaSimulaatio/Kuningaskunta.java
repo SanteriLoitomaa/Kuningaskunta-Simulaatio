@@ -412,7 +412,7 @@ Paatokset:	1. "Komentakaa sotilaamme marssimaan lohikäärmettä vastaan, suojel
 Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 sukuvälit puolustaneille ja muille, - puolet pulustus populasta
 			2. +20 tyytyväisyys kaikille ei puolustaneille, +30 sukuvälit puolustaneiden ja muidne välillä, -10 populaatio puolustaneille
         	3. -200 kultaa, -200 ruokaa
-        	4. -100 kultaa (ei alle 1), -100 ruokaa (ei alle 1), -5 ruoka tuottoa (ei alle 0), -5 kultatuottoa (ei alle 0), - 20 tyytyväisyys kaikilta, - 15 populaatiosta. 
+        	4. -40 kultaa, -40 ruokaa , -5 ruoka tuottoa, -5 kultatuottoa, - 20 tyytyväisyys kaikilta, - 5 populaatiosta. 
 
 */
       
@@ -424,23 +424,14 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
           pasifistit.add(kunkku.suvut.get(i));
         }
       }
-      ArrayList<Suku> puolustus = new ArrayList<Suku>();
-      for (int i = 0; i<5; i++){
-        puolustus.add(kunkku.etsiSukuTyypit(false,true,false,false,false).get(i));
-      }
-      int puol = 0;
-      for (int i=0;i<puolustus.size();i++){
-        puol += puolustus.get(i).annaPopulaatio();
-      }
-      puol = puol/10;
       	paatokset.add(
       		new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.SUKUSUHDE,40,kunkku.etsiSukuTyypit(false,true,false,false,false).get(4))},
             	new Seuraus[]{
+            	  new Seuraus (Tyyppi.SUKUPOPULAATIO, -20,new ArrayList<Suku>(Arrays.asList(kunkku.etsiSukuTyypit(false,true,false,false,false).get(4),kunkku.etsiSukuTyypit(false,true,false,false,false).get(3),kunkku.etsiSukuTyypit(false,true,false,false,false).get(2),kunkku.etsiSukuTyypit(false,true,false,false,false).get(1),kunkku.etsiSukuTyypit(false,true,false,false,false).get(0)))),
                   new Seuraus(Tyyppi.SUKUSUHDE, -40,kunkku.etsiSukuTyypit(false,true,false,false,false)),
                   new Seuraus (Tyyppi.SUKUSUHDE, +20,kunkku.suvut),
-                  new Seuraus (Tyyppi.SUKUVALIT,+30,kunkku.etsiSukuTyypit(false,true,false,false,false),pasifistit),
-                  new Seuraus (Tyyppi.SUKUPOPULAATIO, -puol,puolustus)
+                  new Seuraus (Tyyppi.SUKUVALIT,+30,kunkku.etsiSukuTyypit(false,true,false,false,false),pasifistit)
                 },
               "Komentakaa sotilaamme marssimaan lohikäärmettä vastaan, suojelemme kansaa viimeiseen asti!",
               "Sotilaat kärsivät suuria tappioita, mutta suurelta tuholta vältyttiin, \nheidän uhrauksensa musitetaan sukupolvien ajan!"
@@ -451,7 +442,7 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
       }
        ArrayList<Suku> muut = new ArrayList<Suku>();
       for (int i = 0; i<kunkku.suvut.size();i++){
-        if (kunkku.suvut.get(i).annaSotilaallinen() == 0 || kunkku.suvut.get(i).annaMagia() == 0){
+        if (kunkku.suvut.get(i).annaSotilaallinen() == 0 && kunkku.suvut.get(i).annaMagia() == 0){
           muut.add(kunkku.suvut.get(i));
         }
       }
@@ -483,37 +474,17 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
             	"Kirennätte vyötä ja kavennatte leipää, henkenne säästyi mutta kyllä se maksoi."
             )
       	);
-      int kesk =0;
-      for (int i = 0; i<kunkku.suvut.size();i++) {
-    	  kesk += kunkku.suvut.get(i).annaPopulaatio();
-      }
-      kesk = kesk/(kunkku.suvut.size()*2);
-      int aamupala = 100;
-      int evaat = 100;
-      if (aamupala > kunkku.annaRaha()) {
-    	  aamupala = kunkku.annaRaha()-1;
-      }
-      if (evaat > kunkku.annaRuoka()) {
-    	  evaat = kunkku.annaRuoka()-1;
-      }
-      int raham = 5;
-      int ruokam = 5;
-      if (raham > kunkku.annaRahaTuotto()) {
-    	  raham = kunkku.annaRahaTuotto();
-      }
-      if (ruokam > kunkku.annaRuokaTuotto()) {
-    	  ruokam = kunkku.annaRuokaTuotto();
-      }
+      
       paatokset.add(
       		new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.NULL, 0)},
             	new Seuraus[]{
-                  new Seuraus(Tyyppi.RAHA,-aamupala),
-                  new Seuraus(Tyyppi.RUOKA,-evaat),
-                  new Seuraus(Tyyppi.SUKUSUHDE, -kesk,kunkku.suvut),
-                  new Seuraus(Tyyppi.RAHA_T,-raham),
-                  new Seuraus(Tyyppi.RUOKA_T,-ruokam),
-                  new Seuraus(Tyyppi.SUKUPOPULAATIO,-15,kunkku.suvut)
+                  new Seuraus(Tyyppi.RAHA,-40),
+                  new Seuraus(Tyyppi.RUOKA,-40),
+                  new Seuraus(Tyyppi.SUKUSUHDE, -20,kunkku.suvut),
+                  new Seuraus(Tyyppi.RAHA_T,-5),
+                  new Seuraus(Tyyppi.RUOKA_T,-5),
+                  new Seuraus(Tyyppi.SUKUPOPULAATIO,-5,kunkku.suvut)
                 },
             	"Mitään ei ole tehtävissä, kärsikäämme kohtalomme.",
             	"Lohikäärme tuli ja poltti peltonne, varanne, ihmisenne ja ylpeytenne. \nUusi nousu tulee olemaan vaikea..."
