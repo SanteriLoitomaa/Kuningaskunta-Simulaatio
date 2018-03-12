@@ -9,11 +9,20 @@ import java.util.Scanner;
 
 public class Kuningaskunta{
 
+	/**
+	 * main()-metodi toimii tässä pelissä päävalikkona, jonka avulla voi...
+		1. aloittaa uuden pelin
+		2. jatkaa siitä, mihin jäit
+		3. nähdä parhaimmat pisteet
+		4. nollata pisteet
+		5. poistua pelistä
+		6. syöttää huijauskoodin (1337)
+	 * @param args
+	 * @author Santeri Loitomaa
+	 */
 	public static void main(String[] args) {
 		Scanner vastaus = new Scanner(System.in);
 		Scanner scan = new Scanner(System.in);
-		String filename = Start.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
-        System.out.println(filename);
 		while(true) {
 			try {
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
