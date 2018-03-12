@@ -62,7 +62,7 @@ public class Kuningaskunta{
 				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
 				System.out.println();
 				kunkku.scan(vastaus);
-				kunkku.vuorokierto();
+				kunkku.vuorokierto(0);
 			}
 			// Pelin lataus
 			if(vast == 2) {
@@ -80,7 +80,7 @@ public class Kuningaskunta{
 				}
 				System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
-				kunkku.vuorokierto();
+				kunkku.vuorokierto(kunkku.annaNykyinenVuoroIndex());
 			}
 			// Parhaat pisteet
 			if(vast == 3) {
@@ -128,7 +128,7 @@ public class Kuningaskunta{
 				meillaOnOngelmia(kunkku);
 				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
-				kunkku.vuorokierto();
+				kunkku.vuorokierto(0);
 			}
 		}
 		vastaus.close();
@@ -172,7 +172,7 @@ Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
           		new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5)),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
-				"Voin auttaa teitä korjaustäissä viidellä kullalla per suku. ("+ (kunkku.annaSukujenLKM()*5) +" kultaa)",
+				"Voin auttaa teitä korjaustöissä viidellä kullalla per suku. ("+ (kunkku.annaSukujenLKM()*5) +" kultaa)",
 				"Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!"));
 		
 		ArrayList<Suku> uskot = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, true, false, false));

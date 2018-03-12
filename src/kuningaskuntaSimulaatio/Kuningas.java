@@ -16,6 +16,7 @@ public class Kuningas implements Serializable{
 	private int rahaTuotto;
 	private int ruokaTuotto;
 	private int vuorot;
+	private int nykyinenVuoroIndex;
 	private int sukujenLKM;
 	private boolean havitty = false;
 	transient private Scanner vastaus;
@@ -63,17 +64,26 @@ public class Kuningas implements Serializable{
 	public String annaNimi() {
 		return nimi;
 	}
+	
+	public int annaNykyinenVuoroIndex() {
+		return nykyinenVuoroIndex;
+	}
+	
+	public void asetaNykyinenVuoroIndex(int nykyinenVuoroIndex) {
+		this.nykyinenVuoroIndex = nykyinenVuoroIndex;
+	}
 
-	public void vuorokierto() { // Koko peli täällä
+	public void vuorokierto(int nykyinenVuoroIndex) { // Koko peli täällä
 		laskePisteet(false);
-		for (int i = 0; i < vuorot; i++) {
+		this.nykyinenVuoroIndex = nykyinenVuoroIndex;
+		while(this.nykyinenVuoroIndex < vuorot) {
 			if (ongelmat.size() <1) {
 				Kuningaskunta.meillaOnOngelmia(this);
 			}
 			Random r = new Random();
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
-			vuoronOngelma.tulosta(this, i+1);
+			vuoronOngelma.tulosta(this, this.nykyinenVuoroIndex+1);
 			String s = "";
 			while(true) {
 				System.out.print("Päätöksesi numero: ");
@@ -86,12 +96,26 @@ public class Kuningas implements Serializable{
 			}
 			System.out.println();
 			ongelmat.remove(x);
-			if (havitty) {
+			if (havitty || nykyinenVuoroIndex == (vuorot-1)) {
 				laskePisteet(true);
 				tulostaPisteet();
+				System.out.println("Haluatko takaisin päävalikkoon?");
+				System.out.println("1. Kyllä");
+				System.out.println("2. En");
+				while (!vastaus.hasNextInt()) {
+					vastaus.next();
+				}
+				int vast = vastaus.nextInt();
+				if(vast == 1) {
+					break;
+				}
+				if(vast == 2) {
+					System.exit(1);
+				}
 				break;
 			}
 			else {
+				this.nykyinenVuoroIndex++;
 				TallennaLataaPisteet.tallenna(this);
 				System.out.println("Haluatko Jatkaa?");
 				System.out.println("1. Kyllä");
@@ -100,15 +124,15 @@ public class Kuningas implements Serializable{
 					vastaus.next();
 				}
 				int vast = vastaus.nextInt();
+				if(vast == 2) {
+					break;
+				}
 				try {
 					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 				} catch (InterruptedException | IOException e) {
 					e.printStackTrace();
 				}
 				laskePisteet(true);
-				if(vast == 2) {
-					break;
-				}
 			}
 		}
 	}
@@ -264,11 +288,6 @@ public class Kuningas implements Serializable{
 	
 	// pelin lopetus
 	private void tulostaPisteet() {
-		try {
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		} catch (InterruptedException | IOException e) {
-			e.printStackTrace();
-		}
 		System.out.println("Valtakautesi on päättynyt.");
 		System.out.println("Pisteesi ovat: " + annaPisteet());
 		int truPisteet = annaPisteet();
@@ -320,23 +339,40 @@ public class Kuningas implements Serializable{
 		tyyppi[r.nextInt(5)] += r.nextInt(1) + 1;
 		// haetaan tyyppiin kuuluva nimi
 		String lisattavaNimi = "";
+		int x = 0;
 		for (int j = 0; j < tyyppi.length; j++) {
 			if (tyyppi[j] > 0) {
 				if (j==0) {
+					if(x > 0) {
+						lisattavaNimi += "-";
+					}
 					lisattavaNimi += magianimet.get(r.nextInt(magianimet.size()));
 				}
 				if (j==1) {
+					if(x > 0) {
+						lisattavaNimi += "-";
+					}
 					lisattavaNimi += sotilasnimet.get(r.nextInt(sotilasnimet.size()));
 				}
 				if (j==2) {
+					if(x > 0) {
+						lisattavaNimi += "-";
+					}
 					lisattavaNimi += uskontonimet.get(r.nextInt(uskontonimet.size()));
 				}
 				if (j==3) {
+					if(x > 0) {
+						lisattavaNimi += "-";
+					}
 					lisattavaNimi += kauppiasnimet.get(r.nextInt(kauppiasnimet.size()));
 				}
 				if (j==4) {
+					if(x > 0) {
+						lisattavaNimi += "-";
+					}
 					lisattavaNimi += maalaisnimet.get(r.nextInt(maalaisnimet.size()));
 				}
+				x++;
 			}
 		}
 		suvut.add(new Suku());
