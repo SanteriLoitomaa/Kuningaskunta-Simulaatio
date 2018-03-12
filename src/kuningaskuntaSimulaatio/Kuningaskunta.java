@@ -1,6 +1,7 @@
 package kuningaskuntaSimulaatio;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -14,6 +15,11 @@ public class Kuningaskunta{
 		String filename = Start.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
         System.out.println(filename);
 		while(true) {
+			try {
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			} catch (InterruptedException | IOException e) {
+				e.printStackTrace();
+			}
 			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
 			System.out.println("1. aloittaa uuden pelin? (Mahdollinen vanha pelisi katoaa)");
 			System.out.println("2. jatkaa siitä, mihin jäit?");
@@ -26,23 +32,36 @@ public class Kuningaskunta{
 			int vast = vastaus.nextInt();
 			// Peli alkaa tästä
 			if(vast == 1) {
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
 				System.out.println("Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
 				String nimi = "";
 				nimi = scan.nextLine();
+				System.out.println();
 				System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
 				}
 				int vuorot = vastaus.nextInt();
+				System.out.println();
 				vuorot = vuorot * 12;
 				Kuningas kunkku = new Kuningas(nimi, vuorot);
 				meillaOnOngelmia(kunkku);
 				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
+				System.out.println();
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto();
 			}
 			// Pelin lataus
 			if(vast == 2) {
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
 				Kuningas kunkku = new Kuningas("Bugi kingi", 1);
 				try {
 					kunkku = TallennaLataaPisteet.lataa();
@@ -56,14 +75,38 @@ public class Kuningaskunta{
 			}
 			// Parhaat pisteet
 			if(vast == 3) {
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
 				TallennaLataaPisteet.tulostaPisteet();
 			}
 			// Resetoi pisteet
-			if(vast == 4) TallennaLataaPisteet.luoPisteet();
+			if(vast == 4) {
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
+				TallennaLataaPisteet.luoPisteet();
+			}
 			// Poistu pelistä
-			if(vast == 5) break;
+			if(vast == 5) {
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
 			// Huijauskoodi
 			if(vast == 1337) {
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
 				Kuningas kunkku = new Kuningas("Kuningas Arthur", 80);
 				kunkku.asetaRaha(10000);
 				kunkku.asetaRuoka(10000);
@@ -123,12 +166,24 @@ Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
 				"Voin auttaa teitä korjaustäissä viidellä kullalla per suku. ("+ (kunkku.annaSukujenLKM()*5) +" kultaa)",
 				"Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!"));
 		
+		ArrayList<Suku> uskot = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, true, false, false));
+		ArrayList<Suku> maagit = new ArrayList<Suku>(kunkku.etsiSukuTyypit(true, false, false, false, false));
+		try {
+			ArrayList<Suku> molemmat = new ArrayList<Suku>(kunkku.etsiSukuKombo(true, false, true, false, false));
+			for(Suku s : molemmat) {
+				uskot.remove(s);
+				maagit.remove(s);
+			}
+		}catch(NullPointerException e) {
+			
+		}
+		
 		paatokset.add(new Paatos(
           		new Vaatimus[] { new Vaatimus(Tyyppi.SUKUSUHDE, 1, kunkku.etsiSukuTyypit(true, false, false, false, false).get(0), null) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
-						new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.etsiSukuTyypit(false, false, true, false, false)),
-						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.etsiSukuTyypit(false, false, true, true, false))},
-				//Puuttuu vielä sukujen väliset muutokset//,
+						new Seuraus(Tyyppi.SUKUSUHDE, -20, uskot),
+						new Seuraus(Tyyppi.SUKUSUHDE, 20, maagit),
+						new Seuraus(Tyyppi.SUKUVALIT, -20, uskot, maagit)},
 				"Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui.",
 				"Kaikki suvut tykkäävät selityksestäsi paitsi uskonnolliset suvut joiden uskomuksia se loukkaa."));
 

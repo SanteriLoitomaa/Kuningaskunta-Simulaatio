@@ -36,8 +36,9 @@ public class Ongelma implements Serializable {
 	 * Metodi joka tulostaa vuoron Ongelma-olion ja sen mahdolliset päätökset pelaajalle näkyväksi.
 	 * @param kunkku (Kuninkaan tämänhetkinen instanssi)
 	 */
-	public void tulosta(Kuningas kunkku) {
-		System.out.println("Suku " + esittelijaSuku.annaNimi() + ":\n" + this.nimi + "!\n" + selitys);
+	public void tulosta(Kuningas kunkku, int vuoro) {
+		System.out.println();
+		System.out.println("Vuoro " + vuoro + ", suku " + esittelijaSuku.annaNimi() + ":\n\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
 			try {
 				p.tulostaPaatosrivi(kunkku, this, paatokset.indexOf(p));

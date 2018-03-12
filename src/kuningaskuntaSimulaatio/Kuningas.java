@@ -1,5 +1,6 @@
 package kuningaskuntaSimulaatio;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,20 +73,24 @@ public class Kuningas implements Serializable{
 			Random r = new Random();
 			int x = r.nextInt(ongelmat.size());
 			Ongelma vuoronOngelma = ongelmat.get(x);
-			vuoronOngelma.tulosta(this);
+			vuoronOngelma.tulosta(this, i+1);
 			String s = "";
 			while(true) {
 				System.out.print("Päätöksesi numero: ");
 				s = vastaus.next();
 				if(vuoronOngelma.onSallittu(s)) {
+					System.out.println();
 					vuoronOngelma.valitsePaatos(Integer.parseInt(s),this);
 					break;
 				}
 			}
-			laskePisteet(true);
+			System.out.println();
 			ongelmat.remove(x);
-			if (havitty)
+			if (havitty) {
+				laskePisteet(true);
+				tulostaPisteet();
 				break;
+			}
 			else {
 				TallennaLataaPisteet.tallenna(this);
 				System.out.println("Haluatko Jatkaa?");
@@ -95,12 +100,17 @@ public class Kuningas implements Serializable{
 					vastaus.next();
 				}
 				int vast = vastaus.nextInt();
+				try {
+					new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
+				laskePisteet(true);
 				if(vast == 2) {
-					System.exit(1);
+					break;
 				}
 			}
 		}
-		tulostaPisteet();
 	}
 	/**
 	 * Laskee vallankumouksen voiman, jolla määritellään päättyykö peli.
@@ -254,6 +264,11 @@ public class Kuningas implements Serializable{
 	
 	// pelin lopetus
 	private void tulostaPisteet() {
+		try {
+			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		} catch (InterruptedException | IOException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Valtakautesi on päättynyt.");
 		System.out.println("Pisteesi ovat: " + annaPisteet());
 		int truPisteet = annaPisteet();
