@@ -443,7 +443,7 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
                   new Seuraus (Tyyppi.SUKUVALIT,+30,kunkku.etsiSukuTyypit(false,true,false,false,false),pasifistit)
                 },
               "Komentakaa sotilaamme marssimaan lohikäärmettä vastaan, suojelemme kansaa viimeiseen asti!",
-              "Sotilaat kärsivät suuria tappioita, mutta suurelta tuholta vältyttiin, \nheidän uhrauksensa musitetaan sukupolvien ajan!"
+              "Sotilaat kärsivät suuria tappioita, mutta suurelta tuholta vältyttiin, \nheidän uhrauksensa muistetaan sukupolvien ajan!"
             )
         );
       }catch(IndexOutOfBoundsException e) {
@@ -755,7 +755,7 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	            },
 	            "(Älä tee mitään)",
 	            "Edustaja " + x.annaEdustaja() + " poistuu paikalta surullisin mielin. Sen päätöksen\n "
-	            + "ei enää pitkään aikaan syöty rypäleitä."
+	            + "jälkeen ei enää pitkään aikaan syöty rypäleitä."
 	        )
 	    );
 		
