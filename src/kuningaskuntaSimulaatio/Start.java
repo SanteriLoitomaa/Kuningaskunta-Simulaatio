@@ -1,7 +1,7 @@
 package kuningaskuntaSimulaatio;
 /**
- * Avaa erillisen komentoikkunan, jotta peli on helpompi avata.
- * @author Santeri Loitomaa (lainattu)
+ * Avaa komentoikkunan ja ylläpitää sitä, jotta peli on helpompi avata ja sitä on helpompi pelata.
+ * @author Santeri Loitomaa (koodi lainattu netistä)
  */
 import java.io.*;
 import java.awt.GraphicsEnvironment;
