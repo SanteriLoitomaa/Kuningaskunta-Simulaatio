@@ -29,12 +29,12 @@ public class Kuningaskunta{
 			} catch (InterruptedException | IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Tervetuloa pelaamaan Kuningaskunta Simulaattoria! Haluatko...");
-			System.out.println("1. aloittaa uuden pelin? (Mahdollinen vanha pelisi katoaa)");
-			System.out.println("2. jatkaa siitä, mihin jäit?");
-			System.out.println("3. nähdä parhaimmat pisteet?");
-			System.out.println("4. nollata pisteet?");
-			System.out.println("5. poistua pelistä?");
+			System.out.println("Welcome to the Kingdom Simulator.");
+			System.out.println("1. Start a new game (Old one will be lost)");
+			System.out.println("2. Continue");
+			System.out.println("3. Top-10");
+			System.out.println("4. Reset points");
+			System.out.println("5. Exit the game");
 			while (!vastaus.hasNextInt()) {
 				vastaus.next();
 			}
@@ -46,11 +46,11 @@ public class Kuningaskunta{
 				} catch (InterruptedException | IOException e) {
 					e.printStackTrace();
 				}
-				System.out.println("Miten haluatte että kutsun teitä, teidän ylhäisyytenne? (nimi ja titteli)");
+				System.out.println("How would you like to be called, your majesty?");
 				String nimi = "";
 				nimi = scan.nextLine();
 				System.out.println();
-				System.out.println("Kuinka monta vuotta aiot hallita? (Joka kuukausi tapahtuu jotain!)");
+				System.out.println("How many years do you plan on ruling over us? (1 month, 1 event)");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
 				}
@@ -59,7 +59,7 @@ public class Kuningaskunta{
 				vuorot = vuorot * 12;
 				Kuningas kunkku = new Kuningas(nimi, vuorot);
 				meillaOnOngelmia(kunkku);
-				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
+				System.out.println("It is an honor to meet you, " + kunkku.annaNimi());
 				System.out.println();
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto(0);
@@ -71,18 +71,18 @@ public class Kuningaskunta{
 				} catch (InterruptedException | IOException e) {
 					e.printStackTrace();
 				}
-				Kuningas kunkku = new Kuningas("Bugi kingi", 1);
+				Kuningas kunkku = new Kuningas("Bug king", 1);
 				try {
 					kunkku = TallennaLataaPisteet.lataa();
 					if(kunkku == null) {
-						System.out.println("Tallennuksesi on korruptoitunut tai sitä ei ole. Aloita uusi peli.");
+						System.out.println("Your save is corrupted or it doesn't exist.");
 						continue;
 					}
 				}catch(FileNotFoundException | ClassNotFoundException | NullPointerException e) {
-					System.out.println("Tallennuksesi on korruptoitunut tai sitä ei ole. Aloita uusi peli.");
+					System.out.println("Your save is corrupted or it doesn't exist.");
 					continue;
 				}
-				System.out.println("Hyvä että palasitte, " + kunkku.annaNimi());
+				System.out.println("Glad to have you back, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto(kunkku.annaNykyinenVuoroIndex());
 			}
@@ -120,7 +120,7 @@ public class Kuningaskunta{
 				} catch (InterruptedException | IOException e) {
 					e.printStackTrace();
 				}
-				Kuningas kunkku = new Kuningas("Kuningas Arthur", 80);
+				Kuningas kunkku = new Kuningas("King Arthur", 80);
 				kunkku.asetaRaha(10000);
 				kunkku.asetaRuoka(10000);
 				kunkku.asetaRahaTuotto(10);
@@ -130,7 +130,7 @@ public class Kuningaskunta{
 				}
 				kunkku.tulostaSuvut();
 				meillaOnOngelmia(kunkku);
-				System.out.println("On kunnia tavata teidät, " + kunkku.annaNimi());
+				System.out.println("It is an honor to meet you, " + kunkku.annaNimi());
 				kunkku.scan(vastaus);
 				kunkku.vuorokierto(0);
 			}
@@ -176,8 +176,8 @@ Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
           		new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, kunkku.annaSukujenLKM() * 5) },
 				new Seuraus[] { new Seuraus(Tyyppi.RAHA, -(kunkku.annaSukujenLKM() * 5)),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, kunkku.suvut) },
-				"Voin auttaa teitä korjaustöissä viidellä kullalla per suku. ("+ (kunkku.annaSukujenLKM()*5) +" kultaa)",
-				"Kaikki suvut tykkäävät, vaikka olet nyt hiukan köyhempi kuningas!"));
+				"I will give you 5 gold each for repairs. ("+ (kunkku.annaSukujenLKM()*5) +" gold)",
+				"Everyone likes you a little more now!"));
 		
 		ArrayList<Suku> uskot = new ArrayList<Suku>(kunkku.etsiSukuTyypit(false, false, true, false, false));
 		ArrayList<Suku> maagit = new ArrayList<Suku>(kunkku.etsiSukuTyypit(true, false, false, false, false));
@@ -197,8 +197,8 @@ Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, uskot),
 						new Seuraus(Tyyppi.SUKUSUHDE, 20, maagit),
 						new Seuraus(Tyyppi.SUKUVALIT, -20, uskot, maagit)},
-				"Kansa on selvästikkin käsittänyt jotain väärin. Annas kun selitän, mistä tämä johtui.",
-				"Kaikki suvut tykkäävät selityksestäsi paitsi uskonnolliset suvut joiden uskomuksia se loukkaa."));
+				"People have misunderstood. This is no work of a god. Let me explain...",
+				"Everyone, except for the religious families, likes you more now."));
 
 		Random r = new Random();
 		Suku x = kunkku.suvut.get(r.nextInt(kunkku.suvut.size()));
@@ -216,21 +216,21 @@ Vaikutukset: 	1. -5 kultaa per suku, +20 vaikutettujen sukujen välit.
 						new Seuraus(Tyyppi.SUKUSUHDE, -20, uhri),
 						new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.suvut),
 						new Seuraus(Tyyppi.SUKUVALIT, -20, new ArrayList<Suku>(Arrays.asList(x)), new ArrayList<Suku>(Arrays.asList(y)))},
-				"Jos jumalat ovat tosiaan niin vihaisia meidän on uhrattava neitsyt " + neitsyenKoti + " suvulta mitä pikimmiten.",
-				x.annaNimi() + " suku itkee kauniin neitsyensä kohtalosta ja suuttui " + y.annaNimi() + " suvulle. \nMuut suvut huokaisevat helpotuksesta,"+
-					" koska heihin ei kohdistu vaaraa."));
+				"If gods really are this mad at we will have to scrifice a virgin from the " + neitsyenKoti + " family immediatly.",
+				x.annaNimi() + " family cries for the death of their virgin and blame " + y.annaNimi() + " family for it. \nEveryone else is relieved"+
+					" because they are no longer in danger."));
 		
 		paatokset.add(new Paatos(
           		new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -20, kunkku.suvut)},
-				"En näe miten tämä ongelma koskee minua.",
-				"Kaikki ovat tyytymättömiä ratkaisuun!"));
+				"I don't see how this is my problem.",
+				"Everyone hates you more now!"));
 		
 		//Ongelma(String nimi, String selitys, Suku esittelijaSuku, ArrayList<Paatos> paatokset)
 		
-		kunkku.ongelmat.add(new Ongelma("Maanjäristys",
-				"Jumalat ovat vihaisia meille. Kaikkia sukuja on kohdannut onnettomuus ja heidän "
-						+ "tilansa ovat kokeneet suurta vahinkoa. Miten toimimme?",
+		kunkku.ongelmat.add(new Ongelma("Earthquake",
+				"Gods are mad at us! Everyone has suffered great losses of property."
+						+ "What should we do?",
 				kunkku.annaAatelisin(), paatokset));
 		
 /*Nimi: Maakiista (TOTEUTETTU)
@@ -279,10 +279,10 @@ Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän
 					new Seuraus(Tyyppi.SUKUSUHDE,-10, yList),
 					new Seuraus(Tyyppi.SUKUSUHDE, -5, uskonnolliset),
 					new Seuraus(Tyyppi.SUKUVALIT,-15, xList, yList)
-				},"Maa kuuluu sille, joka on sen eteen eniten tehnyt töitä. Saatte maan omistuksen nimiinne!"
-                ,"Maalaissuku " + x.annaNimi() + " kiittää ja muistakin maalaisista tuntuu kivalt\n"
-              	+"Suku " + y.annaNimi() + " ja kirkko ei tykkää yhtään ja " + x.annaNimi() 
-                + " ja " + y.annaNimi() + " eivät tykkää toisistaan."
+				},"The land belongs to the one who has done more to gain it. I will give you the field."
+                ,"Farmer family " + x.annaNimi() + " thanks you and other farmers feel relieved as well.\n"
+              	+y.annaNimi() + "family and the church don't like this at all. The hate between " + x.annaNimi() 
+                + " and " + y.annaNimi() + " is mutual."
 			)
 		);
 
@@ -294,10 +294,10 @@ Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän
 					new Seuraus(Tyyppi.SUKUSUHDE, -10, xList),
 					new Seuraus(Tyyppi.SUKUSUHDE, 1, aateliset)
 				},
-				"Olette vaatimassa itsellenne maita joita ette omista. Rankaisen teitä 20 ruoskaniskulla." //uskonnolliset +20 ja x -20
-              	, "Kirkko on tyytyväinen, että maaoikeuksia kunnioitetaan"
-              	+ "Maalaissuvun " + x.annaEdustaja() + " raahataan itkevänä pois. "
-              	+ "Positiivisena puolena on, että aateliset tykkää aina, kun duunaria kyykytetään."
+				"You are trying to claim a land that you do not own. This will not go unpunished." //uskonnolliset +20 ja x -20
+              	, "The church is happy with the result. "
+              	+ "Farmer family " + x.annaEdustaja() + " is carried away while begging for justice. "
+              	+ "On a positive side note, nobles always like to see the worker suffer."
 			)
 		);
 
@@ -307,8 +307,8 @@ Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän
 				new Seuraus[]{
 					new Seuraus(Tyyppi.RUOKA_T, 1)
 				},
-				"Vuokrasopimus on kirjattava ja kohtuullistettava. Vuokraksi riittää vain kaksi viljasäkkiä vuodessa" //x -10 ruoka +10
-              	, "Maalaissuku tekee hommia ankarammin, jotta vuokra saadaan maksettua."
+				"The rent has to be regulated and lowered. 2 bags of wheat per year are more than enough." //x -10 ruoka +10
+              	, "The farmers work harder to pay the rent."
 			)
 		);
 
@@ -319,16 +319,16 @@ Vaikutukset:	1. Muutaman muun (satunnaisesti valitun) maalaissuuku +3 ja heidän
 					new Seuraus(Tyyppi.SUKUSUHDE, 10, yList),
 					new Seuraus(Tyyppi.SUKUVALIT, -5, aateliset, maalaiset)
 				},
-				"(Älä tee mitään)"
-              	,"Riitely jatkuu viikkoja, mutta lopulta kirkko saa tahtonsa läpi ja maalaisille jää karvas maku suuhun."
+				"(Stay neutral)"
+              	,"The fight goes on for weeks until the church finally have their way. The farmers are not happy."
 			)
 		);
 
 		kunkku.ongelmat.add(
-			new Ongelma("Maakiista","Suvun " + x.annaNimi() + " edustaja " + x.annaEdustaja() + " on ojittanut pellon ja rakentanut talon kirkon maalle. Kirkon suvun \n" 
-					+ y.annaNimi() + " kanssa on ollut suullinen sopimus, että joutomaalle rakennettu talo"+
-					" ja osa pellosta siirtyisi isännän " + x.annaEdustaja() + " omistukseen, mikäli hänen peltonsa tuottaisi hyvin.\nNyt suku "+y.annaNimi()+
-					" on pakkolunastamassa kaiken maansa takaisin lupauksista huolimatta ja tarjoamassa kallista vuokrasopimusta sen sijaan."
+			new Ongelma("Fight over a field",x.annaEdustaja() + " from family " + x.annaNimi() + " has drained a field and built a house on land owned by the church.\n"
+					+ "They had a deal with the church's " + y.annaNimi() + " family, that if they managed to make enough profit, the field and the house built near it\n"+
+					" would be given to " + x.annaEdustaja() + ". Now the "+y.annaNimi()+
+					" family wants their land back and is ignoring the old deal, giving a much more expensive one instead."
 					, x
 					,paatokset)
 		);
@@ -359,8 +359,8 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
       					new Seuraus(Tyyppi.SUKUSUHDE, 10, kunkku.etsiAateliset()),
       					new Seuraus(Tyyppi.SUKUVALIT, -10, kunkku.etsiSukuTyypit(false,true,false,false,false), kunkku.etsiAateliset())
     				},
-  					"Järjestetään sotilaat vartioimaan alueita, nappaamme polttajan kyllä!",
-  					"Tuhopoltot loppuivat, mutta sotilassuvut joutuivat ylitöihin."
+  					"Let's have the soldiers do some extra work, we'll catch them!",
+  					"The arson has ended but the soldiers had to work overtime."
   				)
     		);
       
@@ -372,8 +372,8 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
               		new Seuraus(Tyyppi.RAHA, -50),
               		new Seuraus(Tyyppi.SUKUPOPULAATIO, -2, kunkku.etsiAateliset())
             	},
-        		"Korvataan vahingot kullalla, kaikki asiat voidaan ratkaista sillä.",
-        		"Korjasit tuhot kerta toisensa jälkeen, paria kuollutta lukuunottamatta kaikki olivat tyytyväisiä."
+        		"Will 50 gold cover the damage? I have other things to worry about.",
+        		"You repaired the damage but a few people died."
         	)
       	);
       ArrayList<Suku> suosikki = new ArrayList<Suku>();
@@ -387,8 +387,8 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
                   new Seuraus (Tyyppi.SUKUPOPULAATIO, -5, kunkku.etsiAateliset()),
                   new Seuraus (Tyyppi.SUKUPOPULAATIO, +5,suosikki)
                 },
-              	"Kröhöm, yritämme toki kaikkemme ongelman ratkaisuun.... mutta tuholaiset \novat viekkaita, katsotaan onnistuuko.",
-              	"Suosikkisukusi uskoi sinua, kun taas muut aateliset punovat nyrkkiä toimettomuudellesi."
+              	"Well we can TRY but arsonists can be quite slippery...",
+              	"Your favorite noble believed you but the other are giving you funny looks..."
             )
         );
       	paatokset.add(
@@ -398,14 +398,14 @@ Vaikutukset: 1. +10 aateliskohteiden välit, -10 liittolaissotilaiden välit.
                   new Seuraus (Tyyppi.SUKUSUHDE,-20,kunkku.etsiAateliset()),
                   new Seuraus (Tyyppi.SUKUPOPULAATIO, -10, kunkku.etsiAateliset())
                 },
-              	"Ei tämä minun ongelmani ole! Palkatkaa sotilaita, älkää tuhlatko aikaani!",
-              	"Aateliset kärsivät tuhoja toisensa perään, kunnes palot mystisesti loppuivat."
+              	"This isn't my problem! Go hire some soldiers or something!",
+              	"Nobles suffer from the arson for weeks, until it suddenly ends. No one ever knew why."
             )
         );
       
       kunkku.ongelmat.add(
-			new Ongelma("Tuhopoltot","Suvun " + kunkku.etsiAateliset().get(0).annaNimi() + " edustaja " + kunkku.etsiAateliset().get(0).annaEdustaja() +
-                    " kertoo että heidän maillaan on riehunut tuhopolttaja, joka uhkaa aateliston \nhenkiä ja arvokkaita kiinteistöjä. Mikseivät he polta peltoja?"
+			new Ongelma("Arson", kunkku.etsiAateliset().get(0).annaEdustaja() + " from the " + kunkku.etsiAateliset().get(0).annaNimi() + " family" +
+                    " says there is an arsonist on the loose. Nobility is suffering. What to do?"
 					, kunkku.etsiAateliset().get(0)
 					,paatokset)
 		);
@@ -446,8 +446,8 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
                   new Seuraus (Tyyppi.SUKUSUHDE, +20,kunkku.suvut),
                   new Seuraus (Tyyppi.SUKUVALIT,+30,kunkku.etsiSukuTyypit(false,true,false,false,false),pasifistit)
                 },
-              "Komentakaa sotilaamme marssimaan lohikäärmettä vastaan, suojelemme kansaa viimeiseen asti!",
-              "Sotilaat kärsivät suuria tappioita, mutta suurelta tuholta vältyttiin, \nheidän uhrauksensa muistetaan sukupolvien ajan!"
+              "Our soldiers shall defeat this dragon. We have to protect our people to the last man!",
+              "The soldiers suffer great loss, but a far greater loss was evaded. \nThey will be remembered for generations!"
             )
         );
       }catch(IndexOutOfBoundsException e) {
@@ -468,8 +468,8 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
                   new Seuraus (Tyyppi.SUKUSUHDE, +20,kunkku.suvut),
                   new Seuraus (Tyyppi.SUKUVALIT, +30, muut,kunkku.etsiSukuKombo(true,true,false,false,false))
                 },
-            	"Maagiset joukkomme ovat experttejä tällaisten asioiden kanssa, jättäkää se heidän huolekseen.",
-            	"Arkaaniset tiedot ja sotilasmahti yhdessä kukistivat lohikäärmeen ilman suurempia ongelmia."
+            	"Our magical troops are experts at this kind of thig. Just leave it to them.",
+            	"Arcane knowledge and military power defeated the dragon together without much of a problem."
             )
         );
       }catch(IndexOutOfBoundsException e) {
@@ -479,12 +479,12 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
       		new Paatos(
             	new Vaatimus[] {new Vaatimus(Tyyppi.RUOKA, 200), new Vaatimus (Tyyppi.RAHA, 200)},
             	new Seuraus[]{
-                  new Seuraus(Tyyppi.RAHA,-200),
-                  new Seuraus(Tyyppi.RUOKA,-200),
+                  new Seuraus(Tyyppi.RAHA,-80),
+                  new Seuraus(Tyyppi.RUOKA,-80),
                   new Seuraus(Tyyppi.SUKUSUHDE, +20,kunkku.suvut)
                 },
-            	"Koetetaan lahjoa petoa, kenties sen raivo laantuu jos annamme \nsille ruokaa ja kultaa ilman vastustusta!",
-            	"Kirennätte vyötä ja kavennatte leipää, henkenne säästyi mutta kyllä se maksoi."
+            	"We could try to bribe the beast. Let's give it some food and gold to calm it down.",
+            	"The price was high but no one died. Let's hope it was worth it."
             )
       	);
       
@@ -499,13 +499,13 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
                   new Seuraus(Tyyppi.RUOKA_T,-5),
                   new Seuraus(Tyyppi.SUKUPOPULAATIO,-5,kunkku.suvut)
                 },
-            	"Mitään ei ole tehtävissä, kärsikäämme kohtalomme.",
-            	"Lohikäärme tuli ja poltti peltonne, varanne, ihmisenne ja ylpeytenne. \nUusi nousu tulee olemaan vaikea..."
+            	"There's nothing to do. Let's hide and hope for the best.",
+            	"The dragon burns down your resources, their source, your people and your pride. \nCan we rise from these ashes..."
             )
       	);
       
        kunkku.ongelmat.add(
-			new Ongelma("Lohikäärme hyökkää","Suvun " + kunkku.etsiAateliset().get(0).annaNimi() + " edustaja " + kunkku.etsiAateliset().get(0).annaEdustaja() +
+			new Ongelma("Dragon attacks","Suvun " + kunkku.etsiAateliset().get(0).annaNimi() + " edustaja " + kunkku.etsiAateliset().get(0).annaEdustaja() +
                     " varoittaa kuningaskuntaa lähestyvästä verenhimoisesta lohikäärmeestä, joka polttaa maat, syö ihmiset ja varastaa kullan."
 					, kunkku.etsiAateliset().get(0)
 					,paatokset)

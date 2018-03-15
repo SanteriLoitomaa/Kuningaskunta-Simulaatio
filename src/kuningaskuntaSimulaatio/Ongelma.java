@@ -38,7 +38,7 @@ public class Ongelma implements Serializable {
 	 */
 	public void tulosta(Kuningas kunkku, int vuoro) {
 		System.out.println();
-		System.out.println("Vuoro " + vuoro + ", suku " + esittelijaSuku.annaNimi() + ":\n\n" + this.nimi + "!\n" + selitys);
+		System.out.println("Turn " + vuoro + ", " + esittelijaSuku.annaNimi() + "family" + ":\n\n" + this.nimi + "!\n" + selitys);
 		for (Paatos p : paatokset) {
 			try {
 				p.tulostaPaatosrivi(kunkku, this, paatokset.indexOf(p));

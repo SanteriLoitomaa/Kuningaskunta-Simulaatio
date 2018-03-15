@@ -86,7 +86,7 @@ public class Kuningas implements Serializable{
 			vuoronOngelma.tulosta(this, this.nykyinenVuoroIndex+1);
 			String s = "";
 			while(true) {
-				System.out.print("Päätöksesi numero: ");
+				System.out.print("The number of your decision: ");
 				s = vastaus.next();
 				if(vuoronOngelma.onSallittu(s)) {
 					System.out.println();
@@ -100,9 +100,9 @@ public class Kuningas implements Serializable{
 			if (havitty || nykyinenVuoroIndex == (vuorot-1)) {
 				laskePisteet(true);
 				tulostaPisteet();
-				System.out.println("Haluatko takaisin päävalikkoon?");
-				System.out.println("1. Kyllä");
-				System.out.println("2. En");
+				System.out.println("Return to the menu?");
+				System.out.println("1. Yes");
+				System.out.println("2. No");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
 				}
@@ -118,9 +118,9 @@ public class Kuningas implements Serializable{
 			else {
 				this.nykyinenVuoroIndex++;
 				TallennaLataaPisteet.tallenna(this);
-				System.out.println("Haluatko Jatkaa?");
-				System.out.println("1. Kyllä");
-				System.out.println("2. En");
+				System.out.println("Do you want to continue?");
+				System.out.println("1. Yes");
+				System.out.println("2. No");
 				while (!vastaus.hasNextInt()) {
 					vastaus.next();
 				}
@@ -225,23 +225,23 @@ public class Kuningas implements Serializable{
 		return popula;
 	}
 	
-	private void loppuko() {
+	public void loppuko() {
 		if (ruoka < 1 || raha < 1) { //Resurssipulaloppu
-			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
+			System.out.println("You ran out of resources and your people are in anarchy.");
 			havitty = true;
 		} else if (kumotaanko()) { //Vallankaappausloppu
 			if (coupDeTat() > sotilasmahti()) {
-				System.out.println("Kapiset kapinalliset ovat kyllästyneet valtaasi, sinut karkotettiin maasta ja koko perheesi teloitettiin!");
+				System.out.println("Rebellious citizens are fed up with you, your rule overthrown and you are exiled and your family, slaughtered.");
 				havitty = true;
 			}else {
-				System.out.println("Kansan tyytymättömyys nosti osan heistä kapinoimaan, onnistuimme kuitenkin kukistamaan heidät omalla armeijallamme. Osa kapinoitsijista toki kuoli taistelussa, eiköhän se opeta heille vallan merkityksen!");
+				System.out.println("You catch a few rebellious citizens have attacked you! Your rule is shaking, but you hold your grip with your superious army. Half of the rebels were killed.");
 				ArrayList<Suku> rankaistavat = kapinalliset();
 				for (int uhri =0;uhri<rankaistavat.size();uhri++) {
 					rankaistavat.get(uhri).asetaPopulaatio((int)(rankaistavat.get(uhri).annaPopulaatio()*0.8));
 				}
 			}
 		} else if (annaKuningaskunnanPopulaatio() <100) { //Kansa vähyysloppu
-			System.out.println("Kansasi on pienentynyt niin paljon ettei mitään hallittavaa enää juuri ole. Valittavat aatelisetkin jättivät sinut.");
+			System.out.println("You have ran out of citizens to rule over. Even your trusty nobles have left you.");
 			havitty = true;
 		}
 	}
@@ -258,9 +258,9 @@ public class Kuningas implements Serializable{
 			this.raha += this.rahaTuotto;
 			this.ruoka += this.ruokaTuotto;
 		}
-		System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
-			+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
-			"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
+		System.out.println("You have " + this.raha + " gold ((+)" + this.rahaTuotto + ") and " + this.ruoka
+				+ " food per month ((+)" + this.ruokaTuotto + ")."+
+				"\n" + "You have " + annaPisteet() + "points.");
 	}
 
 	/**
@@ -293,8 +293,8 @@ public class Kuningas implements Serializable{
 	
 	// pelin lopetus
 	private void tulostaPisteet() {
-		System.out.println("Valtakautesi on päättynyt.");
-		System.out.println("Pisteesi ovat: " + annaPisteet());
+		System.out.println("Your rule is over");
+		System.out.println("Your total points are " + annaPisteet());
 		int truPisteet = annaPisteet();
 		TallennaLataaPisteet.lisaaPisteet(truPisteet, nimi);
 		TallennaLataaPisteet.tulostaPisteet();

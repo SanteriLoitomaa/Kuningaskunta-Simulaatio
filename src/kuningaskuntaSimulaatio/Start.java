@@ -15,7 +15,7 @@ public class Start{
             Runtime.getRuntime().exec(new String[]{"cmd","/c","start","cmd","/k","java -jar \"" + filename + "\""});
         }else{
             Kuningaskunta.main(new String[0]);
-            System.out.println("Peli loppui, kirjoita 'exit' poistuaksesi.");
+            System.out.println("Type 'exit' to exit the game.");
         }
     }
 }

@@ -136,9 +136,9 @@ public class TallennaLataaPisteet implements Serializable{
 			tiedosto.close();
 			int[] piste = pisteet.annaPisteet();
 			String[] nimet = pisteet.annaNimet();
-			System.out.println("Parhaat pisteet ovat saaneet: ");
+			System.out.println("Top-10: ");
 			for(int i = 0; i < 10; i++) {
-				System.out.println(nimet[i] + " sai " + piste[i] + " pistettä.");
+				System.out.println(nimet[i] + " collected " + piste[i] + " points.");
 			}
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -151,8 +151,8 @@ public class TallennaLataaPisteet implements Serializable{
 	public static void luoPisteet() {
 		Pisteet pisteet = new Pisteet(
 			new int[] {100000, 75000, 50000, 25000, 10000, 7500, 5000, 2500, 1000, 100},
-			new String[] {"Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur",
-					"Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur", "Kuningas Arthur"});
+			new String[] {"King Arthur", "King Arthur", "King Arthur", "King Arthur", "King Arthur",
+					"King Arthur", "King Arthur", "King Arthur", "King Arthur", "King Arthur"});
 		try {
 			FileOutputStream tiedosto = new FileOutputStream("pisteet.pis");
 			ObjectOutputStream tallenna = new ObjectOutputStream(tiedosto);
