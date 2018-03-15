@@ -258,8 +258,8 @@ public class Kuningas implements Serializable{
 			this.raha += this.rahaTuotto;
 			this.ruoka += this.ruokaTuotto;
 		}
-		else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
-				+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
+		System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
+			+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
 			"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
 	}
 
