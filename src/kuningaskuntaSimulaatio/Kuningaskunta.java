@@ -505,8 +505,9 @@ Vaikutukset:1. -20 tyytyväisyys puolustaneille, +20 tyytyväisyys muille, +30 s
       	);
       
        kunkku.ongelmat.add(
-			new Ongelma("Dragon attacks","Suvun " + kunkku.etsiAateliset().get(0).annaNimi() + " edustaja " + kunkku.etsiAateliset().get(0).annaEdustaja() +
-                    " varoittaa kuningaskuntaa lähestyvästä verenhimoisesta lohikäärmeestä, joka polttaa maat, syö ihmiset ja varastaa kullan."
+			new Ongelma("A dragon attacks", kunkku.etsiAateliset().get(0).annaEdustaja() + " from the family " + kunkku.etsiAateliset().get(0).annaNimi() +
+                    " warns you about a bloodthirsty dragon that might steal your gold, eat your food and burn you kingdom to the ground.\n" +
+					"How will you react?"
 					, kunkku.etsiAateliset().get(0)
 					,paatokset)
 			);
@@ -538,8 +539,8 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
                               	new Seuraus(Tyyppi.RUOKA_T, 5),
                               	new Seuraus(Tyyppi.SUKUSUHDE, 10, new ArrayList<Suku>(Arrays.asList(x))),
                               	new Seuraus(Tyyppi.RAHA, -30)},
-				"Tottakai, paljonko tarvitsette? (30 kultaa)",
-				"Suku pitää sinusta nyt enemmän ja tuottosi kasvoi."));
+				"Of course! How much do you need? (30 gold should be enough)",
+				"The family likes you more and your production went up."));
       
       	ArrayList<Suku> muutMaalaiset = kunkku.etsiSukuTyypit(false, false, false, false, true);
       	muutMaalaiset.remove(x);
@@ -550,26 +551,26 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
                               	new Seuraus(Tyyppi.SUKUSUHDE, 20, new ArrayList<Suku>(Arrays.asList(x))),
                               	new Seuraus(Tyyppi.SUKUSUHDE, -10, kunkku.etsiSukuTyypit(false, false, false, false, true)),
                               	new Seuraus(Tyyppi.SUKUVALIT, -10, new ArrayList<Suku>(Arrays.asList(x)), muutMaalaiset)},
-				"Järjestän teille maa-alaa muilta suvuilta, saatte tilanne.",
-				"Suku pitää sinusta nyt enemmän ja tuottosi kasvoi mutta muut maalaissuvut \npahastuivat ja ruuan tuotto jäi +-nollaksi."));
+				"I'll arrange you more land from the other farmers.",
+				"The family likes you more now and you got a little bit of production out of it but\n the other farmers seem angry at you."));
       
       	paatokset.add(new Paatos(
           		new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -10, kunkku.etsiSukuTyypit(false, false, false, false, true)),
                               	new Seuraus(Tyyppi.RAHA_T, 1)},
-				"Kokeilen mielelläni tätä, mutta vain itse!",
-				"Viljelysi ei juuri onnistunut ja kaikki maalaiset ovat tyytymättömiä ratkaisuun!"));
+				"Sounds good! Might as well try it myself. ONLY myself!",
+				"Your project didn't go as well as you planned. Your production only went up a little and now all farmers like you less."));
       
       	paatokset.add(new Paatos(
           		new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
 				new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -10, new ArrayList<Suku>(Arrays.asList(x)))},
-				"Viekää rehunne muualle.",
-				"Suku " + x.annaNimi() + " ei pitänyt päätöksestäsi!"));
+				"Take your greens elsewhere!",
+				x.annaNimi() + " family didn't like your decision!"));
 				
-		kunkku.ongelmat.add(new Ongelma("Riskialtis sijoitus",
-				"Olemme hiljattain saaneet haltuumme harvinaisen hedelmälajikkeen liikekumppaniltamme.\n"+
-                "Uskomme sen viljelyn tuottavan meille suurta voittoa, tarvitsemme kuitenkin tukea isomman\n"+
-                "tilan perustamiseen. Voisitteko kenties tukea yhteistä hyväämme?",
+		kunkku.ongelmat.add(new Ongelma("Risky investment",
+				"We've recently aquired a rare fruit from one of our contacts.\n"+
+                "We believe that cultivating it will be beneficial to us both. We only need some money\n"+
+                " to establish a new farm here. How about we get rich together?",
 				x, paatokset));
        	}catch(IndexOutOfBoundsException e) {
       	
@@ -600,8 +601,8 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
        	       new Vaatimus[] { new Vaatimus(Tyyppi.RAHA, 30) },
        	       new Seuraus[] {new Seuraus(Tyyppi.SUKUSUHDE, 10, new ArrayList<Suku>(Arrays.asList(x))),
        	                     new Seuraus(Tyyppi.RAHA, -30)},
-       	       	"Tottakai, paljonko tarvitsette? (30 kultaa)",
-       			"Suku pitää sinusta nyt enemmän, koska annoit heille viinarahaa"));
+       	       	"Of course! How much do you need? (30 gold should be enough)",
+       			"You gave the family some money and they spent in on booze. The family likes you more now."));
        	 
        	 ArrayList<Suku> muutMaalaiset = kunkku.etsiSukuTyypit(false, false, false, false, true);
        	 muutMaalaiset.remove(x);
@@ -611,26 +612,26 @@ Vaikutukset: 1. -30 kultaa, +5 ruokatuotto ja +5 kultatuotto ja +10 tyytyväisyy
        			new Seuraus[] {new Seuraus(Tyyppi.SUKUSUHDE, 10, new ArrayList<Suku>(Arrays.asList(x))),
        	                       new Seuraus(Tyyppi.SUKUSUHDE, -10, muutMaalaiset),
        	                       new Seuraus(Tyyppi.SUKUVALIT, -10, new ArrayList<Suku>(Arrays.asList(x)), muutMaalaiset)},
-       			"Järjestän teille maa-alaa muilta suvuilta, saatte tilanne.",
-       			"Suku pitää sinusta nyt enemmän, koska annoit heille maata, jonka voi myydä viinaa vastaan."));
+       			"I'll arrange you more land from the other farmers.",
+       			"They sold the land and used the money on booze. The family likes you more now but the other farmer don't like you at all."));
        	 
        	paatokset.add(new Paatos(
        	        new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
        			new Seuraus[] { new Seuraus(Tyyppi.SUKUSUHDE, -10, kunkku.etsiSukuTyypit(false, false, false, false, true))},
-       			"Kokeilen mielelläni tätä, mutta vain itse!",
-       			"Suku " + x.annaNimi() + " suuttui, sillä yritit varastaa heidän viinansa."));
+       			"Sounds good! Might as well try it myself. ONLY myself!",
+       			x.annaNimi() + " family got mad at you since you tried to steal their booze."));
        	      
        	paatokset.add(new Paatos(
        	        new Vaatimus[] { new Vaatimus(Tyyppi.NULL, 0) },
        			new Seuraus[] { new Seuraus(Tyyppi.NULL, 0)},
-       			"Viekää rehunne muualle.",
-       			"Suku " + x.annaNimi() + " ei välittänyt, sillä he olivat niin kännissä."));
+       			"Take your greens elsewhere!",
+       			x.annaNimi() + " family didn't care that much, they were all quite drunk. They might've just spent anything you'd given them on booze.\n Good call!"));
        	
-       	kunkku.ongelmat.add(new Ongelma("Viskialtis sijoitus",
-       			"Olemme hiljattain saaneet haltuumme harvinaisen hedelmälajikkeen liikekumppaniltamme.\n"+
-       	        "Uskomme sen viljelyn tuottavan meille suurta voittoa, tarvitsemme kuitenkin tukea isomman\n"+
-       	        "tilan perustamiseen. Voisitteko kenties tukea yhteistä hyväämme?",
-       			x, paatokset));
+       	kunkku.ongelmat.add(new Ongelma("Whisky investment",
+				"We've recently aquired a rare fruit from one of our contacts.\n"+
+                "We believe that cultivating it will be beneficial to us both. We only need some money\n"+
+                " to establish a new farm here. How about we get rich together?",
+				x, paatokset));
 
 /*
 Nimi: Barbaarihyökkäys (TOTEUTETTU)
@@ -676,9 +677,9 @@ Vaikutukset:	1. Sotilaalliset suvut ++, raha -,
                   new Seuraus(Tyyppi.SUKUSUHDE, 10,kunkku.etsiSukuTyypit(false,true,false,false,false)),
                   new Seuraus(Tyyppi.SUKUSUHDE, 3,kunkku.etsiSukuTyypit(false,false,false,false,true))
                 },
-                "Sotilaat ottavat kiinni ja hirttävät jokaisen villi-ihmisen!",
-                "Sotilaat ovat tyytyväisiä saadessaan vuodatettua verta vihollisista \nja suku "
-                + x.annaNimi()+" tuntee olonsa turvalliseksi"
+                "Let the soldiers lynch them all.",
+                "The soldiers are happy to get some enemy blood on their hands \n and "
+                + x.annaNimi()+" family feels safe again."
             )
         );
       
@@ -690,8 +691,8 @@ Vaikutukset:	1. Sotilaalliset suvut ++, raha -,
                   new Seuraus(Tyyppi.SUKUSUHDE, -3,kunkku.etsiSukuTyypit(false,true,false,false,false)),
                   new Seuraus(Tyyppi.SUKUSUHDE, +25, kunkku.etsiSukuTyypit(false, false, true, false, false))
                 },
-				"Sotilaat ottavat kiinni ja pakkokäännyttävät pakanalliset oikeauskoisiksi",
-                "Sotilaille joudutaan maksamaan ylimääräistä vaivannäöstä, mutta uskonnolliset\n ovat erittäin iloisia, kun seurakunta laajenee."
+				"Have the soldiers capture them and convert the unbelievers.",
+                "The soldiers feel burdened by the extra work but the church\n is happy to see their congregation grow."
             )
         );
         
@@ -703,8 +704,8 @@ Vaikutukset:	1. Sotilaalliset suvut ++, raha -,
                   new Seuraus(Tyyppi.SUKUSUHDE, -3,kunkku.etsiSukuTyypit(false,true,false,false,false)),
                   new Seuraus(Tyyppi.SUKUSUHDE, +25, kunkku.etsiSukuTyypit(false, false, false, false, true))
                 },
-                "Sotilaat pakottavat raakalaiset pakkotyöhön pelloilla",
-                "Ruuantuottosi lisääntyy, mutta maalaiset eivät ole täysin tyytyväisiä, \nkun joutuvat huolehtimaan lainsuojattomista."
+                "Have the soldiers capture them and make them work at the fields.",
+                "Your food production goes up but the farmers aren't happy about shielding outlaws."
             )
         );
         
@@ -715,8 +716,8 @@ Vaikutukset:	1. Sotilaalliset suvut ++, raha -,
                   new Seuraus(Tyyppi.RAHA, 10),
                   new Seuraus(Tyyppi.SUKUSUHDE, +25, kunkku.etsiSukuTyypit(false, false, false, true, false))
                 },
-                "Sotilaat ottavat raakalaiset kiinni ja antavat heidät kauppiaille myytäväksi orjakaupassa",
-                "Orjien myynnistä saadaan paljon rahaa ja kauppiaat hierovat käsiään tyytyväisenä."
+                "Have the soldiers capture them and give them to the merchants. They should be able to make a nice profit out of slaves.",
+                "The salve trade proves itself profitable and the merchants are happy."
             )
         );
         
@@ -728,13 +729,13 @@ Vaikutukset:	1. Sotilaalliset suvut ++, raha -,
                   new Seuraus(Tyyppi.RUOKA_T, -2),
                   new Seuraus(Tyyppi.SUKUSUHDE, +10, aateliset)
                 },
-                "(Älä tee mitään)",
-                "Puolet maalaisista kuolee raakalaisten hyökkäyksissä, mutta aatelisiahan se tunnetusti ei haittaa"
+                "(Don't do anything)",
+                "Half of your farmers die from the attacks but this doesn't seem to worry the nobles at all."
             )
         );
       
 		kunkku.ongelmat.add(
-			new Ongelma("Barbaarihyökkäys", randomRaakalaisnimi + " on hyökännyt " + x.annaNimi() + " suvun farmille!"
+			new Ongelma("Barbarian attack", randomRaakalaisnimi + " has attacked " + x.annaNimi() + " family's farm! What should we do?"
 					, x
 					,paatokset)
 		);
@@ -770,10 +771,10 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	              new Seuraus(Tyyppi.SUKUSUHDE, -2,kunkku.etsiSukuTyypit(false,false,false,true,false)),
 	              new Seuraus(Tyyppi.SUKUSUHDE, 20, xList)
 	            },
-	            "Lähetän kauppiaita hakemaan parhaimpia viinirypäleitä",
-	            "Kauppiaat eivät ole kovinkaan riemuissaan ylimääräisistä vaarallisista kaupparetkistä \n"
-	            + ", mutta " + x.annaEdustaja() + " itkahtaa ilosta, kun kuninkaalta löytyy rahaa ostaa \n"
-	            + "lisää viinirypäleitä!"
+	            "I'll have some merchants fetch the best possible grapes they can find.",
+	            "The merchants weren't too pleased to hear about an unnecessary trip across dangerous lands \n"
+	            + ", but " + x.annaEdustaja() + " let's out a delighted cry as they hear that the king will buy them \n"
+	            + "more grapes!"
 	        )
 	    );
 	    
@@ -785,7 +786,7 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	              new Seuraus(Tyyppi.RUOKA_T,1),
 	              new Seuraus(Tyyppi.SUKUSUHDE, -5,xList)
 	            },
-	            "Maanviljelijät viljelkööt tästä lähtien useamman palstan viinirypäleitä.",
+	            "I'll have the farmers plant more grapes so you won't run out next time.",
 	            "Rahan ja ruuan tuotanto lisääntyy, kun viinirypäletilukset alkavat kantaa hedelmää\n ja kauppiaat saavat "
 	            + "uusia vientituotteita. Rypäleiden saantiin kestää kuitenkin tovi, \n"
 	            + "jolloin suku " + x.annaNimi() + " joutuu pitämään monta illallista ilman herkullisia rypäleitä."
