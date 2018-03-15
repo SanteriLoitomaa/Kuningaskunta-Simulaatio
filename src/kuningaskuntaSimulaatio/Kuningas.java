@@ -96,6 +96,7 @@ public class Kuningas implements Serializable{
 			}
 			System.out.println();
 			ongelmat.remove(x);
+			loppuko();
 			if (havitty || nykyinenVuoroIndex == (vuorot-1)) {
 				laskePisteet(true);
 				tulostaPisteet();
@@ -223,19 +224,8 @@ public class Kuningas implements Serializable{
 		}
 		return popula;
 	}
-
-	/**
-	 * Lisää tuottosi resursseihisi, tarkistaa oletko hävinnyt pelin joko resurssipulan, vallankumouksen tai kansan vähyyden vuoksi.
-	 * Tulostaa tämänhetkiset tuottosi, resurssisi ja pisteesi.
-	 * @param lisaaPisteet
-	 * @author Tommi Heikkinen, Santeri Loitomaa
-	 * @return Tulostaa joko pelin lopetusviestin tai sitten tämänhetkiset resurssit, tuotot ja pisteet.
-	 */
-	private void laskePisteet(Boolean lisaaPisteet) {
-		if(lisaaPisteet) {
-			this.raha += this.rahaTuotto;
-			this.ruoka += this.ruokaTuotto;
-		}
+	
+	private void loppuko() {
 		if (ruoka < 1 || raha < 1) { //Resurssipulaloppu
 			System.out.println("Resurssisi loppuivat ja kuningaskuntasi vajosi anarkiaan.");
 			havitty = true;
@@ -253,9 +243,24 @@ public class Kuningas implements Serializable{
 		} else if (annaKuningaskunnanPopulaatio() <100) { //Kansa vähyysloppu
 			System.out.println("Kansasi on pienentynyt niin paljon ettei mitään hallittavaa enää juuri ole. Valittavat aatelisetkin jättivät sinut.");
 			havitty = true;
-		}else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
-					+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
-				"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
+		}
+	}
+
+	/**
+	 * Lisää tuottosi resursseihisi, tarkistaa oletko hävinnyt pelin joko resurssipulan, vallankumouksen tai kansan vähyyden vuoksi.
+	 * Tulostaa tämänhetkiset tuottosi, resurssisi ja pisteesi.
+	 * @param lisaaPisteet
+	 * @author Tommi Heikkinen, Santeri Loitomaa
+	 * @return Tulostaa joko pelin lopetusviestin tai sitten tämänhetkiset resurssit, tuotot ja pisteet.
+	 */
+	private void laskePisteet(Boolean lisaaPisteet) {
+		if(lisaaPisteet) {
+			this.raha += this.rahaTuotto;
+			this.ruoka += this.ruokaTuotto;
+		}
+		else System.out.println("Sinulla on " + this.raha + " kulta(a) ((+)" + this.rahaTuotto + ") ja " + this.ruoka
+				+ " ruoka(a) per kk ((+)" + this.ruokaTuotto + ")."+
+			"\n" + "Tämänhetkiset pisteesi ovat: " + annaPisteet());
 	}
 
 	/**
