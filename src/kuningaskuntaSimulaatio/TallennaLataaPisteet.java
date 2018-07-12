@@ -24,7 +24,7 @@ public class TallennaLataaPisteet implements Serializable{
 	 */
 	public static void tallenna(Kuningas kunkku) {
 		try {
-			FileOutputStream tiedosto = new FileOutputStream("tallennus.tal");
+			FileOutputStream tiedosto = new FileOutputStream("save.sav");
 			ObjectOutputStream tallenna = new ObjectOutputStream(tiedosto);
 			tallenna.writeObject(kunkku);
 			tallenna.close();
@@ -40,7 +40,7 @@ public class TallennaLataaPisteet implements Serializable{
 	 */
 	public static Kuningas lataa() throws FileNotFoundException, ClassNotFoundException {
 		try {
-			FileInputStream tiedosto = new FileInputStream("tallennus.tal");
+			FileInputStream tiedosto = new FileInputStream("save.sav");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
 			Kuningas kunkku = (Kuningas) lataa.readObject();
 			lataa.close();
@@ -60,13 +60,13 @@ public class TallennaLataaPisteet implements Serializable{
 	 */
 	public static void lisaaPisteet(int pist, String nimi) {
 		try {
-			FileInputStream tiedosto3 = new FileInputStream("pisteet.pis");
+			FileInputStream tiedosto3 = new FileInputStream("points.pnt");
 			tiedosto3.close();
 		}catch(IOException e){
 			TallennaLataaPisteet.luoPisteet();
 		}
 		try {
-			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
+			FileInputStream tiedosto = new FileInputStream("points.pnt");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
 			Pisteet pisteet = (Pisteet) lataa.readObject();
 			lataa.close();
@@ -108,7 +108,7 @@ public class TallennaLataaPisteet implements Serializable{
 			}
 			pisteet.asetaNimet(nimet);
 			pisteet.asetaPisteet(piste);
-			FileOutputStream tiedosto1 = new FileOutputStream("pisteet.pis");
+			FileOutputStream tiedosto1 = new FileOutputStream("points.pnt");
 			ObjectOutputStream tallenna = new ObjectOutputStream(tiedosto1);
 			tallenna.writeObject(pisteet);
 			tallenna.close();
@@ -123,13 +123,13 @@ public class TallennaLataaPisteet implements Serializable{
 	 */
 	public static void tulostaPisteet() {
 		try {
-			FileInputStream tiedosto3 = new FileInputStream("pisteet.pis");
+			FileInputStream tiedosto3 = new FileInputStream("points.pnt");
 			tiedosto3.close();
 		}catch(IOException e){
 			TallennaLataaPisteet.luoPisteet();
 		}
 		try {
-			FileInputStream tiedosto = new FileInputStream("pisteet.pis");
+			FileInputStream tiedosto = new FileInputStream("points.pnt");
 			ObjectInputStream lataa = new ObjectInputStream(tiedosto);
 			Pisteet pisteet = (Pisteet) lataa.readObject();
 			lataa.close();
@@ -154,7 +154,7 @@ public class TallennaLataaPisteet implements Serializable{
 			new String[] {"King Arthur", "King Arthur", "King Arthur", "King Arthur", "King Arthur",
 					"King Arthur", "King Arthur", "King Arthur", "King Arthur", "King Arthur"});
 		try {
-			FileOutputStream tiedosto = new FileOutputStream("pisteet.pis");
+			FileOutputStream tiedosto = new FileOutputStream("points.pnt");
 			ObjectOutputStream tallenna = new ObjectOutputStream(tiedosto);
 			tallenna.writeObject(pisteet);
 			tallenna.close();

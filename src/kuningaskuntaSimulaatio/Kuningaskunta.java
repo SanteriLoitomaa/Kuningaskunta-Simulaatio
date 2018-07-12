@@ -787,9 +787,9 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	              new Seuraus(Tyyppi.SUKUSUHDE, -5,xList)
 	            },
 	            "I'll have the farmers plant more grapes so you won't run out next time.",
-	            "Rahan ja ruuan tuotanto lisääntyy, kun viinirypäletilukset alkavat kantaa hedelmää\n ja kauppiaat saavat "
-	            + "uusia vientituotteita. Rypäleiden saantiin kestää kuitenkin tovi, \n"
-	            + "jolloin suku " + x.annaNimi() + " joutuu pitämään monta illallista ilman herkullisia rypäleitä."
+	            "The production of food and money will increase when more wine products get to the market\n and traders gain "
+	            + "new products to sell outside of the borders. This might take a while though so tonight\n"
+	            + " " + x.annaNimi() + " family must deal with the lack of delicious grapes."
 	        )
 	    );
 	    
@@ -801,10 +801,9 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	              new Seuraus(Tyyppi.SUKUSUHDE, -15,xList),
 	              new Seuraus(Tyyppi.SUKUSUHDE, 10, maalaiset)
 	            },
-	            "Ahhahhahha! Syökööt vaikka perunaa rypäleiden sijasta. Säästyypähän nekin rahat!",
-	            "Rahaa säästyy, mutta vain vähän. Suku " + x.annaNimi() + " on kovin loukkaantunut \n"
-	            + "vastauksestasi, mutta huhu pihtaruudestasi kiirii maalaisten korviin, mikä \n"
-	            + "tekee sinusta suositumman maalaisten piireissä."
+	            "Ahhahhahha! For all I care they can eat potatoes. I'll even save some money!",
+	            "You save a little bit of money but you gain the ire of the " + x.annaNimi() + " family.\n"
+	            + "On the other hand the farmer families seemed to like your qwip."
 	        )
 	    );
 	    
@@ -815,17 +814,17 @@ Vaikutukset:	1. kauppias-, x++, raha-
 	              new Seuraus(Tyyppi.RAHA,2),
 	              new Seuraus(Tyyppi.SUKUSUHDE, -3,xList)
 	            },
-	            "(Älä tee mitään)",
-	            "Edustaja " + x.annaEdustaja() + " poistuu paikalta surullisin mielin. Sen päätöksen\n "
-	            + "jälkeen ei enää pitkään aikaan syöty rypäleitä."
+	            "(Do nothing)",
+	            "The representative " + x.annaEdustaja() + " goes away with a sad look on his face.\n "
+	            + "After you decission there was no grapes on the table for a long time."
 	        )
 	    );
 		
 		kunkku.ongelmat.add(
-			new Ongelma("Ne on loppu nyt", "Aatelissuvulta " + x.annaNimi() + " on illallispöydässä loppunut viinirypäleet \n"
-											+ "aatelissuvun edustaja " + x.annaEdustaja() + " on tullut häntä koipien välissä \n"
-											+ "pyytämään, että voisit lähettä jonkun hakemaan herkkuja lisää pöytään, \n"
-											+ "koska muuten illallisella ei voi tarjota sitä parasta mitä maailmasta löytyy"
+			new Ongelma("We're out", "The nobles of " + x.annaNimi() + " family have run out of grapes at their dinner.\n"
+											+ "Their representative " + x.annaEdustaja() + " has come to humbly ask for your\n"
+											+ "assistance in the matter. He would like it if you'd send someone to get more grapes\n"
+											+ "for their dinner so that they could offer only the best at their dinner table."
 					, x
 					,paatokset)
 		);
@@ -868,9 +867,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.SUKUSUHDE, 30,maalaiset),
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, maalaiset)
 			            },
-			            "Haluan jakaa varat kaikista köyhimmälle kansanosallemme maalaisille!",
-						"Ruuantuotto lisääntyy, koska maalaiset sijoittavat varoja viisaasti\n" +
-						"uusiin maataloustyövälineisiin."
+			            "I'd like to share this treasure with our poor farmers!",
+						"Food production increases because of the wise investments of the farmers."
 			        )
 			    );
 
@@ -881,8 +879,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(false,false,true,false,false)),
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(false,false,true,false,false))
 			            },
-			            "Rakennutat rahoilla uuden kirkon.",
-						"Uskonnollisuus kuningaskunnassasi kasvaa."
+			            "I shall build a new church!",
+						"Your kingdom becomes more religious."
 			        )
 			    );
 
@@ -893,8 +891,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(false,true,false,false,false)),
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(false,true,false,false,false))
 			            },
-			            "Kehität rahoilla sotilaiden hyvinvointia ja hankit heille paremmat miekat ja kilvet.",
-						"Kuningaskuntasi sotilasvoimat kasvavat!"
+			            "I shall invest this money in the wellbeing and might of my army!",
+						"The might of your army grows!"
 			        )
 			    );
 
@@ -905,8 +903,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.SUKUSUHDE, 30, kunkku.etsiSukuTyypit(true,false,false,false,false)),
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(true,false,false,false,false))
 			            },
-			            "Sijoitat varat magian koulutukseen ja uusien loitsujen kehitykseen",
-						"Kuningaskuntasi maagiset voimat kasvavat!"
+			            "I shall invest this money in our magic development!",
+						"Your kingdoms magical might grows!"
 			        )
 			    );
 
@@ -918,8 +916,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, kunkku.etsiSukuTyypit(false,false,false,true,false)),
 						  new Seuraus(Tyyppi.RAHA_T, 3)
 			            },
-			            "Kauppiaat saavat pitää aarteensa keskenään ja kehittää omaa kaupankäyntiään vapaasti",
-						"Kaupankäynti kuningaskunnassasi lisääntyy ja kauppa kukoistaa!"
+			            "I'll let you keep the treasure and invest it in yourself.",
+						"Trading becomes more frequent and you gain more tax income."
 			        )
 			    );
 
@@ -930,8 +928,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.SUKUSUHDE, 30, aateliset),
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 10, aateliset)
 			            },
-			            "Kestitset rahoilla aatelisia seuraavat kaksi kuukautta.",
-						"Aatelisten kanssa juhlitaan semmoisia juhlia, notta ei ole aiemmin nähty!"
+			            "I shall please the nobles with this money for months!",
+						"You throw the sweetest parties with the nobles and gain some popularity among them."
 			        )
 			    );
 			    
@@ -942,8 +940,8 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.SUKUSUHDE, 5, kunkku.etsiSukuTyypit(true, true, true, true, true)),
 						  new Seuraus(Tyyppi.SUKUPOPULAATIO, 5, kunkku.etsiSukuTyypit(true, true, true, true, true))
 			            },
-			            "Jaat varat tasaisesti kaikkien kanssa",
-						"Kaikki hyötyvät ja kuningaskuntasi kukoistaa!"
+			            "I shall share this treasure equally with everyone!",
+						"The whole kingdom likes you a little bit more now and you gain more population."
 			        )
 			    );
 
@@ -954,15 +952,15 @@ Vaikutukset:	1. kauppias-, x++, raha-
 			              new Seuraus(Tyyppi.RAHA, 52),
 						  new Seuraus(Tyyppi.SUKUSUHDE, -1, kunkku.etsiSukuTyypit(true, true, true, true, true))
 			            },
-			            "Pidät arteen kokonaan itselläsi.",
-						"Olet rikas! MUTTA kaikkia muita kyllä vähän kismittää"
+			            "I shall keep the treasure myself!",
+						"You gain a big economical boost but everyone seems a little miffed."
 			        )
 			    );
 				
 				kunkku.ongelmat.add(
-					new Ongelma("Mieletön mäihä!", "Kauppiassuku " + x.annaNimi() + " on löytänyt suuren rahakätkön\n" 
-						+ "kauppamatkoillaan ja koska aarre on niin mittaamattoman suuri (noin 50 rahaa), \n" 
-						+ "he eivät tiedä mitä tehdä sillä. Saat päättää miten arteen tuoma vauraus jaetaan."
+					new Ongelma("Jackpot!", "Trader family " + x.annaNimi() + " has found a great treasure on\n" 
+						+ "their travels but since it is worth a lot (about 50 gold) they need your advice \n" 
+						+ "on how to use the money properly."
 							, x
 							,paatokset)
 				);

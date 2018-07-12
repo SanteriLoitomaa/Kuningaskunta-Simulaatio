@@ -11,7 +11,7 @@ public class Start{
         Console console = System.console();
         if(console == null && !GraphicsEnvironment.isHeadless()){
         	String filename = Start.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6,
-        			Start.class.getProtectionDomain().getCodeSource().getLocation().toString().length()-1) + "Kuningaskunta-simulaatio.jar";
+        			Start.class.getProtectionDomain().getCodeSource().getLocation().toString().length()-1) + "Kingdom_Simulator.jar";
             Runtime.getRuntime().exec(new String[]{"cmd","/c","start","cmd","/k","java -jar \"" + filename + "\""});
         }else{
             Kuningaskunta.main(new String[0]);
